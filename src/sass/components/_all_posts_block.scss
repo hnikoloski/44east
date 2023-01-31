@@ -1,0 +1,180 @@
+.ffeast-all-posts-block {
+  header {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 5.7rem;
+    .col {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      h3 {
+        color: $accent01;
+        font-weight: 700;
+        margin-right: 4rem;
+      }
+      .label {
+        color: #000;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-right: 1.2rem;
+      }
+      .filter {
+        display: none;
+        align-items: center;
+        align-content: center;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        &.active {
+          display: flex;
+        }
+        li {
+          margin-right: 1.2rem;
+          a {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #000;
+            @include borderRadius(7.6rem);
+            padding: 0.8rem 3.2rem;
+            background: #ebebf0;
+            &.active,
+            &:hover {
+              color: #fff;
+              background: $accent03;
+            }
+          }
+        }
+      }
+      .select-basic {
+        * {
+          transition: 0s;
+        }
+        .ts-control {
+          background: #ebebf0;
+          @include borderRadius(7.6rem);
+          border: none;
+          .item {
+            padding: 0.8rem 5.3rem 0.8rem 3.2rem;
+            font-size: 1.8rem;
+            color: #000;
+            font-weight: 700;
+          }
+          &::after {
+            content: "\e5cf";
+            border: none;
+            font-family: "Material Symbols Outlined";
+            font-weight: normal;
+            font-style: normal;
+            font-size: 2.4rem;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: "liga";
+            -webkit-font-smoothing: antialiased;
+            width: 2.4rem;
+            height: 2.4rem;
+            @include ver-center();
+            right: 1.5rem;
+            margin: 0;
+          }
+        }
+        &.dropdown-active {
+          .ts-control {
+            @include borderRadius(1.6rem 1.6rem 0 0);
+            border: none;
+            outline: none;
+          }
+        }
+        .ts-dropdown {
+          background: #ebebf0;
+          @include borderRadius(0 0 1.6rem 1.6rem);
+          border: none;
+          padding: 0.5rem;
+          .option {
+            font-size: 1.8rem;
+            color: #000;
+            font-weight: 700;
+            @include borderRadius(7rem);
+            &.active {
+              background-color: $accent03;
+            }
+          }
+        }
+      }
+    }
+  }
+  .results {
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .single-post {
+      flex: 0 0 30%;
+      max-width: 30%;
+      width: 30%;
+      margin-bottom: 5.6rem;
+      .img-wrapper {
+        width: 100%;
+        height: 30.6rem;
+        margin-bottom: 1.6rem;
+        img {
+          display: block;
+        }
+      }
+      .meta {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 0.8rem;
+        p {
+          color: $primaryGray;
+          font-size: 1.4rem;
+        }
+        .categories {
+          li {
+            color: #000;
+            font-size: 1.4rem;
+            font-weight: 500;
+            padding: 0.4rem 1.6rem;
+            line-height: 1.35;
+            @include borderRadius(7.6rem);
+            background: #ebebf0;
+            color: #000;
+          }
+        }
+      }
+      .title {
+        line-height: 1.25;
+        color: #000;
+        font-size: 2.4rem;
+        font-weight: 700;
+        margin-bottom: 1.6rem;
+      }
+      .excerpt {
+        color: $primaryGray;
+        font-size: 1.8rem;
+        font-weight: 400;
+        line-height: 1.5;
+        margin-bottom: 2.4rem;
+      }
+      .btn {
+        font-size: 1.6rem;
+        span {
+          font-size: 3rem;
+        }
+      }
+    }
+  }
+}

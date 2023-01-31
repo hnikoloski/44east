@@ -1,0 +1,28 @@
+body.single-services {
+  $maxWidth: 1088px;
+  .site {
+    .featured-image {
+      width: 100%;
+      height: 78rem;
+      margin-bottom: 5.6rem;
+    }
+    main {
+      max-width: $maxWidth;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 0;
+      padding-right: 0;
+      padding-bottom: 12.5rem;
+      p {
+        font-size: 2.2rem;
+        &:not(:last-of-type) {
+          margin-bottom: 4rem;
+        }
+      }
+      .alignfull {
+        margin-left: calc((100vw - #{$maxWidth}) / -2);
+        margin-right: calc((100vw - #{$maxWidth}) / -2);
+      }
+    }
+  }
+}

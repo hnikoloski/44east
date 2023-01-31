@@ -1,0 +1,37 @@
+.ffeast-cta-text-block {
+  position: relative;
+  padding-top: 5.2rem;
+  padding-bottom: 3.2rem;
+  &::before {
+    content: "";
+    background: var(--beforeImg);
+    width: var(--beforeWidth);
+    height: var(--beforeHeight);
+    position: absolute;
+    @include bg-props(cover, center, no-repeat);
+    left: 6.2rem;
+    bottom: 0;
+  }
+  &::after {
+    content: "";
+    background: var(--afterImg);
+    width: var(--afterWidth);
+    height: var(--afterHeight);
+    position: absolute;
+    @include bg-props(cover, center, no-repeat);
+    right: 19.1rem;
+    top: 0;
+  }
+  .container {
+    background-image: var(--bgImage);
+    background-color: var(--bgColor);
+    padding: 7.7rem 40rem;
+    @include bg-props(cover, center, no-repeat);
+    h3 {
+      color: #fff;
+      font-size: 4.8rem;
+      text-align: center;
+      line-height: 1.12;
+    }
+  }
+}

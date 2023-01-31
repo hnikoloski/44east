@@ -1,0 +1,66 @@
+.ffeast-services-block {
+  .container {
+    margin-bottom: 3rem;
+    padding-top: 16rem;
+    position: relative;
+    .block-deco-title {
+      position: absolute;
+      top: 0;
+      left: -13rem;
+      text-shadow: 0px 0px 2rem rgba(0, 0, 0, 0.2);
+      font-weight: 900;
+      font-size: 16.4rem;
+      color: #fff;
+      letter-spacing: 0.03em;
+      line-height: 1.365;
+      opacity: 0.6;
+      z-index: -1;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      .single-service {
+        flex: 0 0 50%;
+        width: 50%;
+        max-width: 50%;
+        margin-bottom: 4rem;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+
+        &:nth-of-type(odd) {
+          padding-right: 3.2rem;
+        }
+        &:nth-of-type(even) {
+          padding-left: 3.2rem;
+        }
+        //not first two
+        &:nth-of-type(n + 3) {
+          border-top: 0.2rem solid #000;
+          padding-top: 5.3rem;
+        }
+        .img-wrapper {
+          margin-bottom: 2.4rem;
+          width: 100%;
+          height: 45.1rem;
+        }
+
+        h3 {
+          font-size: 4.8rem;
+          color: $accent01;
+          margin-bottom: 3.2rem;
+          font-weight: 700;
+          line-height: 0.92;
+        }
+        p {
+          margin-bottom: 3.2rem;
+          font-size: 1.8rem;
+          color: #000;
+        }
+        .btn {
+          margin-top: auto;
+        }
+      }
+    }
+  }
+}

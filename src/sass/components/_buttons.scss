@@ -1,0 +1,39 @@
+.btn {
+  @include borderRadius(7.6rem);
+  font-size: 1.8rem;
+  font-weight: 700;
+  &-primary {
+    background: $accent03;
+    color: #fff;
+    display: inline-block;
+    &-lg {
+      padding: 3.2rem 8rem;
+    }
+  }
+  &-arrow {
+    color: $accent03;
+    font-weight: 700;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    span {
+      margin-left: 1.4rem;
+      font-size: 5.8rem;
+      font-weight: 100;
+    }
+    &-white {
+      color: #fff;
+    }
+  }
+  &-light {
+    background: #c5e1d6;
+    color: #000;
+    display: inline-block;
+    &-lg {
+      padding: 3.2rem 8rem;
+    }
+  }
+}

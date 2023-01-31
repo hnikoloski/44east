@@ -1,0 +1,61 @@
+.ffeast-related-blogs-block {
+  &.alignfull {
+    padding-left: 27.8rem;
+    padding-right: 27.8rem;
+  }
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 5.6rem;
+    h2 {
+      color: $accent01;
+      line-height: 1.22;
+      font-size: 3.6rem;
+      font-weight: 700;
+    }
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: center;
+    .single-service {
+      flex: 0 0 30%;
+      width: 30%;
+      max-width: 30%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+
+      .img-wrapper {
+        margin-bottom: 1.6rem;
+        width: 100%;
+        height: 30.6rem;
+      }
+
+      h3 {
+        font-size: 2.4rem;
+        color: #000;
+        margin-bottom: 1.6rem;
+        font-weight: 700;
+        line-height: 0.92;
+      }
+      p {
+        margin-bottom: 2.4rem;
+        font-size: 1.6rem;
+        color: $primaryGray;
+      }
+      .btn {
+        margin-top: auto;
+        font-size: 1.6rem;
+        span {
+          font-size: 3rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,200 @@
+.ffeast-all-posts-block {
+  header {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 57px;
+    .col {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      h3 {
+        color: $accent01;
+        font-weight: 700;
+        margin-right: 4px;
+      }
+      .label {
+        color: #000;
+        font-size: 14px;
+        font-weight: 700;
+        margin-right: 12px;
+      }
+      .filter {
+        display: none;
+        align-items: center;
+        align-content: center;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        &.active {
+          display: flex;
+        }
+        li {
+          margin-right: 12px;
+          a {
+            font-size: 18px;
+            font-weight: 700;
+            color: #000;
+            @include borderRadius(76px);
+            padding: 8px 32px;
+            background: #ebebf0;
+            &.active,
+            &:hover {
+              color: #fff;
+              background: $accent03;
+            }
+          }
+        }
+      }
+      .select-basic {
+        * {
+          transition: 0s;
+        }
+        .ts-control {
+          background: #ebebf0;
+          @include borderRadius(76px);
+          border: none;
+          .item {
+            padding: 8px 53px 8px 32px;
+            font-size: 18px;
+            color: #000;
+            font-weight: 700;
+          }
+          &::after {
+            content: "\e5cf";
+            border: none;
+            font-family: "Material Symbols Outlined";
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: "liga";
+            -webkit-font-smoothing: antialiased;
+            width: 24px;
+            height: 24px;
+            @include ver-center();
+            right: 15px;
+            margin: 0;
+          }
+        }
+        &.dropdown-active {
+          .ts-control {
+            @include borderRadius(16px 16px 0 0);
+            border: none;
+            outline: none;
+          }
+        }
+        .ts-dropdown {
+          background: #ebebf0;
+          @include borderRadius(0 0 16px 16px);
+          border: none;
+          padding: 5px;
+          .option {
+            font-size: 18px;
+            color: #000;
+            font-weight: 700;
+            @include borderRadius(70px);
+            &.active {
+              background-color: $accent03;
+            }
+          }
+        }
+      }
+    }
+  }
+  .results {
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: relative;
+    padding: 55px 25px;
+    width: 100%;
+    height: 100%;
+    &::before {
+      content: "Posts Fetched from the API on frontend";
+      position: absolute;
+      @include abs-center();
+      font-size: 26px;
+      background-color: $accent01;
+      color: #fff;
+      text-align: center;
+      width: 100%;
+      height: 100%;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      flex-wrap: wrap;
+    }
+    .single-post {
+      flex: 0 0 30%;
+      max-width: 30%;
+      width: 30%;
+      margin-bottom: 56px;
+      .img-wrapper {
+        width: 100%;
+        height: 306px;
+        margin-bottom: 16px;
+        img {
+          display: block;
+        }
+      }
+      .meta {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        p {
+          color: $primaryGray;
+          font-size: 14px;
+        }
+        .categories {
+          li {
+            color: #000;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 4px 16px;
+            line-height: 1.35;
+            @include borderRadius(76px);
+            background: #ebebf0;
+            color: #000;
+          }
+        }
+      }
+      .title {
+        line-height: 1.25;
+        color: #000;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+      .excerpt {
+        color: $primaryGray;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin-bottom: 24px;
+      }
+      .btn {
+        font-size: 16px;
+        span {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}

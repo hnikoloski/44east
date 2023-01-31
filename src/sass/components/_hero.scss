@@ -1,0 +1,34 @@
+.hero {
+  &-home {
+    min-height: 108rem;
+    background: var(--bgImage);
+    @include bg-props(cover, center, no-repeat);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding: 36rem 27.8rem;
+    &__content {
+      max-width: 71.3rem;
+    }
+    &__subtitle {
+      color: $accent03;
+      font-weight: 500;
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+    }
+    &__title {
+      color: #fff;
+      font-weight: 700;
+      font-size: 6rem;
+      margin-bottom: 4.2rem;
+      line-height: 1.1;
+      span {
+        font-weight: inherit;
+        color: $accent04;
+      }
+    }
+  }
+}

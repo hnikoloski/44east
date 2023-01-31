@@ -1,0 +1,51 @@
+.ffeast-deco-column-block {
+  margin-top: 14.5rem;
+  margin-bottom: 16.4rem;
+  padding: 0 27.8rem;
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    align-content: flex-end;
+    justify-content: space-between;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0.7rem;
+      width: 34.5rem;
+      height: 34.5rem;
+      background: url("../../assets/images/circle-deco.webp");
+      @include bg-props(cover, center, no-repeat);
+      z-index: -1;
+      opacity: 0.5;
+      right: -9.6rem;
+    }
+    .col {
+      &:nth-of-type(1) {
+        flex: 0 0 auto;
+        max-width: 87.3rem;
+        width: auto;
+      }
+      &:nth-of-type(2) {
+        flex: 0 0 38.6rem;
+        max-width: 38.6rem;
+        width: 38.6rem;
+      }
+      h2 {
+        font-size: 8rem;
+        font-weight: 700;
+        color: $primary;
+        line-height: 1.08;
+        span {
+          color: $accent01;
+        }
+      }
+      p {
+        font-size: 2.2rem;
+        line-height: 1.27;
+      }
+    }
+  }
+}

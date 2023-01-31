@@ -1,0 +1,119 @@
+.ffeast-recent-posts-block {
+  margin-bottom: 0px;
+  outline: 1px solid $accent01;
+  .container {
+    .row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-column-gap: 56px;
+      grid-row-gap: 56px;
+
+      .single-post {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        &:nth-of-type(1) {
+          grid-area: 1 / 1 / 3 / 2;
+        }
+        &:nth-of-type(2) {
+          grid-area: 1 / 2 / 2 / 3;
+        }
+        &:nth-of-type(3) {
+          grid-area: 2 / 2 / 3 / 3;
+        }
+
+        .img-wrapper {
+          flex: 0 0 296px;
+          width: 296px;
+          height: 100%;
+          margin-right: 19px;
+          img {
+            display: block;
+          }
+        }
+        .wrapper {
+          flex: 0 0 calc(100% - 19px - 296px);
+          width: calc(100% - 19px - 296px);
+          max-width: calc(100% - 19px - 296px);
+          height: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: column;
+          justify-content: space-between;
+          align-content: flex-start;
+          align-items: stretch;
+          .meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+            margin-bottom: 16px;
+            p {
+              font-size: 14px;
+              color: $primaryGray;
+            }
+            ul {
+              li {
+                color: #000;
+                font-size: 14px;
+                font-weight: 500;
+                padding: 4px 16px;
+                line-height: 1.35;
+                background: #ebebf0;
+                @include borderRadius(76px);
+              }
+            }
+          }
+          .title {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 12px;
+            color: #000;
+          }
+          .excerpt {
+            font-size: 16px;
+            color: $primaryGray;
+            line-height: 1.5;
+          }
+          .btn {
+            font-size: 16px;
+            span {
+              font-size: 30px;
+            }
+          }
+        }
+
+        &-featured {
+          .img-wrapper {
+            width: 100%;
+            flex: 0 0 100%;
+            height: 325px;
+            margin-right: 0;
+            margin-bottom: 16px;
+          }
+          .wrapper {
+            display: block;
+            max-width: 100%;
+            width: 100%;
+            flex: 0 0 100%;
+            height: auto;
+            .title {
+              color: $accent01;
+            }
+            .excerpt {
+              color: #000;
+              margin-bottom: 16px;
+            }
+            .btn {
+              margin-top: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}

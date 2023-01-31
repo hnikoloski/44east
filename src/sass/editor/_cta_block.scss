@@ -1,0 +1,40 @@
+.ffeast-cta-block {
+  background: var(--bgColor);
+  padding: 81px 416px;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 9px;
+    width: 302px;
+    height: 81px;
+    left: -58px;
+    background: url("../../assets/images/pattern-deco.webp");
+    @include bg-props(90%, center, no-repeat);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    background: url("../../assets/images/circle-deco.webp");
+    @include bg-props(100%, center, no-repeat);
+    right: 125px;
+    top: -9px;
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    p {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 1.22;
+      flex: 0 0 651px;
+      width: 651px;
+      margin-right: 140px;
+    }
+  }
+}

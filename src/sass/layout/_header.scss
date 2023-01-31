@@ -1,0 +1,81 @@
+#masthead {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(17.5px);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  padding: 3.6rem 34.5rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1024;
+  .logo-wrapper {
+    position: absolute;
+    @include ver-center();
+    left: 14rem;
+    width: 18.8rem;
+    height: 4.6rem;
+  }
+  nav {
+    .menu {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+      align-content: center;
+      li {
+        &:not(:last-of-type) {
+          margin-right: 7.2rem;
+        }
+        a {
+          font-size: 2rem;
+          color: #fff;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+  .lang-switcher {
+    position: absolute;
+    @include ver-center();
+    right: 14rem;
+    p {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+      cursor: pointer;
+      span {
+        font-size: 2rem;
+      }
+    }
+    p,
+    li a {
+      color: #fff;
+      font-weight: 700;
+      font-size: 2rem;
+      text-transform: uppercase;
+    }
+    ul {
+      position: absolute;
+      bottom: -2em;
+      @include transform(scaleY(0));
+      @include transit(all 0.3s ease-in-out);
+      transform-origin: top;
+    }
+    &.active {
+      ul {
+        @include transform(scaleY(1));
+      }
+      p {
+        span {
+          @include transform(rotate(180deg));
+        }
+      }
+    }
+  }
+}

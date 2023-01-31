@@ -1,0 +1,76 @@
+{
+    "key": "group_63d918603e062",
+    "title": "Faq Block",
+    "fields": [
+        {
+            "key": "field_63d918708d577",
+            "label": "Faq",
+            "name": "faq_block_select",
+            "type": "relationship",
+            "instructions": "If left empty it will display the latest X amount of posts.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "faq"
+            ],
+            "taxonomy": "",
+            "filters": "",
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "object"
+        },
+        {
+            "key": "field_63d918c18d578",
+            "label": "Number of latest FaQs to show",
+            "name": "number_of_latest_faqs_to_show",
+            "type": "number",
+            "instructions": "Number of posts to show if no posts are selected",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_63d918708d577",
+                        "operator": "==empty"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 4,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/faq"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1675172083
+}

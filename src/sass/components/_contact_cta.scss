@@ -1,0 +1,45 @@
+#cta-contact {
+  padding: 7.3rem 0 10rem 0;
+  position: relative;
+  margin-bottom: 1rem;
+  &::before {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -6.8rem;
+    width: 30.2rem;
+    height: 14.6rem;
+    background: url("../../assets/images/pattern-deco.webp");
+    @include bg-props(cover, center, no-repeat);
+  }
+  &::after {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 8.7rem;
+    width: 18rem;
+    height: 18rem;
+    background: url("../../assets/images/circle-deco.webp");
+    @include bg-props(contain, center, no-repeat);
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    background: $accent03;
+    padding: 5.9rem 41.6rem;
+    p {
+      color: #fff;
+      line-height: 1.22;
+      font-size: 3.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      flex: 0 0 65.1rem;
+      width: 65.1rem;
+    }
+  }
+}

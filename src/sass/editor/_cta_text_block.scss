@@ -1,0 +1,37 @@
+.ffeast-cta-text-block {
+  position: relative;
+  padding-top: 52px;
+  padding-bottom: 32px;
+  &::before {
+    content: "";
+    background: var(--beforeImg);
+    width: var(--beforeWidth);
+    height: var(--beforeHeight);
+    position: absolute;
+    @include bg-props(cover, center, no-repeat);
+    left: 62px;
+    bottom: 0;
+  }
+  &::after {
+    content: "";
+    background: var(--afterImg);
+    width: var(--afterWidth);
+    height: var(--afterHeight);
+    position: absolute;
+    @include bg-props(cover, center, no-repeat);
+    right: 191px;
+    top: 0;
+  }
+  .container {
+    background-image: var(--bgImage);
+    background-color: var(--bgColor);
+    padding: 77px 400px;
+    @include bg-props(cover, center, no-repeat);
+    h3 {
+      color: #fff;
+      font-size: 48px;
+      text-align: center;
+      line-height: 1.12;
+    }
+  }
+}

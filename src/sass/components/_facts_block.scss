@@ -1,0 +1,38 @@
+.ffeast-facts-block {
+  .container {
+    background: var(--facts-block-background-color);
+    padding: 3.2rem 3.2rem 5.6rem 3.2rem;
+    position: relative;
+    overflow: hidden;
+    &::after {
+      position: absolute;
+      content: "";
+      top: -3.5rem;
+      right: -1rem;
+      background: url("../../assets/images/circle-deco.webp");
+      width: 12rem;
+      height: 12rem;
+      @include bg-props(cover, center, no-repeat);
+      opacity: 0.3;
+    }
+    .block-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--facts-block-title-color);
+      margin-bottom: 1.6rem;
+      line-height: 1.69;
+    }
+    ul {
+      list-style: disc;
+      padding-left: 2.5rem;
+      li {
+        color: #fff;
+        line-height: 1.33;
+        font-size: 1.8rem;
+        &:not(:last-of-type) {
+          margin-bottom: 2.4rem;
+        }
+      }
+    }
+  }
+}
