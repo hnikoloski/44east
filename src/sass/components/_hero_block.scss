@@ -11,6 +11,11 @@
   align-content: center;
   flex-wrap: wrap;
   padding: 15rem 27.8rem;
+  @include for-tablet {
+    min-height: 38rem;
+    padding: 11rem 2rem 8.9rem 2rem;
+    text-align: center;
+  }
   &::before {
     content: "";
     position: absolute;
@@ -38,6 +43,11 @@
       line-height: 1.1;
       color: #fff;
       margin-bottom: 1.6rem;
+      @include for-tablet {
+        font-size: 2.4rem;
+        line-height: 1.17;
+        margin-bottom: 0.9rem;
+      }
       span {
         color: $accent04;
       }
@@ -48,6 +58,10 @@
       font-weight: 400;
       line-height: 1.27;
       max-width: 51.9rem;
+      @include for-tablet {
+        font-size: 1.8rem;
+        max-width: 100%;
+      }
     }
   }
 }

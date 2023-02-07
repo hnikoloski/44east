@@ -1,9 +1,17 @@
 .ffeast-facts-block {
+  @include for-tablet {
+    width: 100vw;
+    margin-left: calc((100% - 100vw) / 2);
+    margin-right: calc((100% - 100vw) / 2);
+  }
   .container {
     background: var(--facts-block-background-color);
     padding: 3.2rem 3.2rem 5.6rem 3.2rem;
     position: relative;
     overflow: hidden;
+    @include for-tablet {
+      padding: 3.2rem;
+    }
     &::after {
       position: absolute;
       content: "";

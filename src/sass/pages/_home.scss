@@ -3,6 +3,9 @@
     position: relative;
     padding-bottom: 4rem;
     margin-top: -14rem;
+    @include for-tablet {
+      margin-top: -6.4rem;
+    }
     &::before {
       content: "";
       position: absolute;
@@ -12,16 +15,30 @@
       height: calc(100% - 14rem);
       background: #0d174a;
       z-index: -1;
+      @include for-tablet {
+        height: calc(100% - 6.4rem);
+      }
     }
     .action {
       text-align: center;
       color: #fff;
       font-weight: 400;
       font-size: 2.4rem;
+      @include for-tablet {
+        max-width: 17ch;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.2;
+        font-size: 2rem;
+      }
       a {
         color: $accent03;
         text-decoration: underline;
         font-weight: 700;
+        @include for-tablet {
+          display: block;
+          margin-top: 0.5em;
+        }
       }
     }
     .blogs-wrapper {
@@ -29,6 +46,40 @@
       flex-wrap: wrap;
       justify-content: center;
       margin-bottom: 4rem;
+      @include for-tablet {
+        padding-left: 2rem;
+        padding-bottom: 2.5rem;
+        position: relative;
+        .swiper-pagination {
+          position: absolute;
+          bottom: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          align-content: center;
+          flex-wrap: wrap;
+          width: 100%;
+
+          @include hor-center();
+          &-bullet {
+            width: 0.5rem;
+            height: 0.5rem;
+            @include borderRadius(50%);
+            background: #ffffff;
+            opacity: 0.3;
+            display: block;
+            &:not(:last-of-type) {
+              margin-right: 0.5rem;
+            }
+            &-active {
+              background: $accent03;
+              width: 0.7rem;
+              height: 0.7rem;
+              opacity: 1;
+            }
+          }
+        }
+      }
       .blog-card {
         flex: 0 0 44.1rem;
         width: 44.1rem;
@@ -37,8 +88,16 @@
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: flex-start;
+        @include for-tablet {
+          flex: 0 0 auto;
+          height: auto;
+          padding: 1.9rem 1.7rem;
+        }
         &:not(:last-of-type) {
           margin-right: 1.9rem;
+          @include for-tablet {
+            margin-right: 0;
+          }
         }
         &:nth-of-type(1) {
           background: var(--bgColor1);
@@ -54,6 +113,11 @@
           width: 7.2rem;
           height: 7.2rem;
           margin-bottom: 3.8rem;
+          @include for-tablet {
+            width: 3.9rem;
+            height: 3.9rem;
+            margin-bottom: 2.1rem;
+          }
         }
         h3 {
           color: #fff;
@@ -61,12 +125,19 @@
           font-size: 2.4rem;
           margin-bottom: 1.2rem;
           line-height: 1.33;
+          @include for-tablet {
+            font-size: 1.8rem;
+          }
         }
         p {
           color: rgba(255, 255, 255, 0.7);
           font-size: 1.6rem;
           line-height: 1.375;
           margin-bottom: 2.6rem;
+          @include for-tablet {
+            font-size: 1.4rem;
+            margin-bottom: 2.8rem;
+          }
         }
         a {
           color: #fff;
@@ -78,6 +149,9 @@
           justify-content: flex-start;
           flex-wrap: wrap;
           margin-top: auto;
+          @include for-tablet {
+            font-size: 1.6rem;
+          }
           span {
             margin-left: 1.6rem;
             font-size: 2.4rem;
@@ -91,6 +165,10 @@
     padding: 9rem 41rem 15.1rem 41rem;
     display: flex;
     flex-wrap: wrap;
+    @include for-tablet {
+      padding: 4rem 2rem 8rem 2rem;
+      display: block;
+    }
     .col {
       flex: 0 0 50%;
       width: 50%;
@@ -101,8 +179,20 @@
       justify-content: space-between;
       align-items: flex-start;
       margin-top: 6.8rem;
+      @include for-tablet {
+        width: 100%;
+        max-width: 100%;
+        display: block;
+        &:last-of-type {
+          margin-top: 0;
+        }
+      }
       &:first-of-type {
         padding-right: 8.4rem;
+        @include for-tablet {
+          padding-right: 0;
+          margin-bottom: 2.4rem;
+        }
       }
     }
     .intro {
@@ -119,6 +209,9 @@
         font-size: 3.6rem;
         font-weight: 500;
         line-height: 1.22;
+        @include for-tablet {
+          font-size: 2.4rem;
+        }
         span {
           color: #22317e;
         }
@@ -131,6 +224,15 @@
     }
   }
   #our-services {
+    @include for-tablet {
+      .btn-primary-lg {
+        width: 100%;
+        @include borderRadius(0);
+        text-align: center;
+        font-size: 2rem;
+        padding: 1.6rem 0;
+      }
+    }
     .top-bar {
       display: flex;
       flex-wrap: wrap;
@@ -140,21 +242,44 @@
       position: relative;
       padding: 0 10.4rem;
       margin-bottom: -8rem;
+      @include for-tablet {
+        padding: 0;
+        margin-bottom: -4.5rem;
+      }
       &__title {
         font-size: 15.1rem;
         color: #ebe6e6;
         line-height: 1.36;
         font-weight: 400;
         z-index: -1;
+        @include for-tablet {
+          font-size: 8.3rem;
+        }
       }
     }
     .services-wrapper {
       display: flex;
       flex-wrap: wrap;
+      @include for-tablet {
+        display: block;
+      }
       .single-service {
         flex: 0 0 25%;
         width: 25%;
         max-width: 25%;
+        @include for-tablet {
+          width: 100%;
+          max-width: 100%;
+          flex: 0 0 100%;
+          background-color: var(--bgColor);
+          padding: 2.4rem 2rem;
+          h2 {
+            font-size: 2.4rem;
+            margin-bottom: 1.6rem;
+            color: #fff;
+            font-weight: 700;
+          }
+        }
         &:nth-of-type(1) {
           .bottom {
             background: var(--bgColor1);
@@ -178,9 +303,19 @@
         .top {
           height: 59rem;
           width: 100%;
-          background: var(--bgImage);
+          background: linear-gradient(
+              0deg,
+              rgba(0, 0, 0, 0.6),
+              rgba(0, 0, 0, 0.6)
+            ),
+            var(--bgImage);
           @include bg-props(cover, center, no-repeat);
           padding: 7.3rem;
+          @include for-tablet {
+            padding: 0;
+            height: 21.2rem;
+            margin-bottom: 1.6rem;
+          }
           h2 {
             color: #fff;
             line-height: 1.35;
@@ -190,6 +325,9 @@
         }
         .bottom {
           padding: 3.2rem 7.2rem;
+          @include for-tablet {
+            padding: 0;
+          }
           p {
             font-size: 1.6rem;
             color: #fff;
@@ -278,10 +416,18 @@
 
   #latest-blogs {
     margin-bottom: 9.2rem;
+    @include for-tablet {
+      padding: 0 2rem;
+    }
     .header {
       text-align: center;
       max-width: 48.5rem;
       margin: 0 auto 6.6rem auto;
+      @include for-tablet {
+        max-width: 100%;
+        margin-bottom: 4.9rem;
+        text-align: center;
+      }
       h2 {
         font-weight: 500;
         font-size: 3.6rem;
@@ -301,9 +447,18 @@
       align-content: flex-start;
       align-items: flex-start;
       justify-content: space-between;
+      @include for-tablet {
+        padding: 0;
+        display: block;
+      }
       .single-blog {
         flex: 0 0 39.8rem;
         width: 39.8rem;
+        @include for-tablet {
+          width: 100%;
+          flex: 0 0 100%;
+          margin-bottom: 5.5rem;
+        }
         .img-wrapper {
           width: 100%;
           height: 28.5rem;

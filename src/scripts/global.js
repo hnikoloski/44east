@@ -29,6 +29,16 @@ jQuery(document).ready(function ($) {
     var keyValue = getCookie(key);
     setCookie(key, keyValue, "-1");
   }
+  $('#cookie-notice .btn').on('click', function (e) {
+    e.preventDefault();
+    setCookie('cookie-notice', 'true', 365);
+    $('#cookie-notice').removeClass('active');
+  });
+  if (getCookie('cookie-notice') == 'true') {
+    $('#cookie-notice').removeClass('active');
+  }
+
+
   // End Cookie Functions
 
   // Update footer copyright year
@@ -37,12 +47,31 @@ jQuery(document).ready(function ($) {
   }
   if ($('.site-main .wp-block-spacer').length) {
     // Convert each spacer the px to rem
-    $('.site-main .wp-block-spacer').each(function () {
-      var px = $(this).css('height');
-      var rem = px.replace('px', '') / 10;
-      $(this).css('height', rem + 'rem');
-    });
 
+
+
+    if ($(window).width() <= 768) {
+      // Check if the spacer has a class called mob-space-123 and if so, replace the height with the value of the class 
+      $(".site-main .wp-block-spacer").each(function () {
+        var classList = $(this).attr("class").split(" ");
+        for (var i = 0; i < classList.length; i++) {
+          if (classList[i].startsWith("mob-space-")) {
+            var number = parseInt(classList[i].split("-")[2]);
+            if (!isNaN(number)) {
+              $(this).height((number / 10) + "rem");
+              break;
+            }
+          }
+        }
+      });
+    } else {
+
+      $('.site-main .wp-block-spacer').each(function () {
+        var px = $(this).css('height');
+        var rem = px.replace('px', '') / 10;
+        $(this).css('height', rem + 'rem');
+      });
+    }
   }
 
   if ($('[style*="font-size"]').length) {
@@ -60,4 +89,10 @@ jQuery(document).ready(function ($) {
       $(this).remove();
     });
   }, 500);
+  if ($('.page-template-contact .col-form form').length) {
+    // Remove the p and br tags from the form
+    $('.page-template-contact .col-form form p').each(function () {
+      $(this).contents().unwrap();
+    });
+  }
 });

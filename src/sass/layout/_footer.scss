@@ -7,6 +7,9 @@ footer.site-footer {
     align-items: flex-start;
     align-content: flex-start;
     padding: 6.5rem 27.8rem;
+    @include for-tablet {
+      padding: 4.2rem 2rem;
+    }
     .col {
       .footer-title {
         color: #fff;
@@ -18,10 +21,20 @@ footer.site-footer {
       &-about {
         flex: 0 0 34.4rem;
         width: 34.4rem;
+        @include for-tablet {
+          text-align: center;
+          margin-bottom: 5.6rem;
+          flex: 0 0 100%;
+          width: 100%;
+        }
         .logo-wrapper {
           height: auto;
           width: 15.2rem;
           margin-bottom: 2.3rem;
+          @include for-tablet {
+            margin-left: auto;
+            margin-right: auto;
+          }
         }
         p {
           color: #fff;
@@ -33,6 +46,9 @@ footer.site-footer {
         ul.social {
           display: flex;
           flex-wrap: wrap;
+          @include for-tablet {
+            justify-content: center;
+          }
           li {
             &:not(:last-of-type) {
               margin-right: 2.5rem;
@@ -45,6 +61,10 @@ footer.site-footer {
         }
       }
       &-contact {
+        @include for-tablet {
+          flex: 0 0 49%;
+          width: 49%;
+        }
         ul.contact_details {
           li {
             &:not(:last-of-type) {
@@ -74,11 +94,19 @@ footer.site-footer {
       &-newsletter {
         flex: 0 0 39.9rem;
         width: 39.9rem;
+        @include for-tablet {
+          flex: 0 0 100%;
+          width: 100%;
+          margin-top: 4rem;
+        }
         p {
           font-weight: 400;
           font-size: 1.6rem;
           color: #fff;
           max-width: 24.6rem;
+          @include for-tablet {
+            max-width: 100%;
+          }
         }
         form {
           margin-top: 2.4rem;
@@ -96,6 +124,15 @@ footer.site-footer {
                 padding: 1.27rem 3rem;
                 font-size: 1.6rem;
                 color: #000;
+                flex: 0 0 calc(100% - 13.8rem);
+                width: calc(100% - 13.8rem);
+                max-width: calc(100% - 13.8rem);
+                @include for-tablet {
+                  flex: 0 0 100%;
+                  width: 100%;
+                  max-width: 100%;
+                  @include borderRadius(3.2rem);
+                }
                 &::placeholder {
                   color: #807b7b;
                 }
@@ -110,10 +147,34 @@ footer.site-footer {
                 cursor: pointer;
                 font-size: 1.8rem;
                 font-weight: 700;
+                flex: 0 0 13.8rem;
+                width: 13.8rem;
+                max-width: 13.8rem;
+                @include for-tablet {
+                  flex: 0 0 auto;
+                  width: fit-content;
+                  max-width: fit-content;
+                  @include borderRadius(3.2rem);
+                  margin-top: 2.4rem;
+                }
                 &:hover {
                   background: $accent01;
                 }
               }
+            }
+          }
+          .status-msg {
+            text-align: center;
+            width: 100%;
+            max-width: 100%;
+            font-size: 1.8rem;
+            margin-top: 1em;
+            font-weight: 700;
+            &.error {
+              color: #ff5656;
+            }
+            &.success {
+              color: $accent03;
             }
           }
         }
@@ -122,11 +183,56 @@ footer.site-footer {
   }
   .copy-bar {
     background: #070e36;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.6rem 27.8rem;
+    @include for-tablet {
+      padding: 2.3rem;
+      display: block;
+    }
     p {
       color: #fff;
       font-size: 1.4rem;
       font-weight: 400;
-      padding: 1.6rem 27.8rem;
+      @include for-tablet {
+        text-align: center;
+        margin-bottom: 1.6rem;
+      }
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+      align-items: center;
+      justify-content: flex-end;
+      @include for-tablet {
+        justify-content: center;
+      }
+      li {
+        position: relative;
+        &:not(:last-of-type) {
+          margin-right: 1.2rem;
+          padding-right: 1.2rem;
+          &::after {
+            position: absolute;
+            content: "";
+            width: 1px;
+            right: 0;
+            @include ver-center();
+            background: #fff;
+            height: 100%;
+          }
+        }
+
+        a {
+          color: #fff;
+          font-size: 1.4rem;
+          font-weight: 400;
+        }
+      }
     }
   }
 }

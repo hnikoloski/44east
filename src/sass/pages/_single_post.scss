@@ -1,6 +1,9 @@
 body.single-post {
   .featured-image {
     height: 78rem;
+    @include for-tablet {
+      height: 27.5rem;
+    }
     img {
       display: block;
     }
@@ -9,6 +12,10 @@ body.single-post {
     header {
       margin-top: 5.6rem;
       margin-bottom: 5.6rem;
+      @include for-tablet {
+        margin-top: 2.4rem;
+        margin-bottom: 2.4rem;
+      }
       .meta {
         display: flex;
         align-items: center;
@@ -39,6 +46,9 @@ body.single-post {
         font-weight: 700;
         line-height: 1.08;
         margin-bottom: 2.4rem;
+        @include for-tablet {
+          font-size: 3.6rem;
+        }
       }
       .author {
         display: flex;
@@ -70,6 +80,9 @@ body.single-post {
     .main-content {
       p {
         font-size: 2.2rem;
+        @include for-tablet {
+          font-size: 1.6rem;
+        }
       }
       blockquote {
         position: relative;
@@ -77,6 +90,10 @@ body.single-post {
         font-style: italic;
         font-weight: 500;
         @include borderRadius(1rem);
+        @include for-tablet {
+          padding: 6.4rem 3.2rem 3.2rem 3.2rem;
+          font-size: 2rem;
+        }
         &::before {
           content: "";
           position: absolute;
@@ -86,6 +103,12 @@ body.single-post {
           height: 2.87rem;
           top: 4.3rem;
           left: 4.6rem;
+          @include for-tablet {
+            width: 3.12rem;
+            height: 2.3rem;
+            top: 2.4rem;
+            left: 2.4rem;
+          }
         }
       }
     }

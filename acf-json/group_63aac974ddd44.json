@@ -91,6 +91,13 @@
                 "operator": "==",
                 "value": "acf\/hero"
             }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates\/contact.php"
+            }
         ]
     ],
     "menu_order": 0,
@@ -102,5 +109,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1674570249
+    "modified": 1675526474
 }

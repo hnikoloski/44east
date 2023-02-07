@@ -5,32 +5,32 @@ jQuery(document).ready(function ($) {
 
     let homeUrl = window.location.origin;
     let api_url = homeUrl + '/wp-json/ff-east/v1/jobs';
-
-    $('.ffeast-jobs-board-block .select-basic').each(function () {
-        new TomSelect(this, {
-            create: false,
-            allowEmptyOption: false,
-            controlInput: false,
-            // on change event
-            onChange: function (value) {
-                $('.ffeast-all-posts-block .filter').toggleClass('active');
-                $('.ffeast-jobs-board-block .container header .filter li a').attr('data-job-type', value);
-                fetchJobs($('.ffeast-jobs-board-block .container header .filter li a.active').attr('data-job-category'), value);
-            }
+    if ($('.ffeast-jobs-board-block').length) {
+        $('.ffeast-jobs-board-block .select-basic').each(function () {
+            new TomSelect(this, {
+                create: false,
+                allowEmptyOption: false,
+                controlInput: false,
+                // on change event
+                onChange: function (value) {
+                    $('.ffeast-jobs-board-block .filter').toggleClass('active');
+                    $('.ffeast-jobs-board-block .container header .filter li a').attr('data-job-type', value);
+                    fetchJobs($('.ffeast-jobs-board-block .container header .filter li a.active').attr('data-job-category'), value);
+                }
+            });
         });
-    });
 
-    $('.ffeast-jobs-board-block .filter li a').on('click', function (e) {
-        e.preventDefault();
-        let $this = $(this);
-        if ($this.hasClass('active') || $('.ffeast-jobs-board-block .filter').hasClass('loading')) {
-            return;
-        }
-        $this.parent().parent().find('a').removeClass('active');
-        $this.addClass('active');
-        fetchJobs($this.attr('data-job-category'), $this.attr('data-job-type'));
-    });
-
+        $('.ffeast-jobs-board-block .filter li a').on('click', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+            if ($this.hasClass('active') || $('.ffeast-jobs-board-block .filter').hasClass('loading')) {
+                return;
+            }
+            $this.parent().parent().find('a').removeClass('active');
+            $this.addClass('active');
+            fetchJobs($this.attr('data-job-category'), $this.attr('data-job-type'));
+        });
+    }
 
     function singleJobComponent(category, categoryColor, title, link, btnTxt, shortDescription, jobType, minYears) {
         return `
@@ -56,7 +56,6 @@ jQuery(document).ready(function ($) {
 
     fetchJobs('*', '*');
     function fetchJobs(job_category, job_type) {
-        console.log(job_category, job_type)
         axios.get(api_url, {
             params: {
                 job_category: job_category,
@@ -77,6 +76,13 @@ jQuery(document).ready(function ($) {
             }
             container.html(html);
 
+        }).then(() => {
+            if ($(window).width() <= 768) {
+                // Move the .job-results .single-job .top .btn to the bottom of the .job-results .single-job as last 
+                $('.ffeast-jobs-board-block .container .row .job-results .single-job .top .btn').each(function () {
+                    $(this).appendTo($(this).parent().parent());
+                });
+            }
         })
             .catch(function (error) {
                 console.log(error);

@@ -6,7 +6,18 @@ get_header();
 </div>
 <main id="primary" class="site-main">
     <?php
-    the_content();
+    $post = get_post();
+    $post->post_content = '<h1>' . $post->post_title . '</h1>' . $post->post_content;
+    setup_postdata($post);
+
+    // Start the Loop.
+    while (have_posts()) :
+        the_post();
+        the_content();
+    endwhile; // End the loop.
+
+    // Restore original Post Data
+    wp_reset_postdata();
     ?>
 </main>
 

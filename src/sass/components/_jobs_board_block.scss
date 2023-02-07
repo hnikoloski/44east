@@ -7,6 +7,10 @@
       flex-wrap: wrap;
       justify-content: space-between;
       margin-bottom: 9.6rem;
+      @include for-tablet {
+        margin-bottom: 3.2rem;
+        display: block;
+      }
       .filter {
         display: flex;
         align-items: center;
@@ -39,13 +43,20 @@
         align-content: center;
         flex-wrap: wrap;
         justify-content: space-between;
+
         .label {
           color: #000;
           font-size: 1.4rem;
           font-weight: 700;
           margin-right: 1.2rem;
+          @include for-tablet {
+            display: none;
+          }
         }
         .select-basic {
+          @include for-tablet {
+            width: 100%;
+          }
           * {
             transition: 0s;
           }
@@ -53,11 +64,20 @@
             background: #ebebf0;
             @include borderRadius(7.6rem);
             border: none;
+            @include for-tablet {
+              background: #fff;
+              border: 1px solid #ebebf0;
+              padding: 0;
+            }
             .item {
               padding: 0.8rem 5.3rem 0.8rem 3.2rem;
               font-size: 1.8rem;
               color: #000;
               font-weight: 700;
+              @include for-tablet {
+                font-size: 1.6rem;
+                padding: 0.8rem 3.2rem;
+              }
             }
             &::after {
               content: "\e5cf";
@@ -85,7 +105,6 @@
           &.dropdown-active {
             .ts-control {
               @include borderRadius(1.6rem 1.6rem 0 0);
-              border: none;
               outline: none;
             }
           }
@@ -94,6 +113,9 @@
             @include borderRadius(0 0 1.6rem 1.6rem);
             border: none;
             padding: 0.5rem;
+            @include for-tablet {
+              background: #fff;
+            }
             .option {
               font-size: 1.8rem;
               color: #000;
@@ -111,11 +133,21 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
+      @include for-tablet {
+        display: block;
+      }
       .col {
         flex: 0 0 40rem;
         width: 40rem;
         max-width: 40rem;
         margin-right: 9.6rem;
+        @include for-tablet {
+          margin-right: 0;
+          margin-bottom: 3.2rem;
+          flex: 0 0 100%;
+          width: 100%;
+          max-width: 100%;
+        }
         .title {
           color: $accent01;
           font-weight: 700;
@@ -132,8 +164,23 @@
         flex: 0 0 calc(100% - 49.6rem);
         width: calc(100% - 49.6rem);
         max-width: calc(100% - 49.6rem);
+        @include for-tablet {
+          flex: 0 0 100%;
+          width: 100%;
+          max-width: 100%;
+        }
         .single-job {
           margin-bottom: 4rem;
+          @include for-tablet {
+            margin-bottom: 3.2rem;
+            // Btn is moved on mobile
+            .btn {
+              width: 100%;
+              padding: 1rem;
+              text-align: center;
+              margin-top: 2.4rem;
+            }
+          }
           &:not(:last-of-type) {
             padding-bottom: 4rem;
             border-bottom: 0.2rem solid #000;
@@ -145,6 +192,9 @@
             align-items: flex-start;
             align-content: flex-start;
             margin-bottom: 1.6rem;
+            @include for-tablet {
+              display: block;
+            }
             .content {
               .category {
                 color: var(--textColor);

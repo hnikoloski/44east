@@ -1,25 +1,53 @@
 .ffeast-our-team-block {
   padding: 8.9rem 27.8rem;
   background: #f8f7f7;
+  @include for-tablet {
+    padding: 3.2rem 2rem;
+  }
   .block-title {
     text-align: center;
     color: $accent01;
     margin-bottom: 7rem;
     font-weight: 700;
+    @include for-tablet {
+      margin-bottom: 3.2rem;
+    }
   }
   .row {
     display: flex;
     flex-wrap: wrap;
     padding-bottom: 9.8rem;
     border-bottom: 2px solid #000000;
+    @include for-tablet {
+      padding-bottom: 4rem;
+    }
     .single-team-member {
       flex: 0 0 43.8rem;
       width: 43.8rem;
       padding: 2rem;
       @include borderRadius(1rem);
       cursor: pointer;
+      @include for-tablet {
+        flex: 0 0 100%;
+        width: 100%;
+        margin-bottom: 3.2rem;
+        h2 {
+          font-size: 2.4rem;
+        }
+      }
       &:hover {
         box-shadow: 0px 2rem 3.6rem rgba(0, 0, 0, 0.09);
+      }
+      .img-wrapper {
+        width: 100%;
+        height: 50.6rem;
+        @include for-tablet {
+          height: 27rem;
+          img {
+            object-position: top;
+            -o-object-position: top;
+          }
+        }
       }
       p {
         line-height: 1.375;
@@ -79,6 +107,13 @@
       width: 58.5rem;
       flex: 0 0 58.5rem;
       position: relative;
+      @include for-tablet {
+        width: 100%;
+        flex: 0 0 100%;
+        padding: 3.2rem;
+        max-height: 100vh;
+        overflow-y: auto;
+      }
       .close-modal {
         position: absolute;
         right: 3.4rem;
@@ -171,11 +206,22 @@
     display: flex;
     flex-wrap: wrap;
     margin-top: 9.6rem;
+    @include for-tablet {
+      margin-top: 4rem;
+    }
     .col {
       flex: 0 0 50%;
       width: 50%;
+      @include for-tablet {
+        flex: 0 0 100%;
+        width: 100%;
+      }
       p {
         margin-bottom: 3rem;
+        @include for-tablet {
+          margin-top: 2.4rem;
+          margin-bottom: 3.2rem;
+        }
       }
     }
   }

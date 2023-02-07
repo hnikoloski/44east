@@ -22,4 +22,20 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         $(this).parent().toggleClass('active');
     })
+
+    if ($(window).width() <= 768) {
+        // Get the #site-navigation and .lang-switcher elements and wrap them in a div
+        var nav = $('#site-navigation');
+        var lang = $('.lang-switcher');
+        var wrapper = $('<div class="mobile-nav-wrapper"></div>');
+        // Wrap both elements in the same div
+        nav.add(lang).wrapAll(wrapper);
+
+        $('#menu-trigger').on('click', function (e) {
+            e.preventDefault();
+            $(this).toggleClass('active');
+            $('body').toggleClass('overflow-hidden');
+            $('.mobile-nav-wrapper, .mobile-nav-wrapper').toggleClass('active');
+        });
+    }
 });

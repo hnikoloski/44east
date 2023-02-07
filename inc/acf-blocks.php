@@ -253,6 +253,22 @@ function starter_acf_init_block_types()
             ),
         );
 
+        // Still Apply Block
+        acf_register_block_type(
+            array(
+                'name'              => 'still-apply',
+                'title'             => __('Still Apply'),
+                'description'       => __('A block to display still apply.'),
+                'render_template'   => 'block-templates/still_apply_block.php',
+                'category'          => '44east',
+                'icon'              => '44east',
+                'keywords'          => array('still apply', '44east'),
+                'supports'          => array(
+                    'mode' => true,
+                ),
+            ),
+        );
+
         //Share Btns Block
         acf_register_block_type(
             array(

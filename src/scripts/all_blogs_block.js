@@ -6,8 +6,7 @@ jQuery(document).ready(function ($) {
 
     let homeUrl = window.location.origin;
     let api_url = homeUrl + '/wp-json/ff-east/v1/blog-posts';
-
-    $('.ffeast-all-posts-bloc .select-basic').each(function () {
+    $('.ffeast-all-posts-block .select-basic').each(function () {
         new TomSelect(this, {
             create: false,
             allowEmptyOption: false,
@@ -43,7 +42,8 @@ jQuery(document).ready(function ($) {
         let param = catFilter ? 'slug' : 'tag';
         let data = {
             [param]: filterVal,
-            offsetPosts: $('#offsetPosts').val()
+            offsetPosts: $('#offsetPosts').val(),
+            lang: $('#page').attr('data-current-lang')
         };
         axios.get(api_url, {
             params: data

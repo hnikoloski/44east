@@ -32,6 +32,13 @@ add_action('rest_api_init', function () {
         'callback' => 'ff_get_jobs',
         'permission_callback' => '__return_true'
     ));
+
+    // Newsletter Sign Up
+    register_rest_route('ff-east/v1', '/newsletter-sign-up', array(
+        'methods' => 'POST',
+        'callback' => 'ff_newsletter_sign_up',
+        'permission_callback' => '__return_true'
+    ));
 });
 
 function ff_get_team_members()
@@ -100,6 +107,7 @@ function ff_get_blog_categories()
 
 function ff_get_blog_posts_by_category_slug($data)
 {
+    $lang = $data['lang'] ? $data['lang'] : 'en';
 
     $offSet = $data['offSet'];
     $args = array(
@@ -108,6 +116,7 @@ function ff_get_blog_posts_by_category_slug($data)
         'orderby' => 'date',
         'order' => 'DESC',
         'offset' => $offSet,
+        'lang' => $lang,
     );
 
     if ($data['slug'] != '*' && $data['slug'] != '') {
@@ -115,12 +124,10 @@ function ff_get_blog_posts_by_category_slug($data)
         $args['category_name'] = $slug;
     }
 
-    if ($data['tags'] != '*' && $data['tags'] != '') {
-        $tags = $data['tags'];
+    if ($data['tag'] != '*' && $data['tag'] != '') {
+        $tags = $data['tag'];
+        // Return the posts that have the tags
         $args['tag'] = $tags;
-        //Return posts with tags only
-        $args['tag__in'] = $tags;
-        $args['tag__not_in'] = array(0);
     }
 
     $posts = get_posts($args);
@@ -214,7 +221,7 @@ function ff_get_jobs($data)
             'job_category' => get_the_terms($job->ID, 'job_type')[0]->name,
             'job_category_color' => get_field('job_category_color', get_the_terms($job->ID, 'job_type')[0]),
             'job_type' => get_field('job_type', $job->ID),
-            'min_years' => get_field('min_years', $job->ID),
+            'min_years' => pll__('Min.', 'starter') . get_field('min_years', $job->ID) . ' ' . pll__('years', 'starter'),
             'short_description' => $short_description,
             'link' => get_the_permalink($job->ID),
             'btnTxt' => pll__('View Job', 'starter'),
@@ -222,4 +229,59 @@ function ff_get_jobs($data)
     }
 
     return $jobs_array;
+}
+
+
+function ff_newsletter_sign_up($data)
+{
+    $email = $data['email'];
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        //return error message
+        $err_msg = array(
+            'error' => true,
+            'message' => pll__('Please enter a valid email address', 'starter'),
+        );
+        return $err_msg;
+    }
+
+    // Check if email is already in the newsletter_users post type, if not add it.
+    // email is used as title.
+    $args = array(
+        'post_type' => 'newsletter_users',
+        'posts_per_page' => -1,
+        'title' => $email,
+    );
+
+    $posts = get_posts($args);
+
+    if (count($posts) == 0) {
+        $post = array(
+            'post_title' => $email,
+            'post_type' => 'newsletter_users',
+            'post_status' => 'publish',
+        );
+
+        $post_id = wp_insert_post($post);
+
+        if ($post_id) {
+            $success_msg = array(
+                'error' => false,
+                'message' => pll__('Thank you for signing up to our newsletter', 'starter'),
+            );
+            return $success_msg;
+        } else {
+            $err_msg = array(
+                'error' => true,
+                'message' => pll__('Something went wrong, please try again', 'starter'),
+            );
+            return $err_msg;
+        }
+    } else {
+        $err_msg = array(
+            'error' => true,
+            'message' => pll__('You are already signed up to our newsletter', 'starter'),
+        );
+        return $err_msg;
+    }
 }

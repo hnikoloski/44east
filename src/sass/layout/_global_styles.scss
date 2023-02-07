@@ -6,6 +6,9 @@ h2 {
 }
 h3 {
   font-size: 3.6rem;
+  @include for-tablet {
+    font-size: 2.6rem;
+  }
 }
 h4 {
   font-size: 3.4rem;
@@ -24,9 +27,16 @@ body {
     .site {
       main {
         padding: 0 27.8rem;
+        @include for-tablet {
+          padding: 0 2rem;
+        }
         .alignfull {
           margin-left: -27.8rem;
           margin-right: -27.8rem;
+          @include for-tablet {
+            margin-left: -2rem;
+            margin-right: -2rem;
+          }
         }
       }
     }
@@ -84,4 +94,19 @@ h6 {
 }
 .has-ff-light-gray-background-color {
   background-color: #f8f7f7;
+}
+mark {
+  position: relative;
+  background-color: transparent;
+  background: none;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 45%;
+    background-color: #ffff00;
+    z-index: -1;
+  }
 }

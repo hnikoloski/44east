@@ -24,7 +24,7 @@
             }
             // Setup this post for WP functions (variable must be named $post).
             setup_postdata($post); ?>
-            <div class="single-service">
+            <div class="single-service" style="--bgColor:<?php echo $bgColor; ?>">
                 <div class="top" style="--bgImage:url(<?php the_post_thumbnail_url(); ?>)">
                     <h2><?php the_title(); ?></h2>
                 </div>

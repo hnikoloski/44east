@@ -2,12 +2,19 @@
   @include borderRadius(7.6rem);
   font-size: 1.8rem;
   font-weight: 700;
+  border: none;
+  @include for-tablet {
+    font-size: 1.6rem;
+  }
   &-primary {
     background: $accent03;
     color: #fff;
     display: inline-block;
     &-lg {
       padding: 3.2rem 8rem;
+      @include for-tablet {
+        padding: 0.8rem 2.4rem;
+      }
     }
   }
   &-arrow {
@@ -34,6 +41,12 @@
     display: inline-block;
     &-lg {
       padding: 3.2rem 8rem;
+      @include for-tablet {
+        padding: 1.6rem;
+      }
     }
+  }
+  &-m {
+    padding: 1.6rem 4rem;
   }
 }

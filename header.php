@@ -33,7 +33,7 @@
     <div id="page" class="site" data-current-lang="<?php echo pll_current_language('slug'); ?>">
         <header id="masthead" class="site-header">
             <a href="<?= home_url(); ?>" class="logo-wrapper d-block">
-                <img src="<?= $logoUrl[0]; ?>" alt="<?= get_bloginfo(); ?>" class="full-size-img full-size-img-contain">
+                <img src="<?= $logoUrl[0]; ?>" alt="<?= get_bloginfo(); ?>" class="full-size-img full-size-img-contain d-block">
             </a>
 
             <nav id="site-navigation" class="main-navigation">
@@ -73,5 +73,31 @@
                     }
                     ?>
             </div>
+            <div id="menu-trigger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             </ul>
         </header><!-- #masthead -->
+
+        <div id="cookie-notice" class="active">
+            <p class="info">
+                <?php if (pll_current_language('slug') == 'en') { ?>
+                    <?php
+                    $cookieNotice = get_field('cookie_notice', 'option');
+                    ?>
+                <?php } else {
+                    $fieldTarget = 'cookie_notice_' . pll_current_language('slug');
+                    $cookieNotice = get_field($fieldTarget, 'option');
+                }
+                ?>
+
+                <?php
+                echo $cookieNotice;
+                ?>
+            </p>
+            <a href="#" class="btn btn-primary btn-m btn-cookie-accept">
+                <?php pll_e('Accept All Cookies', 'starter'); ?>
+            </a>
+        </div>

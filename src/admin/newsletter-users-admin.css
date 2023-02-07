@@ -1,0 +1,60 @@
+.deletePopup{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.deletePopup .popup-content{
+    padding: 30px;
+    background: #fff;
+    text-align: center;
+    border-radius: 20px;
+    line-height: 1;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 50%);
+}
+.deletePopup .popup-content .popup-btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.deletePopup .popup-content .popup-btns #confirmDeleteNewsLetters{
+    background: #f00;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+    font-size: 22px;
+    line-height: 1;
+    font-weight: 500;
+}
+.deletePopup .popup-content .popup-btns #confirmDeleteNewsLetters:hover{
+   background: rgb(158, 3, 3);
+   box-shadow: 0 3px 6px rgb(0 0 0 / 50%);
+}
+.deletePopup .popup-content .popup-btns #cancelDeleteNewsLetters{
+    background: rgb(199, 229, 52);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+    font-size: 22px;
+    line-height: 1;
+    font-weight: 500;
+}
+.deletePopup .popup-content .popup-btns #cancelDeleteNewsLetters:hover{
+   background:rgb(195, 227, 34);
+   box-shadow: 0 3px 6px rgb(0 0 0 / 50%);
+}

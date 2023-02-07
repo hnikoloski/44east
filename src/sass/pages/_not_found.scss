@@ -1,0 +1,33 @@
+body.error404 {
+  .site main {
+    padding: 0;
+  }
+  .not-found-wrapper {
+    padding: 38.3rem 83rem 28.4rem 28.1rem;
+    background: #ebebeb var(--bgImg);
+    @include bg-props(100vh, right bottom, no-repeat);
+    .content {
+      h6 {
+        color: $accent03;
+        font-size: 2.4rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.17;
+        font-weight: 500;
+      }
+      h1 {
+        color: $primary;
+        font-size: 8rem;
+        line-height: 1.08;
+        margin-bottom: 1.6rem;
+        font-weight: 700;
+      }
+      p {
+        color: #000;
+        font-size: 2.2rem;
+        line-height: 1.27;
+        max-width: 55.2rem;
+        margin-bottom: 5.6rem;
+      }
+    }
+  }
+}

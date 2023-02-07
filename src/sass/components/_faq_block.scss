@@ -2,6 +2,9 @@
   background: #f8f7f7;
   .container {
     padding: 10.4rem 27.8rem 11rem 27.8rem;
+    @include for-tablet {
+      padding: 6rem 2rem 10rem 2rem;
+    }
     .row {
       display: flex;
       flex-wrap: wrap;
@@ -9,6 +12,11 @@
         width: 50%;
         flex: 0 0 50%;
         max-width: 50%;
+        @include for-tablet {
+          flex: 0 0 100%;
+          max-width: 100%;
+          width: 100%;
+        }
         .content {
           h2 {
             color: $accent01;
@@ -16,16 +24,26 @@
             font-weight: 700;
             font-size: 3.6rem;
             margin-bottom: 2.4rem;
+            @include for-tablet {
+              font-size: 2.6rem;
+            }
           }
           p {
             max-width: 39.8rem;
             font-size: 1.8rem;
             line-height: 1.56;
             color: #000;
+            @include for-tablet {
+              font-size: 1.6rem;
+              max-width: 100%;
+            }
           }
         }
         .accordion {
           padding-top: 18.5rem;
+          @include for-tablet {
+            padding-top: 0;
+          }
           &-item {
             border-bottom: 0.2rem solid #000;
             padding-top: 4rem;
@@ -47,6 +65,9 @@
                 font-size: 2.2rem;
                 max-width: 69rem;
                 font-weight: 500;
+                @include for-tablet {
+                  max-width: calc(100% - 3.4rem);
+                }
               }
               .icon {
                 position: absolute;
@@ -54,6 +75,10 @@
                 top: 1rem;
                 font-size: 2rem;
                 cursor: pointer;
+                @include for-tablet {
+                  font-size: 2.6rem;
+                  top: 0.5rem;
+                }
                 &.active {
                   transform: rotate(180deg);
                 }

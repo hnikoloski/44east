@@ -59,6 +59,7 @@ if (!function_exists('starter_setup')) :
             array(
                 'menu-1' => esc_html__('Primary', 'starter'),
                 'lang-switch-menu' => esc_html__('Lang Switcher', 'starter'),
+                'legal-links' => esc_html__('Legal Links', 'starter'),
             )
         );
 
@@ -218,6 +219,19 @@ require get_template_directory() . '/inc/endpoints.php';
 require get_template_directory() . '/inc/translations.php';
 
 
+/**
+ * Newsletter Sign Up func
+ */
+
+require get_template_directory() . '/inc/newsletter.php';
+
+/**
+ * Core Block extensions
+ */
+
+require get_template_directory() . '/inc/block_extend.php';
+
+
 
 
 /**
@@ -274,3 +288,77 @@ add_theme_support('custom-spacing');
 if (get_current_user_id() !== 1) {
     define('DISALLOW_FILE_EDIT', true);
 }
+
+
+// Create taxonomies for post_type=job_applications based on the title of post_type=jobs.
+function create_job_position_taxonomy()
+{
+    $labels = array(
+        'name' => 'Job Positions',
+        'singular_name' => 'Job Position',
+        'search_items' => 'Search Job Positions',
+        'all_items' => 'All Job Positions',
+        'edit_item' => 'Edit Job Position',
+        'update_item' => 'Update Job Position',
+        'add_new_item' => 'Add New Job Position',
+        'new_item_name' => 'New Job Position Name',
+        'menu_name' => 'Job Positions',
+    );
+    $args = array(
+        'labels' => $labels,
+        'hierarchical' => true,
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'job-position'),
+    );
+    register_taxonomy('job_position', array('job_applications'), $args);
+}
+add_action('init', 'create_job_position_taxonomy');
+
+
+function create_job_position_taxonomy_and_term($post_id)
+{
+    $post_type = get_post_type($post_id);
+    if ('job_applications' !== $post_type) {
+        return;
+    }
+    $job_title = get_the_title($post_id);
+    $term = term_exists($job_title, 'job_position');
+    if (0 !== $term && null !== $term) {
+        return;
+    }
+    wp_insert_term($job_title, 'job_position');
+}
+add_action('save_post', 'create_job_position_taxonomy_and_term');
+
+
+
+// Add predefined sizes to the spacer block
+add_filter('block_editor_settings', function ($settings) {
+    $settings['spacing']['customPadding'] = true;
+    $settings['spacing']['units'] = ['px', 'em', 'rem', 'vh', 'vw'];
+    $settings['spacing']['customPadding'] = [
+        [
+            'name' => __('Small', 'ff-east'),
+            'slug' => 'small',
+            'value' => '20px',
+        ],
+        [
+            'name' => __('Medium', 'ff-east'),
+            'slug' => 'medium',
+            'value' => '40px',
+        ],
+        [
+            'name' => __('Large', 'ff-east'),
+            'slug' => 'large',
+            'value' => '60px',
+        ],
+        [
+            'name' => __('X-Large', 'ff-east'),
+            'slug' => 'x-large',
+            'value' => '80px',
+        ],
+    ];
+    return $settings;
+});

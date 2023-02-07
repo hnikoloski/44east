@@ -2,6 +2,10 @@
   position: relative;
   padding-top: 5.2rem;
   padding-bottom: 3.2rem;
+  @include for-tablet {
+    padding-top: 1.3rem;
+    padding-bottom: 1.7rem;
+  }
   &::before {
     content: "";
     background: var(--beforeImg);
@@ -11,6 +15,11 @@
     @include bg-props(cover, center, no-repeat);
     left: 6.2rem;
     bottom: 0;
+    @include for-tablet {
+      width: 4rem;
+      height: 4rem;
+      left: 2rem;
+    }
   }
   &::after {
     content: "";
@@ -21,17 +30,28 @@
     @include bg-props(cover, center, no-repeat);
     right: 19.1rem;
     top: 0;
+    @include for-tablet {
+      width: 4rem;
+      height: 4rem;
+      right: 2rem;
+    }
   }
   .container {
     background-image: var(--bgImage);
     background-color: var(--bgColor);
     padding: 7.7rem 40rem;
     @include bg-props(cover, center, no-repeat);
+    @include for-tablet {
+      padding: 5.6rem 2rem 6.2rem 2rem;
+    }
     h3 {
       color: #fff;
       font-size: 4.8rem;
       text-align: center;
       line-height: 1.12;
+      @include for-tablet {
+        font-size: 3.6rem;
+      }
     }
   }
 }

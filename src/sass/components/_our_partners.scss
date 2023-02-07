@@ -1,6 +1,9 @@
 #our-partners {
   background: #f4f4f4;
   padding: 1.7rem 18.5rem;
+  @include for-tablet {
+    padding: 0.8rem;
+  }
   .swiper-slide {
     height: 3.7rem;
     .img-wrapper {
