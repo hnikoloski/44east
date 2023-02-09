@@ -1,5 +1,6 @@
 <?php
 get_header();
+
 ?>
 <div class="hero">
     <div class="col">

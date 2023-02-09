@@ -39,6 +39,20 @@ add_action('rest_api_init', function () {
         'callback' => 'ff_newsletter_sign_up',
         'permission_callback' => '__return_true'
     ));
+
+    // Job Application
+    register_rest_route('ff-east/v1', '/job-application', array(
+        'methods' => 'POST',
+        'callback' => 'ff_job_application',
+        'permission_callback' => '__return_true'
+    ));
+
+    // Upload files to temp folder
+    register_rest_route('ff-east/v1', '/upload-file-temp', array(
+        'methods' => 'POST',
+        'callback' => 'ff_upload_file_temp',
+        'permission_callback' => '__return_true'
+    ));
 });
 
 function ff_get_team_members()
@@ -284,4 +298,118 @@ function ff_newsletter_sign_up($data)
         );
         return $err_msg;
     }
+}
+
+function ff_job_application($data)
+{
+    $firstName = $data['firstName'];
+    $lastName = $data['lastName'];
+    $email = $data['email'];
+    $phone = $data['phone'];
+    $address = $data['address'];
+    $city = $data['city'];
+    $job_id = $data['job_id'];
+
+    // Validate email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        //return error message
+        $err_msg = array(
+            'error' => true,
+            'message' => pll__('Please enter a valid email address', 'starter'),
+        );
+        return $err_msg;
+    }
+
+    // Create a job_application folder in the uploads folder if it doesn't exist. Then create a folder for the job application based on the job title.
+    $upload_dir = wp_upload_dir();
+    $upload_dir = $upload_dir['basedir'];
+    $upload_dir = $upload_dir . '/job_applications';
+    if (!file_exists($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
+    }
+
+    if ($job_id == 'other') {
+        $job_position = 'Other';
+    } else {
+        $job_position = get_the_title($job_id);
+    }
+
+    $post = array(
+        'post_title' => $firstName . ' ' . $lastName,
+        'post_type' => 'job_applications',
+        'post_status' => 'publish',
+    );
+
+    $post_id = wp_insert_post($post);
+
+
+
+    if (!file_exists($upload_dir . '/' . $job_position)) {
+        mkdir($upload_dir . '/' . $job_position, 0777, true);
+    }
+
+    // Store the uploaded file
+    if (isset($_FILES['files'])) {
+        $file_tmp_name = $_FILES['files']['tmp_name'];
+        $file_name = $_FILES['files']['name'];
+        $file_location = $upload_dir . '/' . $job_position . '/' . uniqid() . '_' . $file_name;
+        if (move_uploaded_file($file_tmp_name, $file_location)) {
+            if ($post_id) {
+                // update acf fields
+                update_field('first_name', $firstName, $post_id);
+                update_field('last_name', $lastName, $post_id);
+                update_field('email', $email, $post_id);
+                update_field('phone', $phone, $post_id);
+                update_field('address', $address, $post_id);
+                update_field('city', $city, $post_id);
+                // Set the taxonomy job_position to the $job_position variable 
+                wp_set_object_terms($post_id, $job_position, 'job_position');
+                // Set files to the acf field files
+                update_field('files', $file_location, $post_id);
+            }
+        } else {
+            // error uploading the file
+            // return error message
+            $err_msg = array(
+                'error' => true,
+                'message' => pll__('Error uploading file', 'starter'),
+            );
+            return $err_msg;
+        }
+    }
+}
+
+
+function ff_upload_file_temp()
+{
+    $upload_dir = wp_upload_dir();
+    $upload_dir = $upload_dir['basedir'];
+    $upload_dir = $upload_dir . '/job_applications/temp';
+
+    if (!file_exists($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
+    }
+
+    // Check if a file was uploaded
+    if (isset($_FILES['file'])) {
+        $file = $_FILES['file'];
+        $file['name'] = str_replace(' ', '_', $file['name']);
+        // Generate a unique file name
+        $file_name = uniqid() . '-' . $file['name'];
+        $file_path = $upload_dir . '/' . $file_name;
+
+        // Move the uploaded file to the temp folder
+        move_uploaded_file($file['tmp_name'], $file_path);
+
+        // Return a success message
+        return array(
+            'message' => 'File uploaded successfully',
+            'file_path' => $file_path
+        );
+    }
+
+    // Return an error message if no file was uploaded
+    return array(
+        'error' => 'No file was uploaded'
+    );
 }

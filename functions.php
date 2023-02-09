@@ -231,6 +231,11 @@ require get_template_directory() . '/inc/newsletter.php';
 
 require get_template_directory() . '/inc/block_extend.php';
 
+/**
+ * Crons
+ */
+
+require get_template_directory() . '/inc/crons.php';
 
 
 

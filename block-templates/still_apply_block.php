@@ -53,8 +53,15 @@ if (!empty($block['align'])) {
                 </span>
             </a>
             <h3><?php pll_e('Start Your Career', 'starter'); ?></h3>
-
-            <form>
+            <?php
+            if (is_singular('jobs')) {
+                $jobId = get_the_ID();
+            } else {
+                $jobId = 'other';
+            }
+            ?>
+            <form action="<?php echo get_home_url(); ?>/wp-json/ff-east/v1/job-application" data-job-id="<?php echo $jobId; ?>">
+                <input type="hidden" name="job_id" value="<?php echo $jobId; ?>">
                 <div class="form-control">
                     <label for="firstName"><?php pll_e('First Name', 'starter'); ?></label>
                     <input type="text" name="firstName" id="firstName" required>
@@ -84,16 +91,16 @@ if (!empty($block['align'])) {
                         <!-- Js  -->
                     </ul>
                 </div>
-                <div class="form-control upload">
-                    <label for="uploadFiles"><?php pll_e('Files', 'starter'); ?></label>
+                <div class="form-control upload dropzone" data-text="<?php pll_e('Choose File', '44east'); ?>">
+
+                    <!-- <label for="uploadFiles"><?php pll_e('Files', 'starter'); ?></label>
                     <div class="wrapper">
                         <p>
                             <?php
                             pll_e('Choose File', 'starter');
                             ?>
                         </p>
-                        <input type="file" id="uploadFiles" multiple />
-                    </div>
+                    </div> -->
                 </div>
                 <div class="form-control">
                     <input type="submit" value="<?php pll_e('Submit Application', 'starter'); ?>" class="btn btn-primary btn-m w-100">

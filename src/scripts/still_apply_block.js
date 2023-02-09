@@ -1,139 +1,96 @@
-import * as Uppy from '@uppy/core'
+import Dropzone from "dropzone";
+import axios from "axios";
 jQuery(document).ready(function ($) {
 
-    // if ($('.ffeast-still-apply-block').length) {
+    if ($('.ffeast-still-apply-block').length) {
+        $('.ffeast-still-apply-block .apply-modal').addClass('active');
 
 
-    //     // Add required attribute to all inputs
-    //     $('.ffeast-still-apply-block .apply-modal input').each(function () {
-    //         // If it has required attribute add a span in the label text
-    //         if ($(this).attr('required')) {
-    //             $(this).parent().find('label').append('<span class="req"></span>');
-    //         }
-    //     });
+        // Add required attribute to all inputs
+        $('.ffeast-still-apply-block .apply-modal input').each(function () {
+            // If it has required attribute add a span in the label text
+            if ($(this).attr('required')) {
+                $(this).parent().find('label').append('<span class="req"></span>');
+            }
+        });
 
-    //     // Modal Toggle
-    //     $('.ffeast-still-apply-block .open-modal').on('click', function (e) {
-    //         e.preventDefault();
-    //         $('.ffeast-still-apply-block .apply-modal').addClass('active');
-    //         $('body').addClass('overflow-hidden');
-    //     });
+        //     // Modal Toggle
+        $('.ffeast-still-apply-block .open-modal').on('click', function (e) {
+            e.preventDefault();
+            $('.ffeast-still-apply-block .apply-modal').addClass('active');
+            $('body').addClass('overflow-hidden');
+        });
 
-    //     $('.ffeast-still-apply-block .apply-modal .close-modal').on('click', function (e) {
-    //         e.preventDefault();
-    //         $('.ffeast-still-apply-block .apply-modal').removeClass('active');
-    //         $('body').removeClass('overflow-hidden');
-    //     });
+        $('.ffeast-still-apply-block .apply-modal .close-modal').on('click', function (e) {
+            e.preventDefault();
+            $('.ffeast-still-apply-block .apply-modal').removeClass('active');
+            $('body').removeClass('overflow-hidden');
+        });
 
-    //     $('.ffeast-still-apply-block .form-control.upload .wrapper p').on('click', function () {
-    //         $('.ffeast-still-apply-block .form-control.upload input').click();
-    //     })
+        //  On esc key press or click outside modal close modal
+        $(document).on('keydown', function (e) {
+            if (e.keyCode === 27) {
+                $('.ffeast-still-apply-block .apply-modal').removeClass('active');
+                $('body').removeClass('overflow-hidden');
+            }
+        });
 
-    //     // // File upload handler
-    //     // let filesUploaded = [];
-    //     // $('#uploadFiles').on('change', function () {
-    //     //     for (let i = 0; i < this.files.length; i++) {
-    //     //         filesUploaded.push(this.files[i].name);
-    //     //     }
-    //     //     // add <li> for each file uploaded
-    //     //     $('.files-selected').html('');
-    //     //     filesUploaded.forEach(function (file) {
-    //     //         $('.files-selected').append(
-    //     //             '<li><span class="material-symbols-outlined icon">description</span>' +
-    //     //             file +
-    //     //             '<span class="material-symbols-outlined delete">close</span> </li>'
-    //     //         );
-    //     //     });
-    //     // });
+        $(document).on('click', function (e) {
+            if ($(e.target).hasClass('apply-modal')) {
+                $('.ffeast-still-apply-block .apply-modal').removeClass('active');
+                $('body').removeClass('overflow-hidden');
+            }
+        });
 
-    //     // // Remove file handler
-    //     // $('.files-selected').on('click', '.delete', function () {
-    //     //     let fileToRemove = $(this).prev().text();
-    //     //     let indexToRemove = filesUploaded.indexOf(fileToRemove);
-    //     //     if (indexToRemove > -1) {
-    //     //         filesUploaded.splice(indexToRemove, 1);
-    //     //     }
-    //     //     $(this).parent().remove();
-    //     // });
+        // Dropzone
+        Dropzone.autoDiscover = false;
+        let uploadInput = $(".ffeast-still-apply-block .dropzone");
+        if (uploadInput.length) {
+            uploadInput.dropzone({
+                url: window.location.origin + '/wp-json/ff-east/v1/upload-file-temp',
+                addRemoveLinks: true,
+                maxFiles: 5,
+                // Drop zone text
+                dictDefaultMessage: $('.ffeast-still-apply-block .dropzone').attr('data-text'),
+            });
+        }
 
-    //     // // Submit form handler
-    //     // $('form').on('submit', function (e) {
-    //     //     e.preventDefault();
+        // on form submit 
+        $('.ffeast-still-apply-block .apply-modal .modal-content form').on('submit', function (e) {
+            e.preventDefault();
+            let form = $(this);
+            let api_url = form.attr('action');
+            let formData = new FormData(this);
+            let dropzone = $('.ffeast-still-apply-block .dropzone')[0].dropzone;
+            let files = dropzone.files;
+            let fileCount = files.length;
+            let fileNames = [];
+            // Add files to form data
+            for (let i = 0; i < fileCount; i++) {
+                fileNames.push(files[i].name);
+                formData.append('files', files[i]);
+            }
 
-    //     //     // Get form data
-    //     //     let firstName = $('#firstName').val();
-    //     //     let lastName = $('#lastName').val();
-    //     //     let email = $('#email').val();
-    //     //     let phone = $('#phone').val();
-    //     //     let address = $('#address').val();
-    //     //     let city = $('#city').val();
-    //     //     let files = $('#uploadFiles')[0].files;
+            // Send form data to api with axios
+            axios.post(api_url, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
 
-    //     //     // Check if all required fields are filled
-    //     //     if (!firstName || !lastName || !email || !phone) {
-    //     //         alert('Please fill in all required fields');
-    //     //         return;
-    //     //     }
-
-    //     //     // Prepare form data for API request
-    //     //     let formData = new FormData();
-    //     //     formData.append('firstName', firstName);
-    //     //     formData.append('lastName', lastName);
-    //     //     formData.append('email', email);
-    //     //     formData.append('phone', phone);
-    //     //     formData.append('address', address);
-    //     //     formData.append('city', city);
-    //     //     for (let i = 0; i < files.length; i++) {
-    //     //         formData.append('files', files[i]);
-    //     //     }
-
-    //     //     // Console log form data in table format
-    //     //     console.table({
-    //     //         'First Name': firstName,
-    //     //         'Last Name': lastName,
-    //     //         'Email': email,
-    //     //         'Phone': phone,
-    //     //         'Address': address,
-    //     //         'City': city,
-    //     //         'Files': filesUploaded
-    //     //     });
-    //     // });
-
-
-    //     // File Pond
-
-    //     let $uploadInput = $('.ffeast-still-apply-block form .form-control.upload input')
-
-    //     new Uppy({
-    //         debug: true,
-    //         autoProceed: true,
-    //         // Target
-    //         target: $uploadInput.parent().get(0),
-    //         restrictions: {
-    //             maxFileSize: 1000000,
-    //             maxNumberOfFiles: 3,
-    //             minNumberOfFiles: 1,
-    //             allowedFileTypes: ['image/*', '.pdf', '.doc', '.docx']
-    //         },
-    //         onBeforeFileAdded: (currentFile, files) => {
-    //             console.log('onBeforeFileAdded', currentFile, files)
-    //         },
-    //         onBeforeUpload: (files) => {
-    //             console.log('onBeforeUpload', files)
-    //         },
-    //         onFileAdded: (currentFile, files) => {
-    //             console.log('onFileAdded', currentFile, files)
-    //         },
-    //         onFileRemoved: (currentFile, files) => {
-    //             console.log('onFileRemoved', currentFile, files)
-    //         },
-    //         onFileUploaded: (file, response) => {
-    //             console.log('onFileUploaded', file, response)
-    //         },
-    //     })
+        });
 
 
 
 
-    // }
+
+
+
+
+
+    }
 });
