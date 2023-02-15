@@ -20,88 +20,73 @@ get_header();
     <a href="<?php the_field('job_apply_link'); ?>" class="btn btn-primary btn-primary-lg"><?php pll_e('Apply For This Job', 'starter'); ?></a>
 </div>
 <main id="primary" class="site-main">
+
     <div class="description">
         <div class="col">
-            <?php if (get_field('job_long_description')) : ?>
-                <h3 class="section-title"><?php pll_e('Description:', 'starter'); ?></h3>
-                <div class="content">
-                    <?php the_field('job_long_description'); ?>
-                </div>
-            <?php endif; ?>
+            <div class="content">
+                <?php
+                the_content();
+                ?>
+            </div>
+
         </div>
 
-        <div class="card">
-            <h6><?php pll_e('About this position', 'starter'); ?></h6>
 
-            <ul>
-                <?php if (get_field('company_name')) : ?>
-                    <li>
-                        <span><?php pll_e('Company name:', 'starter'); ?></span>
-                        <?php the_field('company_name'); ?>
-                    </li>
-                <?php endif; ?>
-                <?php if (get_field('start_date')) : ?>
-                    <li>
-                        <span><?php pll_e('Start date:', 'starter'); ?></span>
-                        <?php the_field('start_date'); ?>
-                    </li>
-                <?php endif; ?>
-                <?php if (get_field('job_application_deadline')) : ?>
-                    <li>
-                        <span><?php pll_e('Application deadline:', 'starter'); ?></span>
-                        <?php the_field('job_application_deadline'); ?>
-                    </li>
-                <?php endif; ?>
-                <?php if (get_field('job_workplace')) : ?>
-                    <li>
-                        <span><?php pll_e('Workplace:', 'starter'); ?></span>
-                        <?php the_field('job_workplace'); ?>
-                    </li>
-                <?php endif; ?>
-                <li>
-                    <span><?php pll_e('Title:', 'starter'); ?></span>
-                    <?php the_title(); ?>
-                </li>
-
-                <?php if (get_field('job_type')) : ?>
-                    <li>
-                        <span><?php pll_e('Position:', 'starter'); ?></span>
-                        <?php echo esc_html($jobType['label']); ?>
-                    </li>
-                <?php endif; ?>
-                <?php if (get_field('job_extent')) : ?>
-                    <li>
-                        <span><?php pll_e('Extent:', 'starter'); ?></span>
-                        <?php the_field('job_extent'); ?>
-                    </li>
-                <?php endif; ?>
-                <?php if (get_field('job_number_of_positions')) : ?>
-                    <li>
-                        <span><?php pll_e('Number of positions:', 'starter'); ?></span>
-                        <?php the_field('job_number_of_positions'); ?>
-                    </li>
-                <?php endif; ?>
-        </div>
-    </div>
-
-    <div class="responsibilities">
-        <?php if (get_field('job_responsibilities')) : ?>
-            <h3 class="section-title"><?php pll_e('Responsibilities:', 'starter'); ?></h3>
-            <div class="content">
-                <?php the_field('job_responsibilities'); ?>
-            </div>
-        <?php endif; ?>
-    </div>
-
-    <div class="requirements">
-        <?php if (get_field('job_requirements')) : ?>
-            <h3 class="section-title"><?php pll_e('Requirements:', 'starter'); ?></h3>
-            <div class="content">
-                <?php the_field('job_requirements'); ?>
-            </div>
-        <?php endif; ?>
     </div>
 </main>
+<section class="application-section">
+    <div class="col">
+        <h3 class="section-title"><?php pll_e('Apply for this job', 'starter'); ?></h3>
+    </div>
+    <?php
+    $jobId = get_the_ID();
+    ?>
+    <form action="<?php echo get_home_url(); ?>/wp-json/ff-east/v1/job-application" data-job-id="<?php echo $jobId; ?>" id="jobAppForm" class="flex">
+        <input type="hidden" name="job_id" value="<?php echo $jobId; ?>">
+        <div class="form-control half">
+            <label for="firstName"><?php pll_e('First Name', 'starter'); ?></label>
+            <input type="text" name="firstName" id="firstName" required>
+        </div>
+        <div class="form-control half">
+            <label for="lastName"><?php pll_e('Last Name', 'starter'); ?></label>
+            <input type="text" name="lastName" id="lastName" required>
+        </div>
+        <div class="form-control half">
+            <label for="email"><?php pll_e('Email', 'starter'); ?></label>
+            <input type="email" name="email" id="email" required>
+        </div>
+        <div class="form-control half">
+            <label for="phone"><?php pll_e('Phone', 'starter'); ?></label>
+            <input type="tel" name="phone" id="phone" required>
+        </div>
+        <div class="form-control half">
+            <label for="address"><?php pll_e('Address', 'starter'); ?></label>
+            <input type="text" name="address" id="address">
+        </div>
+        <div class="form-control half">
+            <label for="city"><?php pll_e('City', 'starter'); ?></label>
+            <input type="text" name="city" id="city">
+        </div>
+
+        <div class="form-control upload dropzone w-100" data-text="<?php pll_e('Choose File', '44east'); ?>">
+
+            <!-- <label for="uploadFiles"><?php pll_e('Files', 'starter'); ?></label>
+                    <div class="wrapper">
+                        <p>
+                            <?php
+                            pll_e('Choose File', 'starter');
+                            ?>
+                        </p>
+                    </div> -->
+        </div>
+        <div class="form-control">
+            <input type="submit" value="<?php pll_e('Submit Application', 'starter'); ?>" class="btn btn-primary btn-m w-100">
+        </div>
+        <div class="status-msg">
+            <p></p>
+        </div>
+    </form>
+</section>
 
 <?php
 get_footer();

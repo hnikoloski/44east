@@ -127,49 +127,13 @@ body.single-jobs .site {
         display: block;
       }
       .col {
-        flex: 0 0 calc(100% - 39.8rem - 4rem);
-        width: calc(100% - 39.8rem - 4rem);
-        max-width: calc(100% - 39.8rem - 4rem);
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
         @include for-tablet {
           flex: 0 0 100%;
           width: 100%;
           max-width: 100%;
-        }
-      }
-      .card {
-        flex: 0 0 39.8rem;
-        width: 39.8rem;
-        max-width: 39.8rem;
-        margin-left: 4rem;
-        background: #e7e7e7;
-        padding: 3.2rem;
-        border: 0.1rem solid #e7e7e7;
-        @include for-tablet {
-          flex: 0 0 100%;
-          width: 100%;
-          max-width: 100%;
-          margin-left: 0;
-        }
-        h6 {
-          font-size: 2.6rem;
-          color: $primary;
-          line-height: 1.69;
-          margin-bottom: 1.6rem;
-        }
-        ul {
-          li {
-            display: flex;
-            align-items: center;
-            align-content: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            color: #000;
-            font-size: 1.6rem;
-            line-height: 1.5;
-            &:not(:last-of-type) {
-              margin-bottom: 3rem;
-            }
-          }
         }
       }
     }
@@ -191,6 +155,7 @@ body.single-jobs .site {
       ul {
         list-style: disc;
         padding-left: 3.3rem;
+        margin-bottom: 3.2rem;
         li {
           font-size: 2.2rem;
           line-height: 1.45;
@@ -203,6 +168,59 @@ body.single-jobs .site {
     p {
       a {
         color: $accent01;
+      }
+    }
+  }
+  .application-section {
+    background: #f8f7f7;
+    padding: 10rem 27.8rem 14.2rem 27.8rem;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    @include for-tablet {
+      display: block;
+      padding: 3.2rem 2rem;
+    }
+    &::before {
+      background: url("../../assets/images/circle-deco.webp");
+      @include bg-props(contain, center, no-repeat);
+      content: "";
+      position: absolute;
+      left: 23.5rem;
+      bottom: -10.4rem;
+      width: 34.5rem;
+      height: 34.5rem;
+      @include for-tablet {
+        display: none;
+      }
+    }
+    .col {
+      flex: 0 0 30%;
+      width: 30%;
+      max-width: 30%;
+      @include for-tablet {
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+      }
+      .section-title {
+        color: $accent01;
+        font-weight: 700;
+      }
+    }
+    form {
+      flex: 0 0 81.2rem;
+      width: 81.2rem;
+      max-width: 81.2rem;
+      @include for-tablet {
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
       }
     }
   }

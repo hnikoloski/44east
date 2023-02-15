@@ -1,65 +1,96 @@
 .ffeast-person-block {
-  .container {
-    padding: 3.2rem;
-    background: #f8f7f7;
-    .img-wrapper {
-      @include borderRadius(50%);
-      overflow: hidden;
-      width: 10rem;
-      height: 10rem;
-      margin-bottom: 1.6rem;
-      img {
-        display: block;
-        object-position: top;
+  &:not(.minimal) {
+    .container {
+      padding: 3.2rem;
+      background: #f8f7f7;
+      .img-wrapper {
+        @include borderRadius(50%);
+        overflow: hidden;
+        width: 10rem;
+        height: 10rem;
+        margin-bottom: 1.6rem;
+        img {
+          display: block;
+          object-position: top;
+        }
       }
-    }
-    .name {
-      font-size: 2.2rem;
-      font-weight: 700;
-      line-height: 1.27;
-      margin: 0;
-    }
-    .title {
-      font-size: 2.2rem;
-      font-weight: 400;
-      margin-bottom: 1.6rem;
-    }
-    .description {
-      margin-bottom: 2.6rem;
-      p {
-        color: $primaryGray;
-        font-size: 1.6rem;
-        line-height: 1.5;
-        &:not(:last-of-type) {
-          margin-bottom: 1.6rem;
+      .name {
+        font-size: 2.2rem;
+        font-weight: 700;
+        line-height: 1.27;
+        margin: 0;
+      }
+      .title {
+        font-size: 2.2rem;
+        font-weight: 400;
+        margin-bottom: 1.6rem;
+      }
+      .description {
+        margin-bottom: 2.6rem;
+        p {
+          color: $primaryGray;
+          font-size: 1.6rem;
+          line-height: 1.5;
+          &:not(:last-of-type) {
+            margin-bottom: 1.6rem;
+          }
+        }
+      }
+      .socials {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: center;
+        align-items: center;
+        li {
+          &:not(:last-of-type) {
+            margin-right: 0.8rem;
+          }
+          a {
+            background: #e7e7e7;
+            @include borderRadius(50%);
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.4rem;
+            color: #63666a;
+            transition: 0s;
+            &:hover {
+              color: #fff;
+              background: $accent01;
+            }
+          }
         }
       }
     }
-    .socials {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      align-content: center;
-      align-items: center;
-      li {
-        &:not(:last-of-type) {
-          margin-right: 0.8rem;
-        }
-        a {
-          background: #e7e7e7;
+  }
+  &.minimal {
+    .container {
+      .author {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        align-items: center;
+        justify-content: flex-start;
+        .img-wrapper {
+          flex: 0 0 4.8rem;
+          max-width: 4.8rem;
+          width: 4.8rem;
+          height: 4.8rem;
           @include borderRadius(50%);
-          display: flex;
-          align-items: center;
-          align-content: center;
-          justify-content: center;
-          width: 3rem;
-          height: 3rem;
-          font-size: 1.4rem;
-          color: #63666a;
-          transition: 0s;
-          &:hover {
-            color: #fff;
-            background: $accent01;
+          overflow: hidden;
+          filter: drop-shadow(0px 0.6rem 2rem rgba(0, 0, 0, 0.16));
+          margin-right: 1.6rem;
+        }
+        p {
+          font-size: 1.6rem;
+          margin-bottom: 0;
+          line-height: 1.38;
+          &.name {
+            font-weight: 700;
           }
         }
       }

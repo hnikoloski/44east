@@ -21,6 +21,16 @@ body.single-services {
       @include for-tablet {
         max-width: calc(100% - 4rem);
       }
+      .service-title {
+        line-height: 1.08;
+        font-size: 8rem;
+        font-weight: 700;
+        margin-bottom: 5.6rem;
+        @include for-tablet {
+          font-size: 3.6rem;
+          margin-bottom: 3.2rem;
+        }
+      }
       @include for-tablet {
         padding-bottom: 0.5rem;
       }

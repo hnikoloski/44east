@@ -114,25 +114,6 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
-        },
-        {
-            "key": "field_63e4f89a60443",
-            "label": "Files",
-            "name": "files",
-            "type": "file",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "url",
-            "library": "all",
-            "min_size": "",
-            "max_size": 5,
-            "mime_types": ""
         }
     ],
     "location": [
@@ -153,5 +134,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1675950284
+    "modified": 1676052170
 }

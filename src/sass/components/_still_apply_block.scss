@@ -106,109 +106,205 @@
         color: $accent01;
         margin-bottom: 3.7rem;
       }
-      form {
-        .form-control {
-          margin-bottom: 1.6rem;
-          label {
-            text-transform: uppercase;
-            color: $primary;
-            font-size: 1.2rem;
-            display: inline-block;
-            margin-bottom: 0.4rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            .req {
-              &::after {
-                content: "*";
-                color: #fb0e0e;
-                font-size: 1.2rem;
-                margin-left: 0.05em;
-              }
-            }
-          }
-          .files-selected {
-            li {
-              display: flex;
-              flex-wrap: wrap;
-              align-items: center;
-              align-content: center;
-              justify-content: flex-start;
-              color: $primaryGray;
-              font-size: 1.6rem;
-              .icon {
-                margin-right: 1.6rem;
-                color: #000;
-                font-size: 2.4rem;
-              }
-              .delete {
-                margin-left: 1.6rem;
-                font-size: 1.6rem;
-                width: 1.6rem;
-                height: 1.6rem;
-                background: #fb0e0e;
-                color: #fff;
-                @include borderRadius(50%);
-                cursor: pointer;
-              }
-            }
-          }
-          input {
-            &:not([type="file"], [type="submit"]) {
-              width: 100%;
-              background: #ffffff;
-              border: 0.1rem solid #ebe7e7;
-              @include borderRadius(0.4rem);
-              font-size: 2rem;
-              padding: 1.6rem 0.5rem;
-            }
-            &[type="submit"] {
-              cursor: pointer;
-            }
-          }
-          &.upload {
-            label {
-              display: block;
-              width: fit-content;
-              width: -moz-fit-content;
-            }
-            .wrapper {
-              position: relative;
-              display: inline-block;
-              cursor: pointer;
-              &:hover {
-                p {
-                  background: $accent03;
-                  color: #fff;
-                }
-              }
-              p {
-                padding: 1.7rem 3.7rem;
-                border: 0.1rem solid $accent03;
-                color: $accent03;
-                cursor: pointer;
-                display: inline-block;
-                font-weight: 700;
-                font-size: 1.6rem;
-                @include borderRadius(0.4rem);
-                &:hover {
-                  background: $accent03;
-                  color: #fff;
-                }
-              }
-              input {
-                opacity: 0;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                cursor: pointer;
-                visibility: hidden;
-              }
-            }
-          }
+    }
+  }
+}
+form#jobAppForm {
+  &.flex {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: space-between;
+    @include for-tablet {
+      display: block;
+    }
+    .form-control {
+      padding: 0 0.8rem;
+      &.upload {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: $accent03;
+        border-color: $accent03;
+      }
+    }
+    .half {
+      flex: 0 0 50%;
+      max-width: 50%;
+      width: 50%;
+      @include for-tablet {
+        flex: 0 0 100%;
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+  }
+  &.loading {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: $accent03;
+      opacity: 0.5;
+      @include borderRadius(0.4rem);
+      z-index: 9999;
+    }
+    &::after {
+      // Font awesome spinner
+      content: "\f110";
+      z-index: 9999;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      position: absolute;
+      @include abs-center;
+      color: $accent03;
+      font-size: 5rem;
+      animation: spin 1s linear infinite;
+    }
+  }
+  .form-control {
+    margin-bottom: 1.6rem;
+
+    label {
+      text-transform: uppercase;
+      color: $primary;
+      font-size: 1.2rem;
+      display: inline-block;
+      margin-bottom: 0.4rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      .req {
+        &::after {
+          content: "*";
+          color: #fb0e0e;
+          font-size: 1.2rem;
+          margin-left: 0.05em;
         }
       }
     }
+    .files-selected {
+      li {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        justify-content: flex-start;
+        color: $primaryGray;
+        font-size: 1.6rem;
+        .icon {
+          margin-right: 1.6rem;
+          color: #000;
+          font-size: 2.4rem;
+        }
+        .delete {
+          margin-left: 1.6rem;
+          font-size: 1.6rem;
+          width: 1.6rem;
+          height: 1.6rem;
+          background: #fb0e0e;
+          color: #fff;
+          @include borderRadius(50%);
+          cursor: pointer;
+        }
+      }
+    }
+    input {
+      &:not([type="file"], [type="submit"]) {
+        width: 100%;
+        background: #ffffff;
+        border: 0.1rem solid #ebe7e7;
+        @include borderRadius(0.4rem);
+        font-size: 2rem;
+        padding: 1.6rem 0.5rem;
+      }
+      &[type="submit"] {
+        cursor: pointer;
+      }
+    }
+    &.upload {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      flex-wrap: wrap;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: $accent03;
+      border-color: $accent03;
+      label {
+        display: block;
+        width: fit-content;
+        width: -moz-fit-content;
+      }
+      .wrapper {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        &:hover {
+          p {
+            background: $accent03;
+            color: #fff;
+          }
+        }
+        p {
+          padding: 1.7rem 3.7rem;
+          border: 0.1rem solid $accent03;
+          color: $accent03;
+          cursor: pointer;
+          display: inline-block;
+          font-weight: 700;
+          font-size: 1.6rem;
+          @include borderRadius(0.4rem);
+          &:hover {
+            background: $accent03;
+            color: #fff;
+          }
+        }
+        input {
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          visibility: hidden;
+        }
+      }
+    }
+  }
+  .status-msg {
+    text-align: center;
+    p {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+    &.success {
+      p {
+        color: $accent01;
+      }
+    }
+    &.error {
+      p {
+        color: #fb0e0e;
+      }
+    }
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

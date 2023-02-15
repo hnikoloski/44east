@@ -72,7 +72,7 @@ $sectionTitle = get_field('our_team_block_title');
 
                         </div>
                         <div class="content">
-                            <h2><?php the_title(); ?></h2>
+                            <h2 class="person-title"><?php the_title(); ?></h2>
                             <?php if (get_field('team_member_position_title', get_the_ID())) : ?>
                                 <p><?php echo the_field('team_member_position_title', get_the_ID()); ?></p>
                             <?php endif; ?>

@@ -37,24 +37,7 @@ get_header();
             $title = strip_tags(get_the_title());
             echo $title;
             ?></h1>
-        <div class="author">
-            <?php
-            $post_id = get_the_ID();
-            $author_id = get_post_field('post_author', $post_id);
-            $author_img = get_avatar_url($author_id);
-            $author_name = get_the_author_meta('display_name', $author_id);
-            ?>
-            <div class="img-wrapper">
 
-                <img src="<?php echo $author_img; ?>" alt="<?php the_author(); ?>" class="full-size-img full-size-img-cover">
-            </div>
-            <div class="info">
-                <p class="name"><?php echo $author_name; ?></p>
-                <?php if (get_field('job_role', 'user_' . $author_id)) : ?>
-                    <p class="title"><?php the_field('job_role', 'user_' . $author_id); ?></p>
-                <?php endif; ?>
-            </div>
-        </div>
     </header>
     <article class="main-content">
         <?php

@@ -2,12 +2,11 @@ import Dropzone from "dropzone";
 import axios from "axios";
 jQuery(document).ready(function ($) {
 
-    if ($('.ffeast-still-apply-block').length) {
-        $('.ffeast-still-apply-block .apply-modal').addClass('active');
+    if ($('.ffeast-still-apply-block').length || $('form#jobAppForm').length) {
 
 
         // Add required attribute to all inputs
-        $('.ffeast-still-apply-block .apply-modal input').each(function () {
+        $('form#jobAppForm input').each(function () {
             // If it has required attribute add a span in the label text
             if ($(this).attr('required')) {
                 $(this).parent().find('label').append('<span class="req"></span>');
@@ -44,24 +43,42 @@ jQuery(document).ready(function ($) {
 
         // Dropzone
         Dropzone.autoDiscover = false;
-        let uploadInput = $(".ffeast-still-apply-block .dropzone");
+        let uploadInput = $("form#jobAppForm .dropzone");
         if (uploadInput.length) {
             uploadInput.dropzone({
                 url: window.location.origin + '/wp-json/ff-east/v1/upload-file-temp',
                 addRemoveLinks: true,
                 maxFiles: 5,
+                // Pdf and word files only
+                acceptedFiles: ".pdf,.doc,.docx",
                 // Drop zone text
-                dictDefaultMessage: $('.ffeast-still-apply-block .dropzone').attr('data-text'),
+                dictDefaultMessage: $('form#jobAppForm .dropzone').attr('data-text'),
+
+
+                init: function () {
+                    this.on("processing", function (file) {
+                        $('form#jobAppForm').addClass('disabled');
+                    });
+                    this.on("complete", function (file) {
+                        $('form#jobAppForm').removeClass('disabled');
+                    });
+                }
             });
         }
 
+
         // on form submit 
-        $('.ffeast-still-apply-block .apply-modal .modal-content form').on('submit', function (e) {
+        $('form#jobAppForm').on('submit', function (e) {
             e.preventDefault();
             let form = $(this);
+            // If there is a class disabled return
+            if (form.hasClass('disabled')) {
+                return;
+            }
+            form.addClass('loading');
             let api_url = form.attr('action');
             let formData = new FormData(this);
-            let dropzone = $('.ffeast-still-apply-block .dropzone')[0].dropzone;
+            let dropzone = $('form#jobAppForm .dropzone')[0].dropzone;
             let files = dropzone.files;
             let fileCount = files.length;
             let fileNames = [];
@@ -72,25 +89,35 @@ jQuery(document).ready(function ($) {
             }
 
             // Send form data to api with axios
-            axios.post(api_url, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(function (response) {
-                console.log(response);
-            }).catch(function (error) {
-                console.log(error);
-            });
+            axios
+                .post(api_url, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(function (response) {
+
+                    form.find('.status-msg p').text(response.data.message);
+                    if (response.data.error === true) {
+                        form.find('.status-msg').addClass('error');
+                    } else {
+                        form.find('.status-msg').addClass('success');
+                        form.find('.status-msg').removeClass('error');
+                        dropzone.removeAllFiles();
+                        // Reset Form
+                        form[0].reset();
+                    }
+
+                })
+                .then(() => {
+                    form.removeClass('loading');
+                })
+
+                .catch(function (error) {
+                    console.log(error);
+                });
 
         });
-
-
-
-
-
-
-
-
 
     }
 });

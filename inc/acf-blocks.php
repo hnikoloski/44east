@@ -253,6 +253,22 @@ function starter_acf_init_block_types()
             ),
         );
 
+        // Single Job Info Block
+        acf_register_block_type(
+            array(
+                'name'              => 'single-job-info',
+                'title'             => __('Single Job Info'),
+                'description'       => __('A block to display single job info.'),
+                'render_template'   => 'block-templates/single_job_info_block.php',
+                'category'          => '44east',
+                'icon'              => '44east',
+                'keywords'          => array('single job info', '44east'),
+                'supports'          => array(
+                    'mode' => true,
+                ),
+            ),
+        );
+
         // Still Apply Block
         acf_register_block_type(
             array(

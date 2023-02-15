@@ -49,13 +49,14 @@
                             if ($reading_time == 0) {
                                 $reading_time = 1;
                             }
-                            echo $reading_time . __(' min read');
+                            echo $reading_time . pll__(' min read');
+
                             ?>
                         </p>
                     </div>
                     <h2><?php the_title(); ?></h2>
                     <a href="<?php the_permalink(); ?>" class="btn">
-                        <?php _e('Read More'); ?>
+                        <?php pll_e('Read More'); ?>
                         <span class="material-symbols-outlined">
                             arrow_circle_right
                         </span>

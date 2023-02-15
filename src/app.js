@@ -1,4 +1,3 @@
-
 import "./scripts/global";
 import "./scripts/header";
 import "./scripts/sliders";
@@ -11,3 +10,4 @@ import "./scripts/newsletter";
 import "./scripts/still_apply_block";
 import "./scripts/map";
 import "./scripts/home";
+import "./scripts/single_job";

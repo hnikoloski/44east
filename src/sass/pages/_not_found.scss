@@ -6,7 +6,24 @@ body.error404 {
     padding: 38.3rem 83rem 28.4rem 28.1rem;
     background: #ebebeb var(--bgImg);
     @include bg-props(100vh, right bottom, no-repeat);
+    @include for-tablet {
+      padding: 10.8rem 2rem;
+      @include bg-props(cover, center center, no-repeat);
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ebebeb;
+        opacity: 0.5;
+      }
+    }
     .content {
+      position: relative;
+      z-index: 1;
       h6 {
         color: $accent03;
         font-size: 2.4rem;

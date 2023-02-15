@@ -325,13 +325,17 @@ function ff_job_application($data)
     $upload_dir = $upload_dir['basedir'];
     $upload_dir = $upload_dir . '/job_applications';
     if (!file_exists($upload_dir)) {
-        mkdir($upload_dir, 0777, true);
+        mkdir($upload_dir, 0755, true);
     }
 
-    if ($job_id == 'other') {
+    if ($job_id == 'other' || $job_id == '') {
         $job_position = 'Other';
+        $job_positionFullName = 'Other';
     } else {
         $job_position = get_the_title($job_id);
+        $job_positionFullName = $job_position;
+        // Convert the job title to a slug
+        $job_position = sanitize_title($job_position);
     }
 
     $post = array(
@@ -342,17 +346,25 @@ function ff_job_application($data)
 
     $post_id = wp_insert_post($post);
 
+    // Set job_position taxonomy to the $job_id
+    wp_set_object_terms($post_id, $job_positionFullName, 'job_position');
 
 
     if (!file_exists($upload_dir . '/' . $job_position)) {
-        mkdir($upload_dir . '/' . $job_position, 0777, true);
+        mkdir($upload_dir . '/' . $job_position, 0755, true);
     }
 
     // Store the uploaded file
     if (isset($_FILES['files'])) {
         $file_tmp_name = $_FILES['files']['tmp_name'];
         $file_name = $_FILES['files']['name'];
-        $file_location = $upload_dir . '/' . $job_position . '/' . uniqid() . '_' . $file_name;
+        // Create a folder for the applicant
+        $applicant_folder = $firstName . '_' . $lastName . '_' . $post_id;
+        if (!file_exists($upload_dir . '/' . $job_position . '/' . $applicant_folder)) {
+            mkdir($upload_dir . '/' . $job_position . '/' . $applicant_folder, 0755, true);
+        }
+        $dateUploaded = date('Y-m-d');
+        $file_location = $upload_dir . '/' . $job_position . '/' . $applicant_folder . '/' . uniqid() . '_' . $dateUploaded . '-' . $file_name;
         if (move_uploaded_file($file_tmp_name, $file_location)) {
             if ($post_id) {
                 // update acf fields
@@ -362,22 +374,26 @@ function ff_job_application($data)
                 update_field('phone', $phone, $post_id);
                 update_field('address', $address, $post_id);
                 update_field('city', $city, $post_id);
-                // Set the taxonomy job_position to the $job_position variable 
-                wp_set_object_terms($post_id, $job_position, 'job_position');
-                // Set files to the acf field files
-                update_field('files', $file_location, $post_id);
+                update_field('job_position', $job_position, $post_id);
+                update_field('resume', $file_location, $post_id);
+                // Return success message
+                $success_msg = array(
+                    'error' => false,
+                    'message' => pll__('Your job application has been submitted successfully!', 'starter'),
+                );
+                return $success_msg;
             }
         } else {
-            // error uploading the file
-            // return error message
+            // Return error message
             $err_msg = array(
                 'error' => true,
-                'message' => pll__('Error uploading file', 'starter'),
+                'message' => pll__('An error occurred while uploading your resume. Please try again.', 'starter'),
             );
             return $err_msg;
         }
     }
 }
+
 
 
 function ff_upload_file_temp()
@@ -387,7 +403,7 @@ function ff_upload_file_temp()
     $upload_dir = $upload_dir . '/job_applications/temp';
 
     if (!file_exists($upload_dir)) {
-        mkdir($upload_dir, 0777, true);
+        mkdir($upload_dir, 0755, true);
     }
 
     // Check if a file was uploaded

@@ -1,0 +1,87 @@
+.page-template-legal-page {
+  #masthead {
+    background: #000;
+  }
+  .hero {
+    padding: 10.9rem 3.5rem 13.7rem 3.5rem;
+    position: relative;
+    background: #f8f7f7;
+    min-height: 49.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+    @include for-tablet {
+      padding: 8.5rem 2rem;
+      min-height: auto;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      right: 18.4rem;
+      top: 3.4rem;
+      background: url("../../assets/images/circle-deco.webp");
+      @include bg-props(contain, center, no-repeat);
+      width: 34.5rem;
+      height: 34.5rem;
+      opacity: 0.5;
+      @include for-tablet {
+        width: 12rem;
+        height: 12rem;
+        right: 2.8rem;
+        top: 5rem;
+      }
+    }
+    .sub-title {
+      color: $accent03;
+      font-size: 2.4rem;
+      line-height: 1.17;
+      margin-bottom: 0.8rem;
+      position: relative;
+      z-index: 1;
+      @include for-tablet {
+        font-size: 2rem;
+      }
+    }
+    .title {
+      line-height: 1.08;
+      color: $primary;
+      font-size: 8rem;
+      margin-bottom: 1.6rem;
+      position: relative;
+      z-index: 1;
+      font-weight: 700;
+      @include for-tablet {
+        font-size: 3.6rem;
+      }
+    }
+    .description {
+      position: relative;
+      z-index: 1;
+      p {
+        color: #000;
+        font-size: 2.2rem;
+        line-height: 1.27;
+        @include for-tablet {
+          font-size: 1.8rem;
+        }
+        &:not(:last-of-type) {
+          margin-bottom: 1.6rem;
+        }
+      }
+    }
+  }
+
+  #primary {
+    padding-top: 5.6rem;
+    padding-bottom: 10rem;
+    p {
+      &:not(:last-of-type) {
+        margin-bottom: 4rem;
+      }
+    }
+  }
+}

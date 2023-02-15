@@ -110,3 +110,10 @@ mark {
     z-index: -1;
   }
 }
+
+.mob-alignfull {
+  @include for-tablet {
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+}

@@ -56,11 +56,13 @@ if (!empty($block['align'])) {
             <?php
             if (is_singular('jobs')) {
                 $jobId = get_the_ID();
+                // Get the slug
+                $jobId = get_post_field('post_name', $jobId);
             } else {
                 $jobId = 'other';
             }
             ?>
-            <form action="<?php echo get_home_url(); ?>/wp-json/ff-east/v1/job-application" data-job-id="<?php echo $jobId; ?>">
+            <form action="<?php echo get_home_url(); ?>/wp-json/ff-east/v1/job-application" data-job-id="<?php echo $jobId; ?>" id="jobAppForm">
                 <input type="hidden" name="job_id" value="<?php echo $jobId; ?>">
                 <div class="form-control">
                     <label for="firstName"><?php pll_e('First Name', 'starter'); ?></label>
@@ -104,6 +106,9 @@ if (!empty($block['align'])) {
                 </div>
                 <div class="form-control">
                     <input type="submit" value="<?php pll_e('Submit Application', 'starter'); ?>" class="btn btn-primary btn-m w-100">
+                </div>
+                <div class="status-msg">
+                    <p></p>
                 </div>
             </form>
         </div>

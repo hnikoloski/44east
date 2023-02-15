@@ -26,30 +26,30 @@ if (pll_current_language('slug') == 'en') {
                 <p><?php the_field('footer_description' . $fieldTarget, 'option'); ?></p>
             <?php endif; ?>
             <ul class="social">
-                <?php if (get_field('linkedin_link' . $fieldTarget, 'option')) : ?>
+                <?php if (get_field('linkedin_link', 'option')) : ?>
                     <li>
-                        <a href="<?php the_field('linkedin_link' . $fieldTarget, 'option'); ?>" target="_blank" rel="noopener noreferrer">
+                        <a href="<?php the_field('linkedin_link', 'option'); ?>" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </li>
                 <?php endif; ?>
-                <?php if (get_field('twitter_link' . $fieldTarget, 'option')) : ?>
+                <?php if (get_field('twitter_link', 'option')) : ?>
                     <li>
-                        <a href="<?php the_field('twitter_link' . $fieldTarget, 'option'); ?>" target="_blank" rel="noopener noreferrer">
+                        <a href="<?php the_field('twitter_link', 'option'); ?>" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-twitter"></i>
                         </a>
                     </li>
                 <?php endif; ?>
-                <?php if (get_field('facebook_link' . $fieldTarget, 'option')) : ?>
+                <?php if (get_field('facebook_link', 'option')) : ?>
                     <li>
-                        <a href="<?php the_field('facebook_link' . $fieldTarget, 'option'); ?>" target="_blank" rel="noopener noreferrer">
+                        <a href="<?php the_field('facebook_link', 'option'); ?>" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </li>
                 <?php endif; ?>
-                <?php if (get_field('instagram_link' . $fieldTarget, 'option')) : ?>
+                <?php if (get_field('instagram_link', 'option')) : ?>
                     <li>
-                        <a href="<?php the_field('instagram_link' . $fieldTarget, 'option'); ?>" target="_blank" rel="noopener noreferrer">
+                        <a href="<?php the_field('instagram_link', 'option'); ?>" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </li>

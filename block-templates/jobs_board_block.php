@@ -22,6 +22,8 @@ if (!empty($block['align'])) {
 
 <div <?= $anchor; ?> class="<?= esc_attr($class_name); ?>">
     <div class="container">
+        <input type="hidden" name="job_type_hidden" id="jobTypeHidden">
+        <input type="hidden" name="job_category_hidden" id="jobCategoryHidden">
         <header>
             <?php
             //taxonomy=job_type&post_type=jobs
@@ -34,7 +36,7 @@ if (!empty($block['align'])) {
 
             if ($terms) {
             ?>
-                <ul class="filter">
+                <ul class="filter filter-for-desktop">
                     <li><a href="*" class="active">All</a></li>
                     <?php
                     foreach ($terms as $term) {
@@ -43,11 +45,26 @@ if (!empty($block['align'])) {
                             continue;
                         }
                     ?>
-                        <li><a href="<?php echo esc_url($term_link); ?>" data-job-category="<?php echo $term->slug; ?>" data-job-type="*"><?php echo $term->name; ?></a></li>
+                        <li><a href="<?php echo esc_url($term_link); ?>" data-job-category="<?php echo $term->slug; ?>" data-job-type="*" class="filter-item"><?php echo $term->name; ?></a></li>
                     <?php
                     }
                     ?>
                 </ul>
+
+                <select class="filter filter-for-mobile select-basic-second">
+                    <option value="*" selected>All</option>
+                    <?php
+                    foreach ($terms as $term) {
+                        $term_link = get_term_link($term);
+                        if (is_wp_error($term_link)) {
+                            continue;
+                        }
+                    ?>
+                        <option value="<?php echo $term->slug; ?>" class="filter-item job_category_item"><?php echo $term->name; ?></option>
+                    <?php
+                    }
+                    ?>
+                </select>
 
             <?php
             }
@@ -79,10 +96,10 @@ if (!empty($block['align'])) {
             <div class="col">
                 <p class="label"><?php pll_e('Filter by', 'starter'); ?></p>
                 <select name="filter-by" id="filter-by" class="select-basic">
-                    <option value="*" selected><?php pll_e('All', 'starter'); ?></option>
+                    <option value="*" selected class="filter-item"><?php pll_e('All', 'starter'); ?></option>
                     <?php
                     foreach ($choicesJobType as $key => $value) {
-                        echo '<option value="' . $key . '">' . $value . '</option>';
+                        echo '<option value="' . $key . '" class="filter-item">' . $value . '</option>';
                     }
                     ?>
                 </select>

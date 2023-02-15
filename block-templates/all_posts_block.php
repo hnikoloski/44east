@@ -29,7 +29,7 @@ $offsetPosts = get_field('all_posts_block_offset_posts') ? get_field('all_posts_
             <?php if ($blockTitle) : ?>
                 <h3><?php echo $blockTitle; ?></h3>
             <?php endif; ?>
-            <ul class="categories filter active">
+            <ul class="categories filter active filter-for-desktop">
                 <li><a href="*" data-filter="*" class="active">All</a></li>
                 <?php
                 $categories = get_categories();
@@ -44,7 +44,18 @@ $offsetPosts = get_field('all_posts_block_offset_posts') ? get_field('all_posts_
                 }
                 ?>
             </ul>
-            <ul class="tags filter">
+            <select class="filter active categories filter-for-mobile select-basic-second">
+                <option value="*" selected>All</option>
+                <?php
+                foreach ($categories as $category) {
+                ?>
+                    <option value="<?php echo $category->slug; ?>"><?php echo $category->name; ?></option>
+                <?php
+                }
+                ?>
+            </select>
+
+            <ul class="tags filter filter-for-desktop">
                 <li><a href="*" class="active">All</a></li>
                 <?php
                 $tags = get_tags();
@@ -55,6 +66,18 @@ $offsetPosts = get_field('all_posts_block_offset_posts') ? get_field('all_posts_
                 }
                 ?>
             </ul>
+            <select class="filter tags filter-for-mobile select-basic-second">
+                <option value="*" selected>All</option>
+                <?php
+                foreach ($tags as $tag) {
+                ?>
+                    <option value="<?php echo $tag->slug; ?>"><?php echo $tag->name; ?></option>
+                <?php
+                }
+                ?>
+            </select>
+            <input type="hidden" name="hidden_tags" id="hiddenTags">
+            <input type="hidden" name="hidden_categories" id="hiddenCategories">
         </div>
         <div class="col">
             <p class="label"><?php pll_e('Filter by', 'starter'); ?></p>

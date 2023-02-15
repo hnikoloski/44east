@@ -237,6 +237,11 @@ require get_template_directory() . '/inc/block_extend.php';
 
 require get_template_directory() . '/inc/crons.php';
 
+/**
+ * Job Applications Admin Page customizations
+ */
+
+require get_template_directory() . '/inc/job_applications_admin.php';
 
 
 /**

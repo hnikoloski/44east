@@ -12,6 +12,12 @@
       align-content: center;
       flex-wrap: wrap;
       justify-content: space-between;
+      @include for-tablet {
+        flex: 0 0 100%;
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 1.2rem;
+      }
       h3 {
         color: $accent01;
         font-weight: 700;
@@ -22,6 +28,9 @@
         font-size: 1.4rem;
         font-weight: 700;
         margin-right: 1.2rem;
+        @include for-tablet {
+          display: none;
+        }
       }
       .filter {
         display: none;
@@ -31,6 +40,11 @@
         justify-content: flex-start;
         &.active {
           display: flex;
+        }
+        @include for-tablet {
+          &.filter-for-desktop {
+            display: none !important;
+          }
         }
         li {
           margin-right: 1.2rem;
@@ -49,19 +63,42 @@
           }
         }
       }
-      .select-basic {
+      .select-basic,
+      .select-basic-second {
         * {
           transition: 0s;
+        }
+        @include for-tablet {
+          width: 100%;
+          // display: flex;
+          align-items: center;
+          align-content: center;
+          flex-wrap: wrap;
+          &.filter-for-mobile.active {
+            display: flex;
+          }
+          &.filter-for-desktop {
+            display: none !important;
+          }
         }
         .ts-control {
           background: #ebebf0;
           @include borderRadius(7.6rem);
           border: none;
+          @include for-tablet {
+            background: #fff;
+            border: 1px solid #ebebf0;
+            padding: 0;
+          }
           .item {
             padding: 0.8rem 5.3rem 0.8rem 3.2rem;
             font-size: 1.8rem;
             color: #000;
             font-weight: 700;
+            @include for-tablet {
+              font-size: 1.6rem;
+              padding: 0.8rem 3.2rem;
+            }
           }
           &::after {
             content: "\e5cf";
@@ -98,6 +135,9 @@
           @include borderRadius(0 0 1.6rem 1.6rem);
           border: none;
           padding: 0.5rem;
+          @include for-tablet {
+            background: #fff;
+          }
           .option {
             font-size: 1.8rem;
             color: #000;

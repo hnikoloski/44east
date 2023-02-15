@@ -14,13 +14,32 @@ jQuery(document).ready(function ($) {
                 // on change event
                 onChange: function (value) {
                     $('.ffeast-jobs-board-block .filter').toggleClass('active');
-                    $('.ffeast-jobs-board-block .container header .filter li a').attr('data-job-type', value);
-                    fetchJobs($('.ffeast-jobs-board-block .container header .filter li a.active').attr('data-job-category'), value);
+                    $('.ffeast-jobs-board-block .container header .filter .filter-item').attr('data-job-type', value);
+                    fetchJobs($('.ffeast-jobs-board-block .container header .filter .filter-item.active').attr('data-job-category'), value);
+                    $('#jobTypeHidden').val(value);
+                    // trigger change event 
+                    $('#jobTypeHidden').trigger('change');
                 }
             });
         });
 
-        $('.ffeast-jobs-board-block .filter li a').on('click', function (e) {
+        $('.ffeast-jobs-board-block .select-basic-second').each(function () {
+            new TomSelect(this, {
+                create: false,
+                allowEmptyOption: false,
+                controlInput: false,
+                // on change event
+                onChange: function (value) {
+                    $('.ffeast-jobs-board-block .filter').toggleClass('active');
+                    $('.ffeast-jobs-board-block .container header .filter .filter-item').attr('data-job-type', value);
+                    $('#jobCategoryHidden').val(value);
+                    // trigger change event
+                    $('#jobCategoryHidden').trigger('change');
+                }
+            });
+        });
+
+        $('.ffeast-jobs-board-block .filter li .filter-item').on('click', function (e) {
             e.preventDefault();
             let $this = $(this);
             if ($this.hasClass('active') || $('.ffeast-jobs-board-block .filter').hasClass('loading')) {
@@ -90,4 +109,17 @@ jQuery(document).ready(function ($) {
             );
 
     }
+
+    // when #jobCategoryHidden or #jobTypeHidden change, trigger the change event of the select
+    $('#jobCategoryHidden').on('change', function () {
+        fetchJobs($(this).val(), $('#jobTypeHidden').val());
+        console.log('jobCategoryHidden change');
+    });
+
+    $('#jobTypeHidden').on('change', function () {
+        fetchJobs($('#jobCategoryHidden').val(), $(this).val());
+        console.log('jobTypeHidden change');
+    });
+
+
 });
