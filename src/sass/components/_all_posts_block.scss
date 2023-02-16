@@ -42,8 +42,12 @@
           display: flex;
         }
         @include for-tablet {
+          margin-bottom: 1.2rem;
           &.filter-for-desktop {
-            display: none !important;
+            display: none;
+          }
+          &.filter-for-mobile {
+            display: flex;
           }
         }
         li {
@@ -67,6 +71,12 @@
       .select-basic-second {
         * {
           transition: 0s;
+        }
+        &.filter-for-mobile {
+          display: none;
+        }
+        &.filter-for-desktop {
+          display: flex;
         }
         @include for-tablet {
           width: 100%;
