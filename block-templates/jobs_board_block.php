@@ -37,7 +37,7 @@ if (!empty($block['align'])) {
             if ($terms) {
             ?>
                 <ul class="filter filter-for-desktop">
-                    <li><a href="*" class="active">All</a></li>
+                    <li><a href="*" class="active filter-item">All</a></li>
                     <?php
                     foreach ($terms as $term) {
                         $term_link = get_term_link($term);

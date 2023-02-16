@@ -75,6 +75,7 @@ jQuery(document).ready(function ($) {
 
     fetchJobs('*', '*');
     function fetchJobs(job_category, job_type) {
+        $('.ffeast-jobs-board-block .filter, .ffeast-jobs-board-block header').addClass('loading');
         axios.get(api_url, {
             params: {
                 job_category: job_category,
@@ -102,6 +103,9 @@ jQuery(document).ready(function ($) {
                     $(this).appendTo($(this).parent().parent());
                 });
             }
+        }).then(() => {
+            $('.ffeast-jobs-board-block .filter, .ffeast-jobs-board-block header').removeClass('loading');
+
         })
             .catch(function (error) {
                 console.log(error);

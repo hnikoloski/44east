@@ -30,7 +30,7 @@ $offsetPosts = get_field('all_posts_block_offset_posts') ? get_field('all_posts_
                 <h3><?php echo $blockTitle; ?></h3>
             <?php endif; ?>
             <ul class="categories filter active filter-for-desktop">
-                <li><a href="*" data-filter="*" class="active">All</a></li>
+                <li><a href="*" data-filter="*" class="active filter-item">All</a></li>
                 <?php
                 $categories = get_categories();
                 // Do not show uncategorized or empty categories
