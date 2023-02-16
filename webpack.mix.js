@@ -11,6 +11,11 @@ mix
     .setPublicPath('dist')
     .sourceMaps(true, 'source-map')
     .copyDirectory('src/sass/fonts/nunito', 'dist/fonts/nunito')
+    // copy /node_modules/material-symbols/material-symbols-sharp.woff2 to /dist/css/material-symbols-sharp.woff2
+    .copy('node_modules/material-symbols/material-symbols-sharp.woff2', 'dist/css/material-symbols-sharp.woff2')
+    .copy('node_modules/material-symbols/material-symbols-sharp.woff2', 'dist/css/material-symbols-outlined.woff2')
+    .copy('node_modules/material-symbols/material-symbols-sharp.woff2', 'dist/css/material-symbols-rounded.woff2')
+
     .disableNotifications();
 
 mix.webpackConfig({

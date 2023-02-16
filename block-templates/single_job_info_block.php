@@ -19,8 +19,8 @@ if (!empty($block['align'])) {
 }
 $jobType = get_field('job_type', get_the_ID());
 
-// Check if it is on a single job page
-if (is_singular('jobs')) {
+// Check if in edit mode and if the current editor is for a job post type
+if (is_admin() || get_post_type() == 'jobs' || is_singular('jobs')) {
 ?>
 
     <div <?= $anchor; ?> class="<?= esc_attr($class_name); ?>">
@@ -78,7 +78,6 @@ if (is_singular('jobs')) {
     </div>
 
 <?php
-    // If not on a single job page
 } else {
-    echo '<h1>' . pll__('This block can only be used on a single job page', 'starter') . '</h1>';
+    echo '<h1>' . pll__('This block can only be used on a single job page. ', 'starter') . '</h1>';
 } ?>
