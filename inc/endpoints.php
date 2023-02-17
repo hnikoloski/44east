@@ -159,7 +159,7 @@ function ff_get_blog_posts_by_category_slug($data)
         if ($reading_time == 0) {
             $reading_time = 1;
         }
-        $reading_time  = $reading_time . __(' min read');
+        $reading_time  = $reading_time . pll__(' min read', '44east');
 
         $title = $post->post_title;
         $title = strip_tags($title);
@@ -172,7 +172,7 @@ function ff_get_blog_posts_by_category_slug($data)
             'date' =>  get_the_date('F j, Y', $post->ID),
             'readTime' =>  $reading_time,
             'imgUrl' =>  get_the_post_thumbnail_url($post->ID),
-            'btnTxt' => __('Read More', 'starter'),
+            'btnTxt' => pll__('Read More', '44east'),
             'btnLink' => get_the_permalink($post->ID),
         );
     }
@@ -227,7 +227,11 @@ function ff_get_jobs($data)
         if (get_field('job_short_description', $job->ID)) {
             $short_description = get_field('job_short_description', $job->ID);
         } else {
-            $short_description = '';
+            $short_description = get_the_excerpt($job->ID);
+
+            if (strlen($short_description) > 250) {
+                $short_description = substr($short_description, 0, 250) . '...';
+            }
         }
         $jobs_array[] = array(
             'id' => $job->ID,
@@ -235,10 +239,10 @@ function ff_get_jobs($data)
             'job_category' => get_the_terms($job->ID, 'job_type')[0]->name,
             'job_category_color' => get_field('job_category_color', get_the_terms($job->ID, 'job_type')[0]),
             'job_type' => get_field('job_type', $job->ID),
-            'min_years' => pll__('Min.', 'starter') . get_field('min_years', $job->ID) . ' ' . pll__('years', 'starter'),
+            'min_years' => pll__('Min.', '44east') . get_field('min_years', $job->ID) . ' ' . pll__('years', '44east'),
             'short_description' => $short_description,
             'link' => get_the_permalink($job->ID),
-            'btnTxt' => pll__('View Job', 'starter'),
+            'btnTxt' => pll__('View Job', '44east'),
         );
     }
 
@@ -254,7 +258,7 @@ function ff_newsletter_sign_up($data)
         //return error message
         $err_msg = array(
             'error' => true,
-            'message' => pll__('Please enter a valid email address', 'starter'),
+            'message' => pll__('Please enter a valid email address', '44east'),
         );
         return $err_msg;
     }
@@ -281,20 +285,20 @@ function ff_newsletter_sign_up($data)
         if ($post_id) {
             $success_msg = array(
                 'error' => false,
-                'message' => pll__('Thank you for signing up to our newsletter', 'starter'),
+                'message' => pll__('Thank you for signing up to our newsletter', '44east'),
             );
             return $success_msg;
         } else {
             $err_msg = array(
                 'error' => true,
-                'message' => pll__('Something went wrong, please try again', 'starter'),
+                'message' => pll__('Something went wrong, please try again', '44east'),
             );
             return $err_msg;
         }
     } else {
         $err_msg = array(
             'error' => true,
-            'message' => pll__('You are already signed up to our newsletter', 'starter'),
+            'message' => pll__('You are already signed up to our newsletter', '44east'),
         );
         return $err_msg;
     }
@@ -315,7 +319,30 @@ function ff_job_application($data)
         //return error message
         $err_msg = array(
             'error' => true,
-            'message' => pll__('Please enter a valid email address', 'starter'),
+            'message' => pll__('Please enter a valid email address', '44east'),
+        );
+        return $err_msg;
+    }
+
+    // Check the uploaded file
+    if (!isset($_FILES['files'])  || $_FILES['files']['error'] !== UPLOAD_ERR_OK) {
+        // Return error message
+        $err_msg = array(
+            'error' => true,
+            'message' => pll__('An error occurred while uploading your resume. Or you did not upload a resume. Please try again.', '44east'),
+        );
+        return $err_msg;
+    }
+
+    // Check file extension
+    $allowed = array('pdf', 'doc', 'docx');
+    $filename = $_FILES['files']['name'];
+    $ext = pathinfo($filename, PATHINFO_EXTENSION);
+    if (!in_array($ext, $allowed)) {
+        // Return error message
+        $err_msg = array(
+            'error' => true,
+            'message' => pll__('Please upload a PDF, DOC or DOCX file', '44east'),
         );
         return $err_msg;
     }
@@ -379,7 +406,7 @@ function ff_job_application($data)
                 // Return success message
                 $success_msg = array(
                     'error' => false,
-                    'message' => pll__('Your job application has been submitted successfully!', 'starter'),
+                    'message' => pll__('Your job application has been submitted successfully!', '44east'),
                 );
                 return $success_msg;
             }
@@ -387,7 +414,7 @@ function ff_job_application($data)
             // Return error message
             $err_msg = array(
                 'error' => true,
-                'message' => pll__('An error occurred while uploading your resume. Please try again.', 'starter'),
+                'message' => pll__('An error occurred while uploading your resume. Please try again.', '44east'),
             );
             return $err_msg;
         }

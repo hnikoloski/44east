@@ -372,3 +372,16 @@ add_filter('block_editor_settings', function ($settings) {
     ];
     return $settings;
 });
+
+
+function custom_excerpt_length($length)
+{
+    return 55; // Set the desired length of the excerpt here
+}
+add_filter('excerpt_length', 'custom_excerpt_length', 999);
+
+function custom_excerpt_more($more)
+{
+    return '...'; // Set the desired ending symbol here
+}
+add_filter('excerpt_more', 'custom_excerpt_more');

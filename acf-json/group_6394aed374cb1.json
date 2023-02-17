@@ -163,6 +163,25 @@
             "return_format": "object"
         },
         {
+            "key": "field_63ee8e01515b6",
+            "label": "Link To",
+            "name": "featured_blogs_link_to",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_639500284124b",
             "label": "Intro Section",
             "name": "",
@@ -471,5 +490,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1675166613
+    "modified": 1676578320
 }

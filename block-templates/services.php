@@ -49,8 +49,8 @@ $sectionTitle = get_field('services_block_title');
                         <h3><?php the_title(); ?></h3>
                         <?php
                         $excerpt = get_the_excerpt();
-                        if (strlen($excerpt) > 680) {
-                            $excerpt = substr($excerpt, 0, 680) . '...';
+                        if (strlen($excerpt) > 280) {
+                            $excerpt = substr($excerpt, 0, 280) . '...';
                         }
                         echo '<p>' . $excerpt . '</p>';
                         ?>

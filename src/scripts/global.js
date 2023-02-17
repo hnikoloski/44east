@@ -88,7 +88,7 @@ jQuery(document).ready(function ($) {
     $('#preloader').fadeOut(500, function () {
       $(this).remove();
     });
-  }, 500);
+  }, 1);
   if ($('.page-template-contact .col-form form').length) {
     // Remove the p and br tags from the form
     $('.page-template-contact .col-form form p').each(function () {

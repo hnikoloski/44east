@@ -9,45 +9,47 @@ body.single-post {
     }
   }
   main {
-    header {
-      margin-top: 5.6rem;
-      margin-bottom: 5.6rem;
-      @include for-tablet {
-        margin-top: 2.4rem;
-        margin-bottom: 2.4rem;
-      }
-      .meta {
-        display: flex;
-        align-items: center;
-        align-content: center;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        margin-bottom: 0.8rem;
-        ul {
-          margin-right: 2.4rem;
-          li {
-            font-weight: 500;
+    & > {
+      header {
+        margin-top: 5.6rem;
+        margin-bottom: 5.6rem;
+        @include for-tablet {
+          margin-top: 2.4rem;
+          margin-bottom: 2.4rem;
+        }
+        .meta {
+          display: flex;
+          align-items: center;
+          align-content: center;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          margin-bottom: 0.8rem;
+          ul {
+            margin-right: 2.4rem;
+            li {
+              font-weight: 500;
+              font-size: 1.4rem;
+              color: #000000;
+              background: #ebebf0;
+              @include borderRadius(7.6rem);
+              line-height: 1.35;
+              padding: 0.4rem 1.6rem;
+            }
+          }
+          p {
+            color: $primaryGray;
+            font-weight: 400;
             font-size: 1.4rem;
-            color: #000000;
-            background: #ebebf0;
-            @include borderRadius(7.6rem);
-            line-height: 1.35;
-            padding: 0.4rem 1.6rem;
           }
         }
-        p {
-          color: $primaryGray;
-          font-weight: 400;
-          font-size: 1.4rem;
-        }
-      }
-      h1 {
-        font-size: 8rem;
-        font-weight: 700;
-        line-height: 1.08;
-        margin-bottom: 2.4rem;
-        @include for-tablet {
-          font-size: 3.6rem;
+        h1 {
+          font-size: 8rem;
+          font-weight: 700;
+          line-height: 1.08;
+          margin-bottom: 2.4rem;
+          @include for-tablet {
+            font-size: 3.6rem;
+          }
         }
       }
     }

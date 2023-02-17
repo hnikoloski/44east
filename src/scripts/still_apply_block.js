@@ -56,15 +56,58 @@ jQuery(document).ready(function ($) {
 
 
                 init: function () {
+                    var myDropzone = this;
                     this.on("processing", function (file) {
                         $('form#jobAppForm').addClass('disabled');
                     });
                     this.on("complete", function (file) {
                         $('form#jobAppForm').removeClass('disabled');
+                        // Add a <li> to the ul.file-list with the file name and the remove button
+                        let fileName = file.name;
+                        let fileUrl = file.upload.filename;
+                        let fileExt = fileUrl.split('.').pop();
+                        let fileIcon = '';
+                        if (fileExt === 'pdf') {
+                            fileIcon = 'pdf';
+                        }
+                        if (fileExt === 'doc' || fileExt === 'docx') {
+                            fileIcon = 'doc';
+                        }
+                        let fileItem = '<li><span class="material-symbols-outlined icon">description</span> ' + file.name + ' <span class="material-symbols-outlined removeFile remove-file delete" data-file="' + fileUrl + '">cancel</span></li>';
+                        $('form#jobAppForm .files-selected').append(fileItem);
+                    });
+                    this.on("removedfile", function (file) {
+                        // Remove the file from the ul.file-list
+                        let fileUrl = file.upload.filename;
+                        $('form#jobAppForm .files-selected li').each(function () {
+                            if ($(this).find('.remove-file').attr('data-file') === fileUrl) {
+                                $(this).remove();
+                            }
+                        });
+                    });
+                    $('form#jobAppForm').on("click", ".remove-file", function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        var fileUrl = $(this).data('file');
+                        // Remove file from Dropzone
+                        myDropzone.files.forEach(function (file) {
+                            if (file.upload.filename === fileUrl) {
+                                file.previewElement.remove();
+                                myDropzone.removeFile(file);
+                            }
+                        });
+                        // Remove file from list
+                        $(this).parent().remove();
                     });
                 }
+
             });
+
         }
+
+
+
+
 
 
         // on form submit 

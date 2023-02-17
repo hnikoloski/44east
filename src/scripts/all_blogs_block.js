@@ -182,7 +182,8 @@ jQuery(document).ready(function ($) {
     // Initial Call
     axios.get(api_url, {
         params: {
-            offsetPosts: $('#offsetPosts').val()
+            offsetPosts: $('#offsetPosts').val(),
+            lang: $('#page').attr('data-current-lang')
         }
     }).then(function (response) {
         let posts = response.data;

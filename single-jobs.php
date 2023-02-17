@@ -17,7 +17,7 @@ get_header();
             </li>
         </ul>
     </div>
-    <a href="<?php the_field('job_apply_link'); ?>" class="btn btn-primary btn-primary-lg"><?php pll_e('Apply For This Job', 'starter'); ?></a>
+    <a href="<?php the_field('job_apply_link'); ?>" class="btn btn-primary btn-primary-lg"><?php pll_e('Apply for this job', '44east'); ?></a>
 </div>
 <main id="primary" class="site-main">
 
@@ -36,12 +36,14 @@ get_header();
 </main>
 <section class="application-section">
     <div class="col">
-        <h3 class="section-title"><?php pll_e('Apply for this job', 'starter'); ?></h3>
+        <h3 class="section-title"><?php pll_e('Apply for this job', '44east'); ?></h3>
     </div>
     <?php
     $jobId = get_the_ID();
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+    $main_domain = $protocol . "://" . $_SERVER['HTTP_HOST'];
     ?>
-    <form action="<?php echo get_home_url(); ?>/wp-json/ff-east/v1/job-application" data-job-id="<?php echo $jobId; ?>" id="jobAppForm" class="flex">
+    <form action="<?php echo $main_domain; ?>/wp-json/ff-east/v1/job-application" data-job-id="<?php echo $jobId; ?>" id="jobAppForm" class="flex">
         <input type="hidden" name="job_id" value="<?php echo $jobId; ?>">
         <div class="form-control half">
             <label for="firstName"><?php pll_e('First Name', 'starter'); ?></label>
@@ -67,10 +69,16 @@ get_header();
             <label for="city"><?php pll_e('City', 'starter'); ?></label>
             <input type="text" name="city" id="city">
         </div>
+        <div class="form-control w-100 hidden">
+            <ul class="files-selected">
+                <!-- Js  -->
+            </ul>
+        </div>
+        <div class="w-100 form-control mb-5">
+            <label for="uploadFiles" class="d-block w-100"><?php pll_e('Files', 'starter'); ?><span class="req"></span></label>
+            <div class="form-control upload dropzone" data-text="<?php pll_e('Choose File', '44east'); ?>">
 
-        <div class="form-control upload dropzone w-100" data-text="<?php pll_e('Choose File', '44east'); ?>">
-
-            <!-- <label for="uploadFiles"><?php pll_e('Files', 'starter'); ?></label>
+                <!-- <label for="uploadFiles"><?php pll_e('Files', 'starter'); ?></label>
                     <div class="wrapper">
                         <p>
                             <?php
@@ -78,9 +86,10 @@ get_header();
                             ?>
                         </p>
                     </div> -->
+            </div>
         </div>
         <div class="form-control">
-            <input type="submit" value="<?php pll_e('Submit Application', 'starter'); ?>" class="btn btn-primary btn-m w-100">
+            <input type="submit" value="<?php pll_e('Submit Application', '44east'); ?>" class="btn btn-primary btn-m w-100">
         </div>
         <div class="status-msg">
             <p></p>

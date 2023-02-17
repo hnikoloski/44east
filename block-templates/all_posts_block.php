@@ -30,7 +30,7 @@ $offsetPosts = get_field('all_posts_block_offset_posts') ? get_field('all_posts_
                 <h3><?php echo $blockTitle; ?></h3>
             <?php endif; ?>
             <ul class="categories filter active filter-for-desktop">
-                <li><a href="*" data-filter="*" class="active filter-item">All</a></li>
+                <li><a href="*" data-filter="*" class="active filter-item"><?php pll_e('All', '44east'); ?></a></li>
                 <?php
                 $categories = get_categories();
                 // Do not show uncategorized or empty categories
@@ -45,7 +45,7 @@ $offsetPosts = get_field('all_posts_block_offset_posts') ? get_field('all_posts_
                 ?>
             </ul>
             <select class="filter active categories filter-for-mobile select-basic-second">
-                <option value="*" selected>All</option>
+                <option value="*" selected><?php pll_e('All', '44east'); ?></option>
                 <?php
                 foreach ($categories as $category) {
                 ?>
@@ -56,7 +56,7 @@ $offsetPosts = get_field('all_posts_block_offset_posts') ? get_field('all_posts_
             </select>
 
             <ul class="tags filter filter-for-desktop">
-                <li><a href="*" class="active">All</a></li>
+                <li><a href="*" class="active"><?php pll_e('All', '44east'); ?></a></li>
                 <?php
                 $tags = get_tags();
                 foreach ($tags as $tag) {
@@ -67,7 +67,7 @@ $offsetPosts = get_field('all_posts_block_offset_posts') ? get_field('all_posts_
                 ?>
             </ul>
             <select class="filter tags filter-for-mobile select-basic-second">
-                <option value="*" selected>All</option>
+                <option value="*" selected><?php pll_e('All', '44east'); ?></option>
                 <?php
                 foreach ($tags as $tag) {
                 ?>

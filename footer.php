@@ -28,28 +28,32 @@ if (pll_current_language('slug') == 'en') {
             <ul class="social">
                 <?php if (get_field('linkedin_link', 'option')) : ?>
                     <li>
-                        <a href="<?php the_field('linkedin_link', 'option'); ?>" target="_blank" rel="noopener noreferrer">
+                        <a href="<?php the_field('linkedin_link', 'option'); ?>" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                            <span class="screen-reader-text">LinkedIn</span>
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </li>
                 <?php endif; ?>
                 <?php if (get_field('twitter_link', 'option')) : ?>
                     <li>
-                        <a href="<?php the_field('twitter_link', 'option'); ?>" target="_blank" rel="noopener noreferrer">
+                        <a href="<?php the_field('twitter_link', 'option'); ?>" target="_blank" rel="noopener noreferrer" title="Twitter">
+                            <span class="screen-reader-text">Twitter</span>
                             <i class="fab fa-twitter"></i>
                         </a>
                     </li>
                 <?php endif; ?>
                 <?php if (get_field('facebook_link', 'option')) : ?>
                     <li>
-                        <a href="<?php the_field('facebook_link', 'option'); ?>" target="_blank" rel="noopener noreferrer">
+                        <a href="<?php the_field('facebook_link', 'option'); ?>" target="_blank" rel="noopener noreferrer" title="Facebook">
+                            <span class="screen-reader-text">Facebook</span>
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </li>
                 <?php endif; ?>
                 <?php if (get_field('instagram_link', 'option')) : ?>
                     <li>
-                        <a href="<?php the_field('instagram_link', 'option'); ?>" target="_blank" rel="noopener noreferrer">
+                        <a href="<?php the_field('instagram_link', 'option'); ?>" target="_blank" rel="noopener noreferrer" title="Instagram">
+                            <span class="screen-reader-text">Instagram</span>
                             <i class="fab fa-instagram"></i>
                         </a>
                     </li>
@@ -66,11 +70,11 @@ if (pll_current_language('slug') == 'en') {
                     ?>
                         <li>
                             <?php if ($phone_orpll_email == 'phone') : ?>
-                                <a href="tel:<?php echo $link_to; ?>">
+                                <a href="tel:<?php echo $link_to; ?>" title="<?php pll_e('Call us', '44east'); ?>">
                                     <?php echo $link_to; ?>
                                 </a>
                             <?php else : ?>
-                                <a href="mailto:<?php echo $link_to; ?>">
+                                <a href="mailto:<?php echo $link_to; ?>" title="<?php pll_e('Email us', '44east'); ?>">
                                     <?php echo $link_to; ?>
                                 </a>
                             <?php endif; ?>
@@ -102,7 +106,7 @@ if (pll_current_language('slug') == 'en') {
         </div>
     </div><!-- .site-info -->
     <div class="copy-bar">
-        <p>© <span class="current-year"></span> <?php pll_e('All Rights Reserved.', 'starter'); ?> </p>
+        <p>© <span class="current-year"></span> <?php pll_e('All Rights Reserved.', '44east'); ?> </p>
         <?php
         wp_nav_menu(
             array(

@@ -62,7 +62,11 @@ if (!empty($block['align'])) {
                 $jobId = 'other';
             }
             ?>
-            <form action="<?php echo get_home_url(); ?>/wp-json/ff-east/v1/job-application" data-job-id="<?php echo $jobId; ?>" id="jobAppForm">
+            <?php
+            $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+            $main_domain = $protocol . "://" . $_SERVER['HTTP_HOST'];
+            ?>
+            <form action="<?php echo $main_domain ?>/wp-json/ff-east/v1/job-application" data-job-id="<?php echo $jobId; ?>" id="jobAppForm">
                 <input type="hidden" name="job_id" value="<?php echo $jobId; ?>">
                 <div class="form-control">
                     <label for="firstName"><?php pll_e('First Name', 'starter'); ?></label>
@@ -88,14 +92,16 @@ if (!empty($block['align'])) {
                     <label for="city"><?php pll_e('City', 'starter'); ?></label>
                     <input type="text" name="city" id="city">
                 </div>
-                <div class="form-control hidden">
+                <div class="form-control w-100 hidden">
                     <ul class="files-selected">
                         <!-- Js  -->
                     </ul>
                 </div>
-                <div class="form-control upload dropzone" data-text="<?php pll_e('Choose File', '44east'); ?>">
+                <div class="w-100 form-control mb-5">
+                    <label for="uploadFiles" class="d-block w-100"><?php pll_e('Files', 'starter'); ?><span class="req"></span></label>
+                    <div class="form-control upload dropzone" data-text="<?php pll_e('Choose File', '44east'); ?>">
 
-                    <!-- <label for="uploadFiles"><?php pll_e('Files', 'starter'); ?></label>
+                        <!-- <label for="uploadFiles"><?php pll_e('Files', 'starter'); ?></label>
                     <div class="wrapper">
                         <p>
                             <?php
@@ -103,7 +109,9 @@ if (!empty($block['align'])) {
                             ?>
                         </p>
                     </div> -->
+                    </div>
                 </div>
+
                 <div class="form-control">
                     <input type="submit" value="<?php pll_e('Submit Application', 'starter'); ?>" class="btn btn-primary btn-m w-100">
                 </div>

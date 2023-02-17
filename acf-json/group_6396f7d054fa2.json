@@ -3,8 +3,8 @@
     "title": "Cta Fields",
     "fields": [
         {
-            "key": "field_6396f7d7a955d",
-            "label": "Contact Cta",
+            "key": "field_63ee9ed2285d0",
+            "label": "English",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -74,6 +74,79 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_6396f7d7a955d",
+            "label": "DK",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_63ee9ee4285d1",
+            "label": "Text DK",
+            "name": "cta_contact_text_dk",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_63ee9ee6285d2",
+            "label": "Button Text DK",
+            "name": "cta_contact_button_text_dk",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_63ee9ee8285d3",
+            "label": "Button Link DK",
+            "name": "cta_contact_button_link_dk",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -94,5 +167,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1670838343
+    "modified": 1676582666
 }

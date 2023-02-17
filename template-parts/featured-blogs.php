@@ -46,5 +46,8 @@
         // Reset the global post object so that the rest of the page works correctly.
         wp_reset_postdata(); ?>
     <?php endif; ?>
-    <p class="action"><?php pll_e('Get Interest About Our Service Function?', 'starter'); ?> <a href="#!"><?php pll_e('Learn More', 'starter'); ?></a></p>
+
+    <?php if (get_field('featured_blogs_link_to', get_the_ID())) : ?>
+        <p class="action"><?php pll_e('Get Interest About Our Service Function?', 'starter'); ?> <a href="<?php echo get_field('featured_blogs_link_to', get_the_ID()); ?>"><?php pll_e('Learn More', 'starter'); ?></a></p>
+    <?php endif; ?>
 </section>
