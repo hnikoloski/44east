@@ -53,7 +53,7 @@ jQuery(document).ready(function ($) {
 
     function singleJobComponent(category, categoryColor, title, link, btnTxt, shortDescription, jobType, minYears) {
         return `
-        <div class="single-job">
+        <div class="single-job" data-href="${link}">
         <div class="top">
             <div class="content">
                 <p class="category" style="--textColor:${categoryColor}">${category}</p>
@@ -103,10 +103,20 @@ jQuery(document).ready(function ($) {
                     $(this).appendTo($(this).parent().parent());
                 });
             }
-        }).then(() => {
-            $('.ffeast-jobs-board-block .filter, .ffeast-jobs-board-block header').removeClass('loading');
-
         })
+            .then(() => {
+                // Convert the .single-job to a link
+
+                $('.ffeast-jobs-board-block .container .row .job-results .single-job').on('click', function (e) {
+                    e.preventDefault();
+                    window.location.href = $(this).attr('data-href');
+
+                });
+            })
+            .then(() => {
+                $('.ffeast-jobs-board-block .filter, .ffeast-jobs-board-block header').removeClass('loading');
+
+            })
             .catch(function (error) {
                 console.log(error);
             }

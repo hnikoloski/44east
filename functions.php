@@ -152,6 +152,9 @@ add_action('widgets_init', 'starter_widgets_init');
  */
 function starter_scripts()
 {
+    // https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css
+    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css', [], 1, 'all');
+    wp_enqueue_style('font-awesome');
     wp_register_style('style', get_template_directory_uri() . '/dist/css/app.css', [], 1, 'all');
     wp_enqueue_style('style');
 

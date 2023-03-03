@@ -16,7 +16,7 @@
                 }
                 // Setup this post for WP functions (variable must be named $post).
                 setup_postdata($post); ?>
-                <div class="blog-card blog-card-featured" style="--bgColor<?php echo $counter; ?>:<?php echo $bgColor; ?>">
+                <div class="blog-card blog-card-featured" style="--bgColor<?php echo $counter; ?>:<?php echo $bgColor; ?>" data-href="<?php the_permalink(); ?>">
                     <div class="img-wrapper">
                         <img src="<?= get_field('featured_icon'); ?>" alt="<?= get_the_title(); ?>" class="full-size-img full-size-img-contain">
                     </div>

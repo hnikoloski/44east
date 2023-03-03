@@ -95,4 +95,9 @@ jQuery(document).ready(function ($) {
       $(this).contents().unwrap();
     });
   }
+
+  $('[data-href]').on('click', function (e) {
+    e.preventDefault();
+    window.location.href = $(this).data('href');
+  });
 });

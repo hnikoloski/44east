@@ -42,7 +42,7 @@ $sectionTitle = get_field('services_block_title');
             if ($loop->have_posts()) :
                 while ($loop->have_posts()) : $loop->the_post();
             ?>
-                    <div class="single-service">
+                    <div class="single-service" data-href="<?php the_permalink(); ?>">
                         <div class="img-wrapper">
                             <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>" class="full-size-img full-size-img-cover">
                         </div>

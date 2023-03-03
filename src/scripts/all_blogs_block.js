@@ -94,10 +94,17 @@ jQuery(document).ready(function ($) {
 
             $('.ffeast-all-posts-block .filter').removeClass('loading');
 
-        }).catch(function (error) {
-            console.log(error);
-        }
-        );
+        })
+            .then(function () {
+                $('.ffeast-all-posts-block .single-post').on('click', function (e) {
+                    e.preventDefault();
+                    window.location.href = $(this).data('href');
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            }
+            );
     });
 
     $('#hiddenCategories').on('change', function () {
@@ -133,10 +140,17 @@ jQuery(document).ready(function ($) {
 
             $('.ffeast-all-posts-block .filter').removeClass('loading');
 
-        }).catch(function (error) {
-            console.log(error);
-        }
-        );
+        })
+            .then(function () {
+                $('.ffeast-all-posts-block .single-post').on('click', function (e) {
+                    e.preventDefault();
+                    window.location.href = $(this).data('href');
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            }
+            );
     });
 
     $('#hiddenTags').on('change', function () {
@@ -172,10 +186,17 @@ jQuery(document).ready(function ($) {
 
             $('.ffeast-all-posts-block .filter').removeClass('loading');
 
-        }).catch(function (error) {
-            console.log(error);
-        }
-        );
+        })
+            .then(function () {
+                $('.ffeast-all-posts-block .single-post').on('click', function (e) {
+                    e.preventDefault();
+                    window.location.href = $(this).data('href');
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            }
+            );
     });
 
 
@@ -201,13 +222,20 @@ jQuery(document).ready(function ($) {
 
         $('.ffeast-all-posts-block .filter').removeClass('loading');
 
-    }).catch(function (error) {
-        console.log(error);
-    });
+    })
+        .then(function () {
+            $('.ffeast-all-posts-block .single-post').on('click', function (e) {
+                e.preventDefault();
+                window.location.href = $(this).data('href');
+            });
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
     function blogCard(title, excerpt, catName, date, readTime, imgUrl, btnTxt, btnLink) {
         return `
-        <div class="single-post">
+        <div class="single-post" data-href="${btnLink}">
         <div class="img-wrapper">
             <img src="${imgUrl}" alt="${title}" class="full-size-img full-size-img-cover">
         </div>

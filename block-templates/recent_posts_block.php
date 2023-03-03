@@ -40,7 +40,7 @@ if (!empty($block['align'])) {
                     $title = strip_tags(get_the_title());
 
                 ?>
-                    <div class="single-post single-post-featured">
+                    <div class="single-post single-post-featured" data-href="<?php the_permalink(); ?>">
                         <div class="img-wrapper">
                             <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php echo $title; ?>" class="full-size-img full-size-img-cover">
                         </div>
@@ -120,7 +120,7 @@ if (!empty($block['align'])) {
                     //strip html tags from title
                     $title = strip_tags(get_the_title());
                     ?>
-                    <div class="single-post">
+                    <div class="single-post" data-href="<?php the_permalink(); ?>">
                         <div class="img-wrapper">
                             <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php echo $title; ?>" class="full-size-img full-size-img-cover">
                         </div>

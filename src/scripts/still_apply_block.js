@@ -60,6 +60,17 @@ jQuery(document).ready(function ($) {
                     this.on("processing", function (file) {
                         $('form#jobAppForm').addClass('disabled');
                     });
+                    // while uploading create a progress bar
+                    this.on("uploadprogress", function (file, progress, bytesSent) {
+                        let progressItem = '<div class="progress"><div class="progress-bar" role="progressbar" style="width: ' + progress + '%;" aria-valuenow="' + progress + '" aria-valuemin="0" aria-valuemax="100"></div></div>';
+                        $('form#jobAppForm .files-selected li').each(function () {
+                            if ($(this).find('span.remove-file').attr('data-file') === file.name) {
+                                $(this).append(progressItem);
+                            }
+                        });
+                    });
+
+
                     this.on("complete", function (file) {
                         $('form#jobAppForm').removeClass('disabled');
                         // Add a <li> to the ul.file-list with the file name and the remove button

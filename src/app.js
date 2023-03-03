@@ -11,3 +11,4 @@ import "./scripts/still_apply_block";
 import "./scripts/map";
 import "./scripts/home";
 import "./scripts/single_job";
+import "./scripts/services";

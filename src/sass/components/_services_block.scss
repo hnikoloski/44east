@@ -25,13 +25,22 @@
       }
     }
     .row {
-      display: flex;
-      flex-wrap: wrap;
+      .services-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 4rem;
+        padding-bottom: 4rem;
+        &:not(:last-of-type) {
+          border-bottom: 0.2rem solid #000;
+          @include for-tablet {
+            border-bottom: none;
+          }
+        }
+      }
       .single-service {
         flex: 0 0 50%;
         width: 50%;
         max-width: 50%;
-        margin-bottom: 4rem;
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
@@ -54,7 +63,7 @@
         }
         //not first two
         &:nth-of-type(n + 3) {
-          border-top: 0.2rem solid #000;
+          // border-top: 0.2rem solid #000;
           padding-top: 5.3rem;
           @include for-tablet {
             border-top: none;

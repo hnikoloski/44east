@@ -308,6 +308,7 @@ form#jobAppForm {
   }
   .status-msg {
     text-align: center;
+    flex: 0 0 100%;
     p {
       font-size: 1.8rem;
       font-weight: 600;
@@ -315,6 +316,7 @@ form#jobAppForm {
     &.success {
       p {
         color: $accent01;
+        font-size: 2.4rem;
       }
     }
     &.error {

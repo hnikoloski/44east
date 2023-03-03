@@ -65,11 +65,11 @@ if (pll_current_language('slug') == 'en') {
             <?php if (have_rows('contact_details' . $fieldTarget, 'option')) : ?>
                 <ul class="contact_details">
                     <?php while (have_rows('contact_details' . $fieldTarget, 'option')) : the_row();
-                        $phone_orpll_email = get_sub_field('phone_orpll_email');
+                        $phone_or_email = get_sub_field('phone_or_email');
                         $link_to = get_sub_field('link_to');
                     ?>
                         <li>
-                            <?php if ($phone_orpll_email == 'phone') : ?>
+                            <?php if ($phone_or_email == 'phone') : ?>
                                 <a href="tel:<?php echo $link_to; ?>" title="<?php pll_e('Call us', '44east'); ?>">
                                     <?php echo $link_to; ?>
                                 </a>

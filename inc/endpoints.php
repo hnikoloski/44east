@@ -408,6 +408,36 @@ function ff_job_application($data)
                     'error' => false,
                     'message' => pll__('Your job application has been submitted successfully!', '44east'),
                 );
+
+                // Send auto reply email
+                $to = $email;
+                $custom_logo_id = get_theme_mod('custom_logo');
+                $logoUrl = wp_get_attachment_image_src($custom_logo_id, 'full');
+                $logoUrl = $logoUrl[0];
+                $contactEmail = get_field('contact_email', 'option') ? get_field('contact_email', 'option') : get_option('admin_email');
+
+                $headers = array('Content-Type: text/html; charset=UTF-8');
+                $headers[] = 'From: 44 East <' . $contactEmail . '>';
+
+                $message = '<table style="width: 100%; max-width: 600px; margin: 0 auto; border: 1px solid #ccc; border-collapse: collapse; font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5; color: #333;">';
+                $message .= '<tr><td style="padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #0d174a; text-align: center;"><img src="' . $logoUrl . '" alt="44 East" style="max-width: 100%; height: auto;"></td></tr>';
+                $message .= '<tr><td style="padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><h1 style="font-size: 24px; line-height: 1.2; color: #333; margin: 0;">' . pll__('Thank you for your interest in 44 East', '44east') . '</h1></td></tr>';
+
+                $message .= '<tr><td style="padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . pll__('We have received your application and will be in touch soon.', '44east') . '</p></td></tr>';
+
+                $message .= '<tr><td style="padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . pll__('If you have any questions, please contact us at', '44east') . ' <a href="mailto:' . $contactEmail . '" style="color: #333; text-decoration: none;">' . $contactEmail . '</a></p></td></tr>';
+
+                $message .= '<tr><td style="padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . pll__('Thank you, 44 East', '44east') . '</p></td></tr>';
+                $message .= '</table>';
+
+                $subject = pll__('Thank you for your interest in 44 East', '44east');
+
+                wp_mail($to, $subject, $message, $headers);
+
+
+
+
+
                 return $success_msg;
             }
         } else {

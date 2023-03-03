@@ -32,7 +32,7 @@
     <?php if ($query->have_posts()) : ?>
         <div class="row">
             <?php while ($query->have_posts()) : $query->the_post(); ?>
-                <div class="single-blog">
+                <div class="single-blog" data-href="<?php the_permalink(); ?>">
                     <div class="img-wrapper">
                         <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>" class="full-size-img full-size-img-cover">
                     </div>

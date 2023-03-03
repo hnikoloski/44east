@@ -9,6 +9,13 @@ body.single-post {
     }
   }
   main {
+    // 1880 max
+    padding: 0 !important;
+    max-width: 1080px;
+    margin: 0 auto;
+    @include for-tablet {
+      padding: 0 2rem !important;
+    }
     & > {
       header {
         margin-top: 5.6rem;
