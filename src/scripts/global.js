@@ -65,7 +65,6 @@ jQuery(document).ready(function ($) {
         }
       });
     } else {
-
       $('.site-main .wp-block-spacer').each(function () {
         var px = $(this).css('height');
         var rem = px.replace('px', '') / 10;

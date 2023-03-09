@@ -233,11 +233,20 @@ function ff_get_jobs($data)
                 $short_description = substr($short_description, 0, 250) . '...';
             }
         }
+        $jobCategories = array();
+        foreach (get_the_terms($job->ID, 'job_type') as $jobCategory) {
+            $jobCategories[] = array(
+                'id' => $jobCategory->term_id,
+                'title' => $jobCategory->name,
+                'slug' => $jobCategory->slug,
+                'job_category_color' => get_field('job_category_color', $jobCategory->term_id),
+            );
+        }
         $jobs_array[] = array(
             'id' => $job->ID,
             'title' => $job->post_title,
-            'job_category' => get_the_terms($job->ID, 'job_type')[0]->name,
-            'job_category_color' => get_field('job_category_color', get_the_terms($job->ID, 'job_type')[0]),
+            'job_category' => $jobCategories,
+
             'job_type' => get_field('job_type', $job->ID),
             'min_years' => pll__('Min.', '44east') . get_field('min_years', $job->ID) . ' ' . pll__('years', '44east'),
             'short_description' => $short_description,

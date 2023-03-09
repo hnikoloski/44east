@@ -4,7 +4,11 @@ jQuery(document).ready(function ($) {
     let api_url = location.protocol + '//' + location.host + '/wp-json/ff-east/v1/';
     $('.ffeast-our-team-block .single-team-member').on('click', function (e) {
         e.preventDefault();
-        $('body').addClass('overflow-hidden');
+        $(this).addClass('active');
+        // Make custom cursor <i class="fas fa-circle-notch fa-spin"></i>
+        $('.ffeast-our-team-block .single-team-member').css('cursor', 'wait');
+        $('body').css('cursor', 'wait');
+
         let id = $(this).data('id');
         let modal = $('.member-modal');
         axios.get(api_url + 'our-team/' + id)
@@ -19,6 +23,8 @@ jQuery(document).ready(function ($) {
                 modal.html(modalMarkup(img, title, position, description, linkedin, email));
                 modal.addClass('active');
             }).then(() => {
+                $('body').addClass('overflow-hidden');
+
                 $('.member-modal .close-modal').on('click', function (e) {
                     e.preventDefault();
                     modal.removeClass('active');
@@ -39,8 +45,12 @@ jQuery(document).ready(function ($) {
                         $('body').removeClass('overflow-hidden');
                     }
                 });
+            })
+            .then(() => {
+                $('.single-team-member').removeClass('active');
 
-
+                $('.ffeast-our-team-block .single-team-member').css('cursor', 'pointer');
+                $('body').css('cursor', 'auto');
             })
             .catch(function (error) {
                 console.log(error);

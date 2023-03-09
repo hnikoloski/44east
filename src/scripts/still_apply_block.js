@@ -59,20 +59,37 @@ jQuery(document).ready(function ($) {
                     var myDropzone = this;
                     this.on("processing", function (file) {
                         $('form#jobAppForm').addClass('disabled');
+                        // Create a progress bar in the $('form#jobAppForm .files-selected') div
+                        let progressBar = '<div class="progress-bar"><div class="progress-bar-inner"><p>0%</p></div></div>';
+                        $('form#jobAppForm .files-selected').append(progressBar);
+
+                        $('form#jobAppForm .progress-bar-inner').css('width', '0%');
+                        $('form#jobAppForm .progress-bar-inner').css('transition', '0.6s');
                     });
-                    // while uploading create a progress bar
+
+                    // Update the progress bar while uploading
                     this.on("uploadprogress", function (file, progress, bytesSent) {
-                        let progressItem = '<div class="progress"><div class="progress-bar" role="progressbar" style="width: ' + progress + '%;" aria-valuenow="' + progress + '" aria-valuemin="0" aria-valuemax="100"></div></div>';
-                        $('form#jobAppForm .files-selected li').each(function () {
-                            if ($(this).find('span.remove-file').attr('data-file') === file.name) {
-                                $(this).append(progressItem);
-                            }
-                        });
+                        let roundedProgress = Math.round(progress);
+                        $('form#jobAppForm .progress-bar-inner').css('width', roundedProgress + '%');
+                        $('form#jobAppForm .progress-bar-inner p').text(roundedProgress + '%');
                     });
+
+
 
 
                     this.on("complete", function (file) {
                         $('form#jobAppForm').removeClass('disabled');
+                        // Remove the progress bar
+                        $('form#jobAppForm .progress-bar').each(function () {
+                            $(this).css('transition', '0s')
+                            $(this).fadeOut(500);
+                            // Remove this progress bar after 1.5 seconds
+                            setTimeout(function () {
+                                $(this).remove();
+                            }, 1500);
+
+
+                        });
                         // Add a <li> to the ul.file-list with the file name and the remove button
                         let fileName = file.name;
                         let fileUrl = file.upload.filename;

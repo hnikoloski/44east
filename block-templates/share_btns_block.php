@@ -26,9 +26,8 @@ $offsetPosts = get_field('all_posts_block_offset_posts') ? get_field('all_posts_
     <p><?php pll_e('Share', 'starter'); ?></p>
     <ul class="share-buttons">
         <li>
-            <a href="<?php the_permalink(); ?>" target="_blank" class="share-btn linkedin">
+            <a href="<?php the_permalink(); ?>" target="_blank" class="share-btn linkedin" title="<?php pll_e('Share on LinkedIn', 'starter'); ?>" rel="nofollow">
                 <i class="fab fa-linkedin-in"></i>
-                LinkedIn
             </a>
         </li>
 </div>
