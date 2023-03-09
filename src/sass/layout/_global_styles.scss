@@ -121,3 +121,25 @@ mark {
 [data-href] {
   cursor: pointer;
 }
+
+.custom-cursor {
+  position: absolute;
+  font-size: 3rem;
+  color: $accent02;
+  z-index: 999999;
+  transition: 0s;
+  @include for-tablet {
+    // display: none;
+  }
+}
+
+.custom-cursor.fa-spinner {
+  animation: fa-spin 1s infinite linear;
+}
+
+body.no-cursor {
+  cursor: none;
+  @include for-tablet {
+    cursor: auto;
+  }
+}

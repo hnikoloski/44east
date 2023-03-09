@@ -33,7 +33,7 @@
             },
             "choices": {
                 "full-time": "Full Time",
-                "half-time": "Half Time",
+                "part-time": "Half Time",
                 "contract": "Contract"
             },
             "allow_null": 0,
@@ -236,5 +236,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1676579256
+    "modified": 1678376397
 }

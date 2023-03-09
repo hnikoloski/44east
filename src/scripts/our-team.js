@@ -4,10 +4,36 @@ jQuery(document).ready(function ($) {
     let api_url = location.protocol + '//' + location.host + '/wp-json/ff-east/v1/';
     $('.ffeast-our-team-block .single-team-member').on('click', function (e) {
         e.preventDefault();
+        if ($(this).hasClass('active') || $(this).hasClass('disabled')) {
+            return;
+        }
         $(this).addClass('active');
-        // Make custom cursor <i class="fas fa-circle-notch fa-spin"></i>
-        $('.ffeast-our-team-block .single-team-member').css('cursor', 'wait');
-        $('body').css('cursor', 'wait');
+        $('.ffeast-our-team-block .single-team-member').not(this).addClass('disabled');
+
+        $('.ffeast-our-team-block .single-team-member').css('cursor', 'none');
+
+        let customCursor = ` <div class="custom-cursor fa fa-spinner"></div>`;
+        $('body').append(customCursor);
+        $('body').addClass('no-cursor');
+        $('.custom-cursor').css({
+            left: e.pageX + 'px',
+            top: e.pageY + 'px'
+        });
+        // If on mobile, set the cursor to the center of the clicked element
+        if (window.innerWidth < 768) {
+            $('.custom-cursor').css({
+                left: $(this).offset().left + ($(this).width() / 2) + 'px',
+                top: $(this).offset().top + ($(this).height() / 2) + 'px'
+            });
+        }
+
+
+        $(document).on('mousemove', function (e) {
+            $('.custom-cursor').css({
+                left: e.pageX + 'px',
+                top: e.pageY + 'px'
+            });
+        });
 
         let id = $(this).data('id');
         let modal = $('.member-modal');
@@ -47,10 +73,12 @@ jQuery(document).ready(function ($) {
                 });
             })
             .then(() => {
-                $('.single-team-member').removeClass('active');
+                $('.single-team-member').removeClass('active disabled');
 
+                $('.custom-cursor').remove();
+                $('body').removeClass('no-cursor');
                 $('.ffeast-our-team-block .single-team-member').css('cursor', 'pointer');
-                $('body').css('cursor', 'auto');
+
             })
             .catch(function (error) {
                 console.log(error);

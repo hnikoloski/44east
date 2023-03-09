@@ -40,7 +40,7 @@
           }
         }
         .accordion {
-          padding-top: 18.5rem;
+          // padding-top: 18.5rem;
           @include for-tablet {
             padding-top: 0;
           }
@@ -48,6 +48,9 @@
             border-bottom: 0.2rem solid #000;
             padding-top: 4rem;
             padding-bottom: 3.2rem;
+            &:first-of-type {
+              padding-top: 0;
+            }
             &:last-of-type {
               border-bottom: none;
               padding-bottom: 0;

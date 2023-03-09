@@ -42,6 +42,9 @@
           z-index: 1;
         }
       }
+      &.disabled {
+        cursor: not-allowed;
+      }
       h2 {
         font-size: 2.4rem;
       }
