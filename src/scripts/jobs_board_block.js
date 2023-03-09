@@ -58,7 +58,6 @@ jQuery(document).ready(function ($) {
         if (category) {
             // loop through the categories
             category.forEach(function (cat) {
-                console.log(cat)
                 categories += `<li class="category" style="--textColor: ${cat.job_category_color ? cat.job_category_color : '#000'}">${cat.title}</li>`;
             });
         }
