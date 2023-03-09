@@ -51,12 +51,26 @@ jQuery(document).ready(function ($) {
         });
     }
 
-    function singleJobComponent(category, categoryColor, title, link, btnTxt, shortDescription, jobType, minYears) {
+    function singleJobComponent(category, title, link, btnTxt, shortDescription, jobType, minYears) {
+        // job_category.job_category_color
+
+        let categories = '';
+        if (category) {
+            // loop through the categories
+            category.forEach(function (cat) {
+                console.log(cat)
+                categories += `<li class="category" style="--textColor: ${cat.job_category_color ? cat.job_category_color : '#000'}">${cat.title}</li>`;
+            });
+        }
+
+
         return `
         <div class="single-job" data-href="${link}">
         <div class="top">
             <div class="content">
-                <p class="category" style="--textColor:${categoryColor}">${category}</p>
+                <ul class="categories">
+                ${categories}
+                </ul>
                 <h3 class="title">${title}</h3>
             </div>
             <a href="${link}" class="btn btn-primary btn-primary-xs">${btnTxt}</a>
@@ -89,7 +103,7 @@ jQuery(document).ready(function ($) {
 
             if (jobs.length > 0) {
                 jobs.forEach(function (job) {
-                    html += singleJobComponent(job.job_category, job.job_category_color ? job.job_category_color : '#000', job.title, job.link, job.btnTxt, job.short_description, job.job_type, job.min_years);
+                    html += singleJobComponent(job.job_category, job.title, job.link, job.btnTxt, job.short_description, job.job_type, job.min_years);
                 });
             } else {
                 html = '<p class="no-results">No results found</p>';

@@ -239,7 +239,7 @@ function ff_get_jobs($data)
                 'id' => $jobCategory->term_id,
                 'title' => $jobCategory->name,
                 'slug' => $jobCategory->slug,
-                'job_category_color' => get_field('job_category_color', $jobCategory->term_id),
+                'job_category_color' => get_field('job_category_color', $jobCategory),
             );
         }
         $jobs_array[] = array(

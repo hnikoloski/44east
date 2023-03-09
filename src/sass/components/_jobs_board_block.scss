@@ -241,6 +241,22 @@
                 font-size: 1.2rem;
                 line-height: 1.333;
                 margin-bottom: 0.8rem;
+                padding: 0;
+                background: none;
+                &:not(:last-of-type) {
+                  &::after {
+                    content: "";
+                    position: absolute;
+                    width: 0.2rem;
+                    height: 100%;
+                    background-color: #ebebf0;
+                    right: -1.2rem;
+                    top: 0;
+                  }
+                }
+                &::before {
+                  display: none;
+                }
               }
               .title {
                 font-size: 2.4rem;
