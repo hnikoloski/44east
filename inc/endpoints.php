@@ -322,14 +322,44 @@ function ff_job_application($data)
     $address = $data['address'];
     $city = $data['city'];
     $job_id = $data['job_id'];
+    $err_msg = array(
+        'error' => false,
+        'message' => '',
+        'fields' => array(),
+    );
 
-    // Validate email
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        //return error message
-        $err_msg = array(
-            'error' => true,
-            'message' => pll__('Please enter a valid email address', '44east'),
-        );
+    $singleFieldErrMsg = pll__('Please fill in this field', '44east');
+
+    if ($firstName == '') {
+        $err_msg['error'] = true;
+        $err_msg['fields']['firstName'] = $singleFieldErrMsg;
+    }
+
+    if ($lastName == '') {
+        $err_msg['error'] = true;
+        $err_msg['fields']['lastName'] = $singleFieldErrMsg;
+    }
+
+    if ($email == '') {
+        $err_msg['error'] = true;
+        $err_msg['fields']['email'] = $singleFieldErrMsg;
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $err_msg['error'] = true;
+        $err_msg['fields']['email'] = pll__('Please enter a valid email address', '44east');
+    }
+
+    if ($phone == '') {
+        $err_msg['error'] = true;
+        $err_msg['fields']['phone'] = $singleFieldErrMsg;
+    } elseif (!preg_match('/^[0-9+]+$/', $phone)) {
+        $err_msg['error'] = true;
+        $err_msg['fields']['phone'] = pll__('Please enter a valid phone number', '44east');
+    }
+
+
+    if ($err_msg['error']) {
+        // One or more fields have an error. Please check and try again.
+        $err_msg['message'] = pll__('One or more fields have an error. Please check and try again.', '44east');
         return $err_msg;
     }
 
@@ -339,9 +369,12 @@ function ff_job_application($data)
         $err_msg = array(
             'error' => true,
             'message' => pll__('An error occurred while uploading your resume. Or you did not upload a resume. Please try again.', '44east'),
+
         );
         return $err_msg;
     }
+
+
 
     // Check file extension
     $allowed = array('pdf', 'doc', 'docx');
@@ -353,7 +386,6 @@ function ff_job_application($data)
             'error' => true,
             'message' => pll__('Please upload a PDF, DOC or DOCX file', '44east'),
         );
-        return $err_msg;
     }
 
     // Create a job_application folder in the uploads folder if it doesn't exist. Then create a folder for the job application based on the job title.
@@ -389,6 +421,7 @@ function ff_job_application($data)
     if (!file_exists($upload_dir . '/' . $job_position)) {
         mkdir($upload_dir . '/' . $job_position, 0755, true);
     }
+
 
     // Store the uploaded file
     if (isset($_FILES['files'])) {
@@ -442,7 +475,6 @@ function ff_job_application($data)
                 $subject = pll__('Thank you for your interest in 44 East', '44east');
 
                 wp_mail($to, $subject, $message, $headers);
-
 
 
 

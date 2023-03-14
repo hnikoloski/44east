@@ -273,6 +273,14 @@ form#jobAppForm {
         line-height: 1.38;
         font-weight: 700;
       }
+      &.error {
+        border-color: #fb0e0e;
+      }
+    }
+    .field-error-msg {
+      color: #dc3232;
+      font-size: 1.2rem;
+      font-weight: normal;
     }
     // &.upload {
     //   display: flex;

@@ -10,6 +10,8 @@ jQuery(document).ready(function ($) {
             // If it has required attribute add a span in the label text
             if ($(this).attr('required')) {
                 $(this).parent().find('label').append('<span class="req"></span>');
+                // Remove required attribute
+                $(this).removeAttr('required');
             }
         });
 
@@ -167,10 +169,22 @@ jQuery(document).ready(function ($) {
                     }
                 })
                 .then(function (response) {
-
+                    form.find('input').removeClass('error');
+                    form.find('.field-error-msg').remove();
                     form.find('.status-msg p').text(response.data.message);
                     if (response.data.error === true) {
                         form.find('.status-msg').addClass('error');
+
+                        // Loop through the error fields and check if they have true value
+                        for (let field in response.data.fields) {
+
+                            $('form#jobAppForm input[name=' + field + ']').addClass('error');
+                            // add the error message to the input
+                            $('form#jobAppForm input[name=' + field + ']').after('<p class="field-error-msg">' + response.data.fields[field] + '</p>');
+
+                        }
+
+
                     } else {
                         form.find('.status-msg').addClass('success');
                         form.find('.status-msg').removeClass('error');
