@@ -53,6 +53,13 @@ add_action('rest_api_init', function () {
         'callback' => 'ff_upload_file_temp',
         'permission_callback' => '__return_true'
     ));
+
+    // Contact Form
+    register_rest_route('ff-east/v1', '/contact-form', array(
+        'methods' => 'POST',
+        'callback' => 'ff_contact_form',
+        'permission_callback' => '__return_true'
+    ));
 });
 
 function ff_get_team_members()
@@ -180,7 +187,6 @@ function ff_get_blog_posts_by_category_slug($data)
     return $posts_array;
 }
 
-
 function ff_get_jobs($data)
 {
     // Language
@@ -257,7 +263,6 @@ function ff_get_jobs($data)
 
     return $jobs_array;
 }
-
 
 function ff_newsletter_sign_up($data)
 {
@@ -492,8 +497,6 @@ function ff_job_application($data)
     }
 }
 
-
-
 function ff_upload_file_temp()
 {
     $upload_dir = wp_upload_dir();
@@ -526,4 +529,131 @@ function ff_upload_file_temp()
     return array(
         'error' => 'No file was uploaded'
     );
+}
+
+function ff_contact_form($data)
+{
+    $firstName = $data['firstName'];
+    $lastName = $data['lastName'];
+    $email = $data['email'];
+    $phone = $data['phone'];
+    $message = $data['message'];
+
+    $lang = $data['lang'] ? $data['lang'] : 'en';
+
+    $err_msg = array(
+        'error' => false,
+        'message' => '',
+        'fields' => array(),
+    );
+
+    // Switch to the correct language
+    PLL()->curlang = PLL()->model->get_language($lang);
+
+    $err_msg = array(
+        'error' => false,
+        'message' => '',
+        'fields' => array(),
+    );
+
+    $singleFieldErrMsg = pll__('Please fill in this field', '44east');
+
+    if ($firstName == '') {
+        $err_msg['error'] = true;
+        $err_msg['fields']['firstName'] = $singleFieldErrMsg;
+    }
+
+    if ($lastName == '') {
+        $err_msg['error'] = true;
+        $err_msg['fields']['lastName'] = $singleFieldErrMsg;
+    }
+
+    if ($email == '') {
+        $err_msg['error'] = true;
+        $err_msg['fields']['email'] = $singleFieldErrMsg;
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $err_msg['error'] = true;
+        $err_msg['fields']['email'] = pll__('Please enter a valid email address', '44east');
+    }
+
+    if ($phone == '') {
+        $err_msg['error'] = true;
+        $err_msg['fields']['phone'] = $singleFieldErrMsg;
+    } elseif (!preg_match('/^[0-9+]+$/', $phone)) {
+        $err_msg['error'] = true;
+        $err_msg['fields']['phone'] = pll__('Please enter a valid phone number', '44east');
+    }
+
+
+    if ($err_msg['error']) {
+        // One or more fields have an error. Please check and try again.
+        $err_msg['message'] = pll__('One or more fields have an error. Please check and try again.', '44east');
+        return $err_msg;
+    }
+
+    $custom_logo_id = get_theme_mod('custom_logo');
+    $logoUrl = wp_get_attachment_image_src($custom_logo_id, 'full');
+
+    $contactEmail = get_field('contact_email', 'option') ? get_field('contact_email', 'option') : get_option('admin_email');
+
+    //    Send email to admin
+    $to = $contactEmail;
+    $headers[] = 'Content-Type: text/html; charset=UTF-8';
+    $headers[] = 'From: ' . $firstName . ' ' . $lastName . ' <' . $email . '>';
+
+    $subject = pll__('44 East Contact form submission', '44east');
+
+    $emailMessage = '<table style="border: 1px solid #ccc; border-collapse: collapse; width: 100%;">';
+    $emailMessage .= '<tr>
+    <td style="padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><img src="' . $logoUrl[0] . '" alt="44 East" style="max-width: 100%; height: auto;"></td>
+    <td style="padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><h1 style="margin: 0;">' . pll__('Contact form submission', '44east') . '</h1></td>
+    </tr>';
+
+    $emailMessage .= '<tr>';
+    $emailMessage .= '<td style="width:25%;padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . pll__('First name', '44east') . '</p></td>';
+    $emailMessage .= '<td style="width:75%; padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . $firstName . '</p></td>';
+    $emailMessage .= '</tr>';
+
+    $emailMessage .= '<tr>';
+    $emailMessage .= '<td style="width:25%; padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . pll__('Last name', '44east') . '</p></td>';
+    $emailMessage .= '<td style="width:75%;padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . $lastName . '</p></td>';
+    $emailMessage .= '</tr>';
+
+    $emailMessage .= '<tr>';
+    $emailMessage .= '<td style="width:25%; padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . pll__('Email', '44east') . '</p></td>';
+    $emailMessage .= '<td style="width:75%;padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . $email . '</p></td>';
+    $emailMessage .= '</tr>';
+
+    $emailMessage .= '<tr>';
+    $emailMessage .= '<td style="width:25%; padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . pll__('Phone', '44east') . '</p></td>';
+    $emailMessage .= '<td style="width:75%;padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . $phone . '</p></td>';
+    $emailMessage .= '</tr>';
+
+    $emailMessage .= '<tr>';
+    $emailMessage .= '<td style="width:25%; padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . pll__('Message', '44east') . '</p></td>';
+    $emailMessage .= '<td style="width:75%;padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . $message . '</p></td>';
+    $emailMessage .= '</tr>';
+
+    $emailMessage .= '</table>';
+
+    //Footer table
+    $emailMessage .= '<table style="border: 1px solid #ccc; border-collapse: collapse; width: 100%;">';
+    $emailMessage .= '<tr>';
+    $emailMessage .= '<td style="padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . pll__('This email was sent from the contact form on', '44east') .  ' ' . get_bloginfo('name') . '</p></td>';
+    $emailMessage .= '</tr>';
+
+    $emailMessage .= '<tr>';
+    $emailMessage .= '<td style="padding: 10px; border: 1px solid #ccc; border-collapse: collapse; background-color: #fff; text-align: center;"><p style="margin: 0;">' . pll__('This email was sent from the IP address', '44east') . ' ' . $_SERVER['REMOTE_ADDR'] . '</p></td>';
+    $emailMessage .= '</tr>';
+    $emailMessage .= '</table>';
+
+    wp_mail($to, $subject, $emailMessage, $headers);
+
+
+    $success_msg = array(
+        'error' => false,
+        'message' => pll__('Thank you for your message. We will be in touch shortly.', '44east'),
+    );
+
+    return $success_msg;
 }

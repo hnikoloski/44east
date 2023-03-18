@@ -134,16 +134,49 @@
             align-content: flex-start;
             align-items: flex-start;
             justify-content: space-between;
-            .wpcf7-response-output {
-              flex: 0 0 100%;
-              width: 100%;
-              max-width: 100%;
-              text-align: center;
-              padding: 1.5rem 0.5rem;
-              font-size: 1.8rem;
-              @include for-tablet {
-                margin: 0;
-                padding: 1rem;
+            // &.invalid,
+            // &.error {
+            //   color: #fb0e0e;
+            // }
+            // .wpcf7-response-output {
+            //   flex: 0 0 100%;
+            //   width: 100%;
+            //   max-width: 100%;
+            //   text-align: center;
+            //   padding: 0;
+            //   font-size: 1.8rem;
+            //   font-weight: 600;
+            //   border: none;
+            //   @include for-tablet {
+            //     margin: 0;
+            //     padding: 1rem;
+            //   }
+            // }
+            &.loading {
+              position: relative;
+              &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background: $accent03;
+                opacity: 0.5;
+                @include borderRadius(0.4rem);
+                z-index: 9999;
+              }
+              &::after {
+                // Font awesome spinner
+                content: "\f110";
+                z-index: 9999;
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                position: absolute;
+                @include abs-center;
+                color: $accent03;
+                font-size: 5rem;
+                animation: spin 1s linear infinite;
               }
             }
             .form-control {
@@ -201,10 +234,37 @@
                 &[type="submit"] {
                   cursor: pointer;
                 }
+                &.error {
+                  border-color: #fb0e0e;
+                }
               }
               textarea {
                 height: 12.6rem;
                 resize: none;
+              }
+              .field-error-msg {
+                color: #dc3232;
+                font-size: 1.2rem;
+                font-weight: normal;
+              }
+            }
+            .status-msg {
+              text-align: center;
+              flex: 0 0 100%;
+              p {
+                font-size: 1.8rem;
+                font-weight: 600;
+              }
+              &.success {
+                p {
+                  color: $accent01;
+                  font-size: 2.4rem;
+                }
+              }
+              &.error {
+                p {
+                  color: #fb0e0e;
+                }
               }
             }
           }
@@ -224,5 +284,14 @@
         display: none;
       }
     }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

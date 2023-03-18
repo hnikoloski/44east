@@ -3,6 +3,41 @@
     "title": "Theme General Settings",
     "fields": [
         {
+            "key": "field_6415a95ecea43",
+            "label": "Global",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6415a96ccea44",
+            "label": "Contact Form Email",
+            "name": "contact_email",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_63dfb552893b5",
             "label": "English",
             "name": "",
@@ -125,5 +160,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1675605443
+    "modified": 1679141273
 }

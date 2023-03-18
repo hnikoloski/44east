@@ -12,3 +12,4 @@ import "./scripts/map";
 import "./scripts/home";
 import "./scripts/single_job";
 import "./scripts/services";
+import "./scripts/contact";

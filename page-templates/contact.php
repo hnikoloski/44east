@@ -77,9 +77,39 @@ if ($background) {
                 <?php endif; ?>
             </div>
             <div class="col col-form">
-                <?php if (get_field('contact_form_shortcode')) : ?>
-                    <?php echo do_shortcode(get_field('contact_form_shortcode')); ?>
-                <?php endif; ?>
+                <?php
+                $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+                $main_domain = $protocol . "://" . $_SERVER['HTTP_HOST'];
+                ?>
+                <form action="<?php echo $main_domain; ?>/wp-json/ff-east/v1/contact-form" data-lang="<?php echo pll_current_language(); ?>">
+
+                    <div class="form-control">
+                        <label for="firstName"><?php pll_e('First Name', '44east'); ?></label>
+                        <input type="text" name="firstName" id="firstName" required>
+                    </div>
+                    <div class="form-control">
+                        <label for="lastName"><?php pll_e('Last Name', '44east'); ?></label>
+                        <input type="text" name="lastName" id="lastName" required>
+                    </div>
+                    <div class="form-control">
+                        <label for="email"><?php pll_e('Email', '44east'); ?></label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
+                    <div class="form-control">
+                        <label for="phone"><?php pll_e('Phone', '44east'); ?></label>
+                        <input type="tel" name="phone" id="phone" required>
+                    </div>
+                    <div class="form-control w-100">
+                        <label for="message"><?php pll_e('Message', '44east'); ?></label>
+                        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="form-control w-fit-content top-space">
+                        <input type="submit" value="<?php pll_e('Send Message', '44east'); ?>" class="btn btn-primary btn-m">
+                    </div>
+                    <div class="status-msg">
+                        <p></p>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

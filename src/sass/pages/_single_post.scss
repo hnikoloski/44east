@@ -4,6 +4,7 @@ body.single-post {
     @include for-tablet {
       height: 27.5rem;
     }
+
     img {
       display: block;
     }
@@ -13,6 +14,9 @@ body.single-post {
     padding: 0 !important;
     max-width: 1080px;
     margin: 0 auto;
+    @media (max-width: 1199px) and (min-width: 768px) {
+      padding: 0 27.8rem !important;
+    }
     @include for-tablet {
       padding: 0 2rem !important;
     }
@@ -97,6 +101,15 @@ body.single-post {
             left: 2.4rem;
           }
         }
+      }
+    }
+    .alignfull {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%) !important;
+      margin-right: calc(-50vw + 50%) !important;
+      @include for-tablet {
+        margin-left: 0;
+        margin-right: 0;
       }
     }
   }
