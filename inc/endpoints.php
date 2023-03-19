@@ -327,6 +327,11 @@ function ff_job_application($data)
     $address = $data['address'];
     $city = $data['city'];
     $job_id = $data['job_id'];
+    $lang = $data['lang'] ? $data['lang'] : 'en';
+
+    // Switch to the correct language
+    PLL()->curlang = PLL()->model->get_language($lang);
+
     $err_msg = array(
         'error' => false,
         'message' => '',
@@ -654,6 +659,25 @@ function ff_contact_form($data)
         'error' => false,
         'message' => pll__('Thank you for your message. We will be in touch shortly.', '44east'),
     );
+
+    // Create post in the contact_form_submission custom post type
+    $post = array(
+        'post_title' => $firstName . ' ' . $lastName,
+        'post_content' => $message,
+        'post_status' => 'publish',
+        'post_type' => 'contact_form_submiss',
+    );
+
+    $post_id = wp_insert_post($post);
+
+    // Update acf fields
+    update_field('first_name', $firstName, $post_id);
+    update_field('last_name', $lastName, $post_id);
+    update_field('email', $email, $post_id);
+    update_field('phone', $phone, $post_id);
+    update_field('message', $message, $post_id);
+
+
 
     return $success_msg;
 }

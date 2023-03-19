@@ -388,3 +388,15 @@ function custom_excerpt_more($more)
     return '...'; // Set the desired ending symbol here
 }
 add_filter('excerpt_more', 'custom_excerpt_more');
+
+
+// post_type=contact_form_submiss make all acf fields uneditable
+function make_acf_fields_uneditable($field)
+{
+    $post_type = get_post_type();
+    if ('contact_form_submiss' === $post_type) {
+        $field['readonly'] = 1;
+    }
+    return $field;
+}
+add_filter('acf/load_field', 'make_acf_fields_uneditable');

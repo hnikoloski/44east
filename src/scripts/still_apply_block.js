@@ -144,6 +144,8 @@ jQuery(document).ready(function ($) {
         $('form#jobAppForm').on('submit', function (e) {
             e.preventDefault();
             let form = $(this);
+            let lang = form.attr('data-lang');
+
             // If there is a class disabled return
             if (form.hasClass('disabled')) {
                 return;
@@ -151,6 +153,10 @@ jQuery(document).ready(function ($) {
             form.addClass('loading');
             let api_url = form.attr('action');
             let formData = new FormData(this);
+
+            // Send the language to the api
+            formData.append('lang', lang);
+
             let dropzone = $('form#jobAppForm .dropzone')[0].dropzone;
             let files = dropzone.files;
             let fileCount = files.length;

@@ -66,7 +66,7 @@ if (!empty($block['align'])) {
             $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
             $main_domain = $protocol . "://" . $_SERVER['HTTP_HOST'];
             ?>
-            <form action="<?php echo $main_domain ?>/wp-json/ff-east/v1/job-application" data-job-id="<?php echo $jobId; ?>" id="jobAppForm">
+            <form action="<?php echo $main_domain ?>/wp-json/ff-east/v1/job-application" data-job-id="<?php echo $jobId; ?>" id="jobAppForm" data-lang="<?php echo pll_current_language(); ?>" novalidate>
                 <input type="hidden" name="job_id" value="<?php echo $jobId; ?>">
                 <div class="form-control">
                     <label for="firstName"><?php pll_e('First Name', 'starter'); ?></label>

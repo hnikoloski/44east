@@ -81,7 +81,7 @@ if ($background) {
                 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
                 $main_domain = $protocol . "://" . $_SERVER['HTTP_HOST'];
                 ?>
-                <form action="<?php echo $main_domain; ?>/wp-json/ff-east/v1/contact-form" data-lang="<?php echo pll_current_language(); ?>">
+                <form action="<?php echo $main_domain; ?>/wp-json/ff-east/v1/contact-form" data-lang="<?php echo pll_current_language(); ?>" novalidate>
 
                     <div class="form-control">
                         <label for="firstName"><?php pll_e('First Name', '44east'); ?></label>
