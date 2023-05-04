@@ -2,8 +2,34 @@ import axios from 'axios';
 jQuery(document).ready(function ($) {
 
     let api_url = location.protocol + '//' + location.host + '/wp-json/ff-east/v1/';
+    // When clicking on a single team member, open the modal but do not open it if an a tag is clicked
+
+
     $('.ffeast-our-team-block .single-team-member').on('click', function (e) {
         e.preventDefault();
+
+        let socialLinks = $(this).find('.socials a');
+        let socialIcons = $(this).find('.socials i');
+
+        // If social links are clicked do not open the modal and open the link in a new tab
+
+        if (socialLinks.is(e.target)) {
+            e.preventDefault();
+            let link = $(e.target).attr('href');
+            window.open(link, '_blank');
+            return;
+        }
+
+        if (socialIcons.is(e.target)) {
+            e.preventDefault();
+
+            let link = $(e.target).parent().attr('href');
+            window.open(link, '_blank');
+            return;
+        }
+
+
+
         if ($(this).hasClass('active') || $(this).hasClass('disabled')) {
             return;
         }
@@ -47,27 +73,28 @@ jQuery(document).ready(function ($) {
                 let linkedin = data.team_member_linkedin;
                 let email = data.team_member_email;
                 modal.html(modalMarkup(img, title, position, description, linkedin, email));
-                modal.addClass('active');
+                modal.fadeIn(300);
             }).then(() => {
                 $('body').addClass('overflow-hidden');
 
                 $('.member-modal .close-modal').on('click', function (e) {
                     e.preventDefault();
-                    modal.removeClass('active');
+                    modal.fadeOut(300);
                     $('body').removeClass('overflow-hidden');
                 });
 
                 // Close modal on click outside or on escape key
                 $(document).on('click', function (e) {
                     if ($(e.target).is('.member-modal')) {
-                        modal.removeClass('active');
+                        modal.fadeOut(300);
                         $('body').removeClass('overflow-hidden');
                     }
                 });
 
                 $(document).keyup(function (e) {
                     if (e.keyCode === 27) {
-                        modal.removeClass('active');
+                        modal.fadeOut(300);
+
                         $('body').removeClass('overflow-hidden');
                     }
                 });

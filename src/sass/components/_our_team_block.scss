@@ -109,13 +109,12 @@
     background: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(10px);
     z-index: 2048;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     align-content: center;
     flex-wrap: wrap;
-    @include transform(scale(0));
-    @include transit(all 0.3s ease-in-out);
+    transition: 0s;
     &.active {
       @include transform(scale(1));
     }
@@ -127,7 +126,8 @@
       padding: 6.2rem 3.2rem 3.2rem 3.2rem;
       width: 58.5rem;
       flex: 0 0 58.5rem;
-      position: relative;
+      position: absolute;
+      @include abs-center();
       @include for-tablet {
         width: 100%;
         flex: 0 0 100%;

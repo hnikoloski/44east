@@ -15,7 +15,7 @@ jQuery(document).ready(function ($) {
                 onChange: function (value) {
                     $('.ffeast-jobs-board-block .filter').toggleClass('active');
                     $('.ffeast-jobs-board-block .container header .filter .filter-item').attr('data-job-type', value);
-                    fetchJobs($('.ffeast-jobs-board-block .container header .filter .filter-item.active').attr('data-job-category'), value);
+                    fetchJobs($('.ffeast-jobs-board-block .container header .filter .filter-item.active').attr('data-job-category'), value, $('#page').attr('data-current-lang'));
                     $('#jobTypeHidden').val(value);
                     // trigger change event 
                     $('#jobTypeHidden').trigger('change');
@@ -47,7 +47,7 @@ jQuery(document).ready(function ($) {
             }
             $this.parent().parent().find('a').removeClass('active');
             $this.addClass('active');
-            fetchJobs($this.attr('data-job-category'), $this.attr('data-job-type'));
+            fetchJobs($this.attr('data-job-category'), $this.attr('data-job-type'), $('#page').attr('data-current-lang'));
         });
     }
 
@@ -77,7 +77,7 @@ jQuery(document).ready(function ($) {
         <p class="short-description">${shortDescription}</p>
         <ul>
             <li class="job-type">
-                ${jobType.label} </li>
+                ${jobType} </li>
             <li class="min-years">
                 ${minYears} </li>
         </ul>
@@ -86,14 +86,14 @@ jQuery(document).ready(function ($) {
     }
 
 
-    fetchJobs('*', '*');
-    function fetchJobs(job_category, job_type) {
+    fetchJobs('*', '*', $('#page').attr('data-current-lang'));
+    function fetchJobs(job_category, job_type, lang) {
         $('.ffeast-jobs-board-block .filter, .ffeast-jobs-board-block header').addClass('loading');
         axios.get(api_url, {
             params: {
                 job_category: job_category,
                 job_type: job_type,
-                lang: $('#page').attr('data-current-lang')
+                lang: lang
             }
         }).then(function (response) {
             let jobs = response.data;
@@ -102,7 +102,7 @@ jQuery(document).ready(function ($) {
 
             if (jobs.length > 0) {
                 jobs.forEach(function (job) {
-                    html += singleJobComponent(job.job_category, job.title, job.link, job.btnTxt, job.short_description, job.job_type, job.min_years);
+                    html += singleJobComponent(job.job_category, job.title, job.link, job.btnTxt, job.short_description, job.job_type.label, job.min_years);
                 });
             } else {
                 html = '<p class="no-results">No results found</p>';
@@ -139,13 +139,13 @@ jQuery(document).ready(function ($) {
 
     // when #jobCategoryHidden or #jobTypeHidden change, trigger the change event of the select
     $('#jobCategoryHidden').on('change', function () {
-        fetchJobs($(this).val(), $('#jobTypeHidden').val());
-        console.log('jobCategoryHidden change');
+        fetchJobs($(this).val(), $('#jobTypeHidden').val(), $('#page').attr('data-current-lang'));
+
     });
 
     $('#jobTypeHidden').on('change', function () {
-        fetchJobs($('#jobCategoryHidden').val(), $(this).val());
-        console.log('jobTypeHidden change');
+        fetchJobs($('#jobCategoryHidden').val(), $(this).val(), $('#page').attr('data-current-lang'));
+
     });
 
 

@@ -95,3 +95,39 @@ if (!wp_next_scheduled('delete_application_files')) {
 
     wp_schedule_event(time(), $timeToRun, 'delete_application_files');
 }
+
+// contact_form_submiss delete posts older than 90 days
+function delete_contact_form_submiss_posts()
+{
+    $args = array(
+        'post_type' => 'contact_form_submiss',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        // older than 90 days
+        'date_query' => array(
+            array(
+                'before' => '90 days ago',
+                'inclusive' => true,
+            ),
+        ),
+    );
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            wp_delete_post(get_the_ID(), true);
+        }
+    }
+    wp_reset_postdata();
+}
+
+// Run cron every 24 hours
+add_action('delete_contact_form_submiss_posts', 'delete_contact_form_submiss_posts');
+
+if (!wp_next_scheduled('delete_contact_form_submiss_posts')) {
+    $timeToRun = '24 * 60 * 60';
+
+    wp_schedule_event(time(), $timeToRun, 'delete_contact_form_submiss_posts');
+}

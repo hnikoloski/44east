@@ -38,6 +38,29 @@
             "maxlength": ""
         },
         {
+            "key": "field_6421a97babfd0",
+            "label": "Disable Cookie banner",
+            "name": "disable_cookie_banner",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "hide_cookie_banner": "Hide Cookie banner"
+            },
+            "allow_custom": 0,
+            "default_value": [],
+            "layout": "vertical",
+            "toggle": 0,
+            "return_format": "value",
+            "save_custom": 0
+        },
+        {
             "key": "field_63dfb552893b5",
             "label": "English",
             "name": "",
@@ -160,5 +183,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1679141273
+    "modified": 1679927712
 }

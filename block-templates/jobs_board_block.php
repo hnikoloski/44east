@@ -74,6 +74,7 @@ if (!empty($block['align'])) {
             // Get a random page that has the needed radio field (job_type)
             $args = array(
                 'post_type' => 'jobs',
+                'lang' => pll_current_language(), // Only show current language
                 'meta_query' => array(
                     array(
                         'key' => 'job_type',
@@ -99,6 +100,7 @@ if (!empty($block['align'])) {
                     <option value="*" selected class="filter-item"><?php pll_e('All', 'starter'); ?></option>
                     <?php
                     foreach ($choicesJobType as $key => $value) {
+                        var_dump($value);
                         echo '<option value="' . $key . '" class="filter-item">' . $value . '</option>';
                     }
                     ?>

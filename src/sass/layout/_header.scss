@@ -1,5 +1,5 @@
 #masthead {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(17.5px);
   display: flex;
   justify-content: center;
@@ -14,7 +14,7 @@
   height: auto;
   z-index: 1024;
   &.sticky {
-    background: rgba(0, 0, 0, 0.4) !important;
+    background: rgba(0, 0, 0, 0.6) !important;
   }
   @include for-tablet {
     padding: 1.2rem 2.1rem;

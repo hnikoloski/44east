@@ -10,7 +10,7 @@ get_header();
             $jobType = get_field('job_type');
             ?>
             <li class="job-type">
-                <?php echo esc_html($jobType['label']); ?>
+                <?php pll_e(esc_html($jobType['label']), '44east'); ?>
             </li>
             <li class="min-years">
                 <?php pll_e('Min.'); ?> <?php the_field('min_years'); ?> <?php pll_e('years'); ?>

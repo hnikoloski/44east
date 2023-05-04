@@ -192,6 +192,9 @@ function ff_get_jobs($data)
     // Language
     $lang = $data['lang'] ? $data['lang'] : 'en';
 
+    // Switch to the correct language
+    PLL()->curlang = PLL()->model->get_language($lang);
+
     $args = array(
         'post_type' => 'jobs',
         'posts_per_page' => -1,
@@ -248,12 +251,19 @@ function ff_get_jobs($data)
                 'job_category_color' => get_field('job_category_color', $jobCategory),
             );
         }
+
+        $jobTypeArr = array();
+        $jobType = get_field('job_type', $job->ID);
+        $jobTypeArr = array(
+            'label' => pll__($jobType['label']),
+            'value' => $jobType['value'],
+        );
+
         $jobs_array[] = array(
             'id' => $job->ID,
             'title' => $job->post_title,
             'job_category' => $jobCategories,
-
-            'job_type' => get_field('job_type', $job->ID),
+            'job_type' => $jobTypeArr,
             'min_years' => pll__('Min.', '44east') . get_field('min_years', $job->ID) . ' ' . pll__('years', '44east'),
             'short_description' => $short_description,
             'link' => get_the_permalink($job->ID),

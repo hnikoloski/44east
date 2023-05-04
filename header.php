@@ -80,24 +80,28 @@
             </div>
             </ul>
         </header><!-- #masthead -->
-
-        <div id="cookie-notice" class="active">
-            <p class="info">
-                <?php if (pll_current_language('slug') == 'en') { ?>
-                    <?php
-                    $cookieNotice = get_field('cookie_notice', 'option');
+        <?php
+        $disable_cookie_banner = get_field('disable_cookie_banner', 'option');
+        if ($disable_cookie_banner == false) :
+        ?>
+            <div id="cookie-notice" class="active">
+                <p class="info">
+                    <?php if (pll_current_language('slug') == 'en') { ?>
+                        <?php
+                        $cookieNotice = get_field('cookie_notice', 'option');
+                        ?>
+                    <?php } else {
+                        $fieldTarget = 'cookie_notice_' . pll_current_language('slug');
+                        $cookieNotice = get_field($fieldTarget, 'option');
+                    }
                     ?>
-                <?php } else {
-                    $fieldTarget = 'cookie_notice_' . pll_current_language('slug');
-                    $cookieNotice = get_field($fieldTarget, 'option');
-                }
-                ?>
 
-                <?php
-                echo $cookieNotice;
-                ?>
-            </p>
-            <a href="#" class="btn btn-primary btn-m btn-cookie-accept">
-                <?php pll_e('Accept All Cookies', 'starter'); ?>
-            </a>
-        </div>
+                    <?php
+                    echo $cookieNotice;
+                    ?>
+                </p>
+                <a href="#" class="btn btn-primary btn-m btn-cookie-accept">
+                    <?php pll_e('Accept All Cookies', 'starter'); ?>
+                </a>
+            </div>
+        <?php endif; ?>

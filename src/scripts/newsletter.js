@@ -20,6 +20,9 @@ jQuery(document).ready(function ($) {
             let data = response.data;
             console.log(data)
             if (data.error === true) {
+                // Remove any existing error messages
+                $this.find('.status-msg.error').remove();
+
                 // Append error message after the .form-control div
                 $this.find('.form-control').after('<p class="status-msg error ">' + data.message + '</p>');
             } else {
